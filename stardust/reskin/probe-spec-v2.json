@@ -1,0 +1,234 @@
+[
+  {
+    "label": "page bg",
+    "selector": "body",
+    "property": "backgroundColor",
+    "token": "palette.pageBg"
+  },
+  {
+    "label": "body fg",
+    "selector": "body",
+    "property": "color",
+    "token": "palette.bodyFg"
+  },
+  {
+    "label": "font-family token string",
+    "selector": "body",
+    "property": "fontFamily",
+    "token": "type.family"
+  },
+  {
+    "label": "body font size",
+    "selector": "body",
+    "property": "fontSize",
+    "token": "type.body.fontSize"
+  },
+  {
+    "label": "display weight (h1)",
+    "selector": "main h1",
+    "property": "fontWeight",
+    "token": "type.display.fontWeight"
+  },
+  {
+    "label": "display size (h1)",
+    "selector": "main h1",
+    "property": "fontSize",
+    "token": "type.display.fontSize"
+  },
+  {
+    "label": "display tracking (h1)",
+    "selector": "main h1",
+    "property": "letterSpacing",
+    "token": "type.display.letterSpacing"
+  },
+  {
+    "label": "heading color",
+    "selector": "main .chapters h2",
+    "property": "color",
+    "token": "palette.headingFg"
+  },
+  {
+    "label": "h2 size",
+    "selector": "main .chapters h2",
+    "property": "fontSize",
+    "token": "type.h2.fontSize"
+  },
+  {
+    "label": "h2 weight",
+    "selector": "main .chapters h2",
+    "property": "fontWeight",
+    "token": "type.h2.fontWeight"
+  },
+  {
+    "label": "primary button bg",
+    "selector": "main .btn-primary",
+    "property": "backgroundColor",
+    "token": "buttons.primary.background"
+  },
+  {
+    "label": "primary button fg",
+    "selector": "main .btn-primary",
+    "property": "color",
+    "token": "buttons.primary.color"
+  },
+  {
+    "label": "primary button radius",
+    "selector": "main .btn-primary",
+    "property": "borderRadius",
+    "token": "buttons.primary.borderRadius"
+  },
+  {
+    "label": "primary button padding (\u00b12px)",
+    "selector": "main .btn-primary",
+    "property": "padding",
+    "token": "buttons.primary.padding",
+    "tolerancePx": 2
+  },
+  {
+    "label": "primary button font size",
+    "selector": "main .btn-primary",
+    "property": "fontSize",
+    "token": "buttons.primary.fontSize"
+  },
+  {
+    "label": "secondary button bg",
+    "selector": "main .btn-secondary",
+    "property": "backgroundColor",
+    "token": "buttons.secondary.background"
+  },
+  {
+    "label": "secondary button radius",
+    "selector": "main .btn-secondary",
+    "property": "borderRadius",
+    "token": "buttons.secondary.borderRadius"
+  },
+  {
+    "label": "container max-width (\u00b120px)",
+    "selector": "main .container",
+    "property": "maxWidth",
+    "token": "layout.containerMaxWidth",
+    "tolerancePx": 20
+  },
+  {
+    "label": "section rhythm (\u00b116px)",
+    "selector": "main section",
+    "property": "paddingTop",
+    "token": "layout.sectionPaddingY",
+    "tolerancePx": 16
+  },
+  {
+    "label": "section rhythm, content band (\u00b116px)",
+    "selector": "main section.sec",
+    "property": "paddingTop",
+    "token": "layout.sectionPaddingY",
+    "tolerancePx": 16
+  },
+  {
+    "label": "hairline color",
+    "selector": "main section.sec",
+    "property": "borderTopColor",
+    "token": "palette.border"
+  },
+  {
+    "label": "step title size",
+    "selector": "main .step-v2 .step-name",
+    "property": "fontSize",
+    "token": "type.stepTitle.fontSize"
+  },
+  {
+    "label": "step title weight",
+    "selector": "main .step-title",
+    "property": "fontWeight",
+    "token": "type.stepTitle.fontWeight"
+  },
+  {
+    "label": "step name = heading (v2)",
+    "selector": "main .step-v2 .step-name",
+    "property": "fontSize",
+    "token": "type.stepTitle.fontSize"
+  },
+  {
+    "label": "lede color (muted)",
+    "selector": "main .chapters .sec-head .lede",
+    "property": "color",
+    "token": "palette.mutedFg"
+  },
+  {
+    "label": "lede size",
+    "selector": "main .chapters .sec-head .lede",
+    "property": "fontSize",
+    "token": "type.lede.fontSize"
+  },
+  {
+    "label": "window surface",
+    "selector": "main .window",
+    "property": "backgroundColor",
+    "token": "palette.surface1"
+  },
+  {
+    "label": "window radius",
+    "selector": "main .chapters .window.mock",
+    "property": "borderRadius",
+    "token": "radii.window"
+  },
+  {
+    "label": "plain list rule (v2 #6)",
+    "selector": "main .plain-list",
+    "property": "borderTopColor",
+    "token": "palette.border"
+  },
+  {
+    "label": "chip radius",
+    "selector": "main .chip",
+    "property": "borderRadius",
+    "value": "9999px"
+  },
+  {
+    "label": "status mint",
+    "selector": "main .status.ok",
+    "property": "color",
+    "token": "palette.accent"
+  },
+  {
+    "label": "light band ground (rev 6)",
+    "selector": "main .band-light",
+    "property": "backgroundColor",
+    "token": "palette.headingFg"
+  },
+  {
+    "label": "light band ink (rev 6)",
+    "selector": "main .band-light .h2",
+    "property": "color",
+    "token": "palette.pageBg"
+  },
+  {
+    "label": "chapter band accent (rev 8)",
+    "selector": "main .intro-label",
+    "property": "backgroundColor",
+    "token": "palette.accent"
+  },
+  {
+    "label": "chapter band tab 300% (rev 8)",
+    "selector": "main .intro-label .tab",
+    "property": "fontSize",
+    "value": "36px"
+  },
+  {
+    "label": "solid header, no glass (v2 #10)",
+    "selector": ".nav",
+    "property": "backdropFilter",
+    "value": "none"
+  },
+  {
+    "label": "no hero text halo (v2 #2)",
+    "selector": "main h1",
+    "property": "textShadow",
+    "value": "none"
+  },
+  {
+    "label": "muted text navy-tinted (v2 #19)",
+    "selector": "main .chapters .sec-head .lede",
+    "property": "color",
+    "token": "palette.mutedFg"
+  }
+]

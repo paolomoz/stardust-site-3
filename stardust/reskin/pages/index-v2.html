@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Stardust — Redesign the Web.</title>
+  <link rel="canonical" href="https://stardust.style/">
+  <meta name="description" content="Stardust takes a website and brings it back redesigned, fixed, migrated, or all of it all together. AI skills from Adobe. Open source, Apache 2.0.">
+  <meta property="og:title" content="Stardust — Redesign the Web.">
+  <meta property="og:description" content="Stardust takes a website and brings it back redesigned, fixed, migrated, or all of it all together. AI skills from Adobe. Open source, Apache 2.0.">
+  <meta property="og:url" content="https://stardust.style/">
+  <meta property="og:image" content="https://stardust.style/og/stardust.jpg?width=1200&amp;format=pjpg&amp;optimize=medium">
+  <meta property="og:image:secure_url" content="https://stardust.style/og/stardust.jpg?width=1200&amp;format=pjpg&amp;optimize=medium">
+  <meta property="og:image:alt" content="Frescopa home page before the redesign">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Stardust — Redesign the Web.">
+  <meta name="twitter:description" content="Stardust takes a website and brings it back redesigned, fixed, migrated, or all of it all together. AI skills from Adobe. Open source, Apache 2.0.">
+  <meta name="twitter:image" content="https://stardust.style/og/stardust.jpg?width=1200&amp;format=pjpg&amp;optimize=medium">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="https://stardust.style/favicon.svg">
+  
+  <link rel="preload" href="https://rsms.me/inter/font-files/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&display=swap">
+  <style>
+@font-face { font-family: interVariable; src: url(https://rsms.me/inter/font-files/InterVariable.woff2) format("woff2"); font-weight: 100 900; font-style: normal; font-display: swap; }
+@font-face { font-family: interVariable; src: url(https://rsms.me/inter/font-files/InterVariable-Italic.woff2) format("woff2"); font-weight: 100 900; font-style: italic; font-display: swap; }
+:root {
+  --page: rgb(8, 30, 61); --fg: rgb(244, 242, 236); --muted: rgb(169, 187, 214); --dim: rgb(138, 158, 190);
+  --display-muted: rgb(214, 222, 236); --s1: rgb(17, 38, 68); --s2: rgb(29, 49, 77); --border: rgb(36, 55, 82);
+  --accent: rgb(247, 202, 110); --blue: rgb(75, 141, 248); --btn2: rgb(50, 68, 93);
+  --font: interVariable, "interVariable Fallback", "SF Pro Display", -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  --container: 1088px; --px: 16px; --sec: 88px;
+  --r: 8px; --r-panel: 12px; --r-win: 16px;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { background: var(--page); scroll-behavior: smooth; scroll-padding-top: 72px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: rgb(8, 30, 61); color: rgb(244, 242, 236); font-family: var(--font); font-size: 16px; line-height: 24px; font-weight: 400; -webkit-font-smoothing: antialiased; font-feature-settings: "cv11", "ss01"; text-rendering: optimizeLegibility; overflow-x: clip; }
+h1, h2, h3, h4, p, figure, blockquote, ul { margin: 0; }
+ul { padding: 0; list-style: none; }
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; height: auto; }
+code { font-family: var(--font); font-size: inherit; }
+.caps { text-transform: uppercase; }
+.ico { width: 16px; height: 16px; flex: none; }
+.mark { width: 18px; height: 18px; fill: currentColor; flex: none; }
+.container { max-width: var(--container); margin: 0 auto; padding: 0 16px; }
+:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; border-radius: 4px; }
+
+/* frame: dashed guides at the column edges */
+main { position: relative; }
+main::before { content: ""; position: absolute; inset: 0 auto 0 50%; width: min(var(--container), 100%); transform: translateX(-50%); border-left: 1px dashed var(--border); border-right: 1px dashed var(--border); pointer-events: none; z-index: 0; }
+main > * { position: relative; z-index: 1; }
+
+/* buttons */
+.btn { display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 6px 12px; border-radius: 8px; font-size: 14px; font-weight: 500; line-height: 20px; background: rgb(244, 242, 236); color: rgb(8, 30, 61); white-space: nowrap; transition: background-color .2s ease, box-shadow .2s ease; }
+.btn:hover { background: rgb(255, 253, 248); }
+.btn-secondary { background: rgb(50, 68, 93); color: rgb(244, 242, 236); box-shadow: rgb(50, 68, 93) 0px 0px 0px 1px; }
+.btn-secondary:hover { background: rgb(62, 80, 104); }
+.btn.caps, .caps .btn-like { letter-spacing: .02em; }
+.label, .mock-label { font-size: 12px; line-height: 14.52px; letter-spacing: -0.15px; color: rgb(169, 187, 214); }
+.label.caps, .mock-label.caps { letter-spacing: .02em; }
+.lede { font-size: 18px; line-height: 24px; letter-spacing: -0.045px; color: var(--muted); max-width: 34em; }
+.h2 { font-size: 48px; line-height: 56px; font-weight: 500; letter-spacing: -1.08px; color: rgb(244, 242, 236); text-wrap: balance; }
+.h2 .line, .step-title .line { display: block; }
+.sec { padding: var(--sec) 0; border-top: 1px solid var(--border); }
+.sec-head { display: grid; gap: 12px; padding: 0 var(--px); margin-bottom: 36px; }
+.sec-head .h2 { max-width: 13em; }
+.sec-head.row { grid-template-columns: 1fr auto; align-items: end; }
+.sec-head.row > div { display: grid; gap: 12px; }
+
+/* nav (M1) */
+.nav { position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--page) 88%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+.nav-inner { display: flex; align-items: center; gap: 24px; height: 56px; }
+.brand { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 17px; letter-spacing: -0.3px; }
+.nav-links { display: flex; gap: 4px; margin: 0 auto 0 8px; }
+.nav-gh { display: inline-flex; align-items: center; gap: 7px; height: 32px; padding: 6px 10px; border-radius: 8px; font-size: 14px; font-weight: 500; color: var(--muted); transition: color .2s ease, background-color .2s ease; }
+.nav-gh:hover { color: var(--fg); background: var(--s1); }
+.nav-gh .ico { width: 16px; height: 16px; }
+.nav-inner { gap: 16px; }
+.nav-links a { padding: 6px 12px; font-size: 14px; font-weight: 500; color: var(--muted); border-radius: var(--r); transition: color .2s ease, background-color .2s ease; }
+.nav-links a:hover { color: var(--fg); background: var(--s1); }
+.nav-btn { display: inline-flex; align-items: center; height: 32px; padding: 6px 12px; border-radius: 8px; background: rgb(244, 242, 236); color: rgb(8, 30, 61); font-size: 14px; font-weight: 500; white-space: nowrap; }
+
+/* hero (M2) */
+.hero { position: relative; padding: var(--sec) 0 0; overflow: clip; border-bottom: 1px solid var(--border); }
+.hero-nebula { position: absolute; inset: 0 0 auto; height: min(100%, 1040px); pointer-events: none; -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 96%); mask-image: linear-gradient(to bottom, #000 55%, transparent 96%); }
+.hero-nebula canvas { display: block; width: 100%; height: 100%; }
+.hero-inner { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 0; padding-bottom: 48px; }
+.announce { order: 0; display: inline-flex; align-items: center; gap: 10px; padding: 4px 10px 4px 4px; margin-bottom: 28px; border: 1px solid var(--border); border-radius: 9999px; font-size: 14px; color: var(--fg); background: var(--s1); }
+.announce-tag { display: inline-flex; align-items: center; gap: 6px; padding: 2px 10px 2px 8px; border-radius: 9999px; background: color-mix(in oklab, lab(70.0429 42.5156 75.8207) 22%, transparent); color: lab(70.0429 42.5156 75.8207); font-weight: 500; }
+.announce-tag .mark { width: 14px; height: 14px; }
+.announce-text { color: var(--muted); font-variant-numeric: tabular-nums; }
+.announce:not(:has(.announce-text)) { padding-right: 4px; }
+.display { order: 1; font-size: 72px; line-height: 76px; font-weight: 500; letter-spacing: -2.4px; color: var(--fg); }
+.display .line { display: inline; }
+.display { white-space: nowrap; }
+.hero-lede { order: 2; margin-top: 20px; max-width: 30em; font-size: 22px; line-height: 30px; letter-spacing: -0.2px; }
+.hero-cta { order: 3; margin-top: 28px; display: flex; gap: 8px; }
+.hero-seed { order: 4; margin-top: 20px; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 10px; font-size: 12px; line-height: 16px; color: var(--dim); font-variant-numeric: tabular-nums; }
+.hero-seed strong { font-weight: 500; color: var(--muted); letter-spacing: .02em; }
+.hero-seed .hash { color: var(--muted); }
+
+/* windows (product-UI mocks) */
+.window { background: var(--s1); border-radius: var(--r-win); box-shadow: 0 0 0 1px rgb(36, 55, 82), 0 24px 80px rgba(3, 12, 26, 0.6); overflow: hidden; }
+.win-bar { display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 16px; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--muted); }
+.win-dots { display: inline-flex; gap: 6px; }
+.win-dots i { width: 9px; height: 9px; border-radius: 50%; background: var(--s2); box-shadow: inset 0 0 0 1px var(--border); }
+.win-url { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--fg); font-weight: 500; }
+.win-end { margin-left: auto; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.win-end.ok { color: var(--accent); }
+.win-skel { width: 120px; height: 8px; border-radius: 4px; background: var(--s2); }
+.routes { display: grid; grid-template-columns: 72px 104px 1fr; align-items: center; padding: 28px 32px; margin-bottom: 40px; border: 1px solid var(--border); border-radius: var(--r-panel); background: radial-gradient(70% 120% at 0% 50%, rgba(75, 141, 248, .08), transparent 70%), var(--s1); }
+.ways .routes { order: 2; }
+.ways > .container { display: flex; flex-direction: column; }
+.ways .sec-head { order: 1; }
+.ways .plans { order: 3; }
+.graph-root { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 16px; background: var(--s2); box-shadow: 0 0 0 1px var(--border), 0 0 40px rgba(244, 242, 236, .08); color: var(--fg); }
+.graph-root .mark { width: 28px; height: 28px; }
+.graph-fork { width: 104px; height: 150px; }
+.graph-fork path { stroke: var(--border); stroke-width: 1.5; stroke-dasharray: 4 4; vector-effect: non-scaling-stroke; }
+.graph-lanes { display: grid; gap: 56px; }
+.glane { display: flex; align-items: center; }
+.glink { flex: 1; min-width: 16px; height: 0; border-top: 1.5px dashed var(--border); }
+.glink.v { flex: none; width: 0; height: 18px; border-top: 0; border-left: 1.5px dashed var(--border); margin-left: 28px; }
+.gnode { display: inline-flex; align-items: center; gap: 10px; padding: 8px 14px 8px 8px; border-radius: var(--r-panel); background: var(--s2); box-shadow: 0 0 0 1px var(--border); font-size: 15px; font-weight: 500; color: var(--fg); white-space: nowrap; }
+.gnode-ico { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 8px; background: var(--s1); color: var(--muted); }
+
+/* D4 hero demo — a stardust run in a browser (rev 4) */
+.demo { position: relative; max-width: 1180px; margin: 0 auto 72px; text-align: left; }
+.browser-bar { display: flex; align-items: center; gap: 14px; height: 48px; padding: 0 16px; border-bottom: 1px solid var(--border); background: color-mix(in srgb, var(--s1) 70%, var(--page)); }
+.browser-nav { display: inline-flex; gap: 4px; color: var(--dim); }
+.addr { flex: 1; max-width: 560px; margin: 0 auto; display: flex; align-items: center; gap: 8px; height: 30px; padding: 0 12px; border-radius: 8px; background: var(--s2); box-shadow: inset 0 0 0 1px var(--border); font-size: 13px; color: var(--fg); white-space: nowrap; overflow: hidden; }
+.addr .mark { width: 12px; height: 12px; color: var(--muted); }
+.addr-t { overflow: hidden; text-overflow: ellipsis; }
+.caret { width: 1.5px; height: 15px; background: var(--fg); flex: none; }
+.run-pill { display: inline-flex; align-items: center; gap: 6px; padding: 2px 9px; border-radius: 9999px; background: rgba(247, 202, 110, .12); color: var(--accent); font-size: 12px; font-weight: 500; }
+.run-pill i { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+.demo.done .run-pill { background: var(--s2); color: var(--muted); }
+.demo.done .run-pill i { background: var(--muted); box-shadow: none; }
+.browser-body { display: grid; grid-template-columns: 300px minmax(0, 1fr); min-height: 480px; }
+.dnav-list { display: flex; flex-direction: column; gap: 4px; padding: 18px 14px; margin: 0; list-style: none; border-right: 1px solid var(--border); background: color-mix(in srgb, var(--s1) 70%, var(--page)); }
+.dnav-grp { padding: 10px 10px 4px; font-size: 11px; letter-spacing: .04em; color: var(--dim); }
+.dnav-grp:first-child { padding-top: 0; }
+.dnav { position: relative; display: grid; grid-template-columns: 28px 1fr; gap: 0 6px; width: 100%; padding: 9px 10px 11px; border: 0; border-radius: 10px; background: transparent; color: var(--muted); font: inherit; text-align: left; cursor: pointer; overflow: hidden; transition: background-color .25s ease, color .25s ease; }
+.dnav:hover { background: var(--s1); color: var(--fg); }
+.dnav.on { background: var(--s2); color: var(--fg); }
+.dnav-n { grid-row: span 2; font-size: 12px; line-height: 20px; color: var(--dim); font-variant-numeric: tabular-nums; }
+.dnav-t { font-size: 14px; line-height: 20px; font-weight: 500; }
+.dnav-s { font-size: 12px; line-height: 16px; color: var(--dim); }
+.dnav.on .dnav-s { color: var(--muted); }
+.dnav.past .dnav-n { color: var(--accent); }
+.dnav-bar { position: absolute; left: 10px; right: 10px; bottom: 4px; height: 2px; border-radius: 1px; background: transparent; transform-origin: left; transform: scaleX(0); }
+.dnav.on .dnav-bar { background: var(--fg); }
+.dnav.past .dnav-bar { transform: scaleX(0); }
+.dstages { display: grid; grid-template-columns: minmax(0, 1fr); min-width: 0; align-items: center; padding: 32px 40px; background: radial-gradient(70% 90% at 70% 0%, rgba(75, 141, 248, .08), transparent 70%); }
+.dstage { grid-area: 1 / 1; min-width: 0; opacity: 0; visibility: hidden; transform: translateY(10px) scale(.985); transition: opacity .45s ease, transform .6s cubic-bezier(.2, .7, .2, 1), visibility 0s linear .45s; }
+.dstage.on { opacity: 1; visibility: visible; transform: none; transition: opacity .45s ease .1s, transform .6s cubic-bezier(.2, .7, .2, 1) .1s, visibility 0s; }
+.dstage .mock { max-width: 640px; margin: 0 auto; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .demo.auto .dnav.on .dnav-bar { animation: fill var(--dur, 4200ms) linear both; }
+  .dstage.play .mock { --e: cubic-bezier(.2, .7, .2, 1); }
+  /* extract: swatches pop, type card and tags stagger in */
+  .dstage.play .swatches i { animation: pop .45s var(--e) calc(.35s + var(--i, 0) * .09s) both; }
+  .dstage.play .typecard { animation: rise .5s var(--e) .9s both; }
+  .dstage.play .chips .chip { animation: rise .4s var(--e) calc(1.2s + var(--i, 0) * .08s) both; }
+  /* direct: hashes roll (JS scramble), roll table rows resolve */
+  .dstage.play .hashes span { animation: pop .4s var(--e) calc(.3s + var(--i, 0) * .1s) both; }
+  .dstage.play .seed .eq { animation: rise .4s var(--e) 1.2s both; }
+  .dstage.play .seed .tr { animation: rise .4s var(--e) calc(1.4s + var(--i, 0) * .14s) both; }
+  /* prototype: the after page wipes in, the toggle follows */
+  .dstage.play .wf-before { animation: rise .45s var(--e) .3s both; }
+  .dstage.play .wf-after { animation: wipe .9s var(--e) 1s both; }
+  .dstage.play .ba > .ico { animation: rise .4s var(--e) .8s both; }
+  .dstage.play .seg b { transition: background-color .3s ease, color .3s ease; }
+  /* replica: scan sweeps, gates check */
+  .dstage.play .thumb { animation: rise .45s var(--e) calc(.3s + var(--i, 0) * .15s) both; }
+  .dstage.play .scan { animation: scan 1.6s ease-in-out .7s both; }
+  .dstage.play .chip.ok { animation: pop .4s var(--e) calc(2.1s + var(--i, 0) * .18s) both; }
+  .dstage.play .win-end.ok { animation: rise .4s var(--e) 2.7s both; }
+  /* deploy: blocks land one by one, each checks */
+  .dstage.play .chain .gnode { animation: rise .4s var(--e) calc(.3s + var(--i, 0) * .32s) both; }
+  .dstage.play .chain .glink { animation: grow-y .3s var(--e) calc(.55s + var(--i, 0) * .32s) both; }
+  .dstage.play .chain .gnode-ok { animation: pop .35s var(--e) calc(.6s + var(--i, 0) * .32s) both; }
+  /* rollout: meter fills, rows deliver */
+  .dstage.play .meter i { animation: grow 2.4s cubic-bezier(.3, .6, .2, 1) .3s both; transform-origin: left; }
+  .dstage.play .sheet .tr { animation: rise .35s var(--e) calc(.4s + var(--i, 0) * .26s) both; }
+  .dstage.play .sheet .status { animation: pop .3s var(--e) calc(.6s + var(--i, 0) * .26s) both; }
+  .dstage.play .mock-foot-line { animation: rise .4s var(--e) 2.4s both; }
+  .demo.auto .caret { animation: blink 1s steps(1) infinite; }
+}
+@keyframes pop { from { opacity: 0; transform: scale(.8); } to { opacity: 1; transform: none; } }
+@keyframes wipe { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes scan { 0% { top: 4%; opacity: 0; } 15% { opacity: .8; } 85% { opacity: .8; } 100% { top: 92%; opacity: 0; } }
+@keyframes grow-y { from { transform: scaleY(0); } to { transform: none; } }
+@keyframes fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes blink { 50% { opacity: 0; } }
+@keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+.lane-a .gnode-ico { color: var(--blue); }
+.lane-b .gnode-ico { color: var(--accent); }
+.gnode.wide { display: flex; width: 100%; }
+.gnode-ok { margin-left: auto; color: var(--accent); }
+
+/* plans (M21) */
+.plans { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--border); }
+.plan { display: flex; flex-direction: column; gap: 14px; padding: 32px 24px 24px; transition: background-color .25s ease; }
+.plan + .plan { border-left: 1px solid var(--border); }
+.plan:hover { background: var(--s1); }
+.plan-name { font-size: 20px; line-height: 28px; font-weight: 500; letter-spacing: -0.3px; }
+.plan-sub { color: var(--fg); font-weight: 500; margin-top: -10px; }
+.plan-flow code, .cmd code { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 9999px; background: var(--s2); box-shadow: inset 0 0 0 1px var(--border); font-size: 13px; line-height: 18px; color: var(--muted); font-variant-ligatures: none; }
+.ab { display: flex; align-items: center; gap: 12px; color: var(--dim); margin: 6px 0; }
+.ab-pg { position: relative; display: grid; place-items: end start; width: 112px; height: 68px; padding: 6px 8px; border-radius: var(--r); background: var(--s2); box-shadow: inset 0 0 0 1px var(--border); background-image: linear-gradient(var(--border), var(--border)), linear-gradient(var(--border), var(--border)); background-size: 70% 6px, 45% 6px; background-position: 8px 10px, 8px 22px; background-repeat: no-repeat; }
+.ab-pg.ab-new { background-color: var(--fg); background-image: linear-gradient(var(--page), var(--page)), linear-gradient(rgb(75, 141, 248), rgb(75, 141, 248)); }
+.ab-pg b { font-size: 11px; font-weight: 500; color: var(--muted); }
+.ab-new b { color: var(--page); }
+.plan-extra { display: grid; gap: 6px; padding-top: 14px; border-top: 1px solid var(--border); }
+.plan-extra .cmd code { color: var(--fg); }
+.note { font-size: 14px; line-height: 20px; color: var(--muted); }
+.plan-action { margin-top: auto; padding-top: 10px; }
+.btn-like { display: flex; justify-content: center; align-items: center; height: 36px; border-radius: 8px; background: var(--btn2); color: var(--fg); font-size: 14px; font-weight: 500; }
+.plan-2 .btn-like { background: rgb(244, 242, 236); color: rgb(8, 30, 61); }
+
+
+/* "Two ways in." — full-width light band (user request, rev 6): the palette inverted, cream ground + navy ink */
+.band-light { --ink: rgb(8, 30, 61); --ink-muted: rgb(79, 94, 114); --line: rgb(211, 212, 212); --tint: rgb(232, 230, 222); background: rgb(244, 242, 236); color: var(--ink); border-top-color: var(--border); }
+.band-light .h2 { color: var(--ink); }
+.band-light .lede { color: var(--ink-muted); }
+.band-light .plans { border-color: var(--line); background: rgb(250, 249, 245); }
+.band-light .plan + .plan { border-left-color: var(--line); }
+.band-light .plan:hover { background: var(--tint); }
+.band-light .plan-sub { color: var(--ink); }
+.band-light .plan-flow code, .band-light .cmd code { background: var(--tint); box-shadow: inset 0 0 0 1px var(--line); color: var(--ink-muted); }
+.band-light .plan-extra { border-top-color: var(--line); }
+.band-light .plan-extra .cmd code { color: var(--ink); }
+.band-light .note, .band-light .label { color: var(--ink-muted); }
+.band-light .ab { color: var(--ink-muted); }
+.band-light .ab-pg { background-color: var(--tint); box-shadow: inset 0 0 0 1px var(--line); background-image: linear-gradient(var(--line), var(--line)), linear-gradient(var(--line), var(--line)); }
+.band-light .ab-pg b { color: var(--ink-muted); }
+.band-light .ab-pg.ab-new { background-color: var(--ink); background-image: linear-gradient(rgb(244, 242, 236), rgb(244, 242, 236)), linear-gradient(rgb(75, 141, 248), rgb(75, 141, 248)); }
+.band-light .ab-new b { color: rgb(244, 242, 236); }
+.band-light .btn-like { background: var(--tint); color: var(--ink); box-shadow: inset 0 0 0 1px var(--line); }
+.band-light .plan-2 .btn-like { background: var(--ink); color: rgb(244, 242, 236); box-shadow: none; }
+.band-light :focus-visible { outline-color: var(--ink); }
+.band-light + .sec { border-top: 0; }
+
+
+/* A → B per use case (rev 17) */
+.band-light .ab { gap: 14px; margin: 8px 0; align-items: flex-start; }
+.band-light .ab > .ico { align-self: center; }
+.band-light .ab .ab-pg { position: relative; display: grid; align-content: start; gap: 5px; width: 132px; height: 86px; padding: 9px; border-radius: 8px; background-image: none; place-items: initial; }
+.band-light .ab-pg b { position: absolute; left: 9px; bottom: 6px; font-size: 11px; font-weight: 500; }
+.band-light .ab-pg i { display: block; border-radius: 2px; }
+.band-light .pg-old { background-color: rgb(226, 224, 216); box-shadow: inset 0 0 0 1px var(--line); }
+.band-light .pg-old b { color: rgb(120, 126, 134); }
+.pg-old .o-nav { height: 5px; background: rgb(196, 196, 192); }
+.pg-old .o-body { display: grid; grid-template-columns: 30% 1fr; gap: 5px; }
+.pg-old .o-side { height: 38px; background: rgb(204, 203, 198); }
+.pg-old .o-txt { display: grid; gap: 4px; align-content: start; }
+.pg-old .o-txt i { height: 3px; background: rgb(196, 196, 192); }
+.pg-old .o-txt i:nth-child(2) { width: 80%; } .pg-old .o-txt i:nth-child(4) { width: 60%; }
+.band-light .pg-new { background-color: var(--ink); box-shadow: none; }
+.band-light .pg-new b { color: rgb(244, 242, 236); }
+.pg-new .n-title { height: 11px; width: 78%; background: rgb(247, 202, 110); margin-top: 2px; }
+.pg-new .n-sub { height: 4px; width: 52%; background: rgba(244, 242, 236, .55); }
+.pg-new .n-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-top: 3px; }
+.pg-new .n-cards i { height: 18px; border-radius: 3px; background: rgba(244, 242, 236, .18); }
+.pg-new .n-cards i:first-child { background: rgb(75, 141, 248); }
+.ab-col { display: grid; gap: 7px; }
+.band-light .pg-same { background-color: rgb(250, 249, 245); box-shadow: inset 0 0 0 1px var(--line); }
+.band-light .pg-same b { color: var(--ink-muted); }
+.pg-same .s-title { height: 8px; width: 62%; background: var(--ink); margin-top: 2px; }
+.pg-same .s-tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-top: 5px; }
+.pg-same .s-tiles i { height: 20px; border-radius: 3px; background: var(--tint); box-shadow: inset 0 0 0 1px var(--line); }
+.pg-same .s-tiles i:first-child { background: rgb(247, 202, 110); box-shadow: none; }
+.base { display: flex; width: 132px; }
+.base-old { flex-direction: column; gap: 2px; }
+.base-old i { height: 5px; border-radius: 2px; background: rgb(196, 196, 192); position: relative; }
+.base-old i::after { content: ""; position: absolute; right: 5px; top: 1.5px; width: 2px; height: 2px; border-radius: 50%; background: rgb(150, 150, 146); }
+.base-edge { position: relative; justify-content: space-between; align-items: center; height: 19px; padding: 0 4px; }
+.base-edge::before { content: ""; position: absolute; left: 8px; right: 8px; top: 50%; border-top: 1.5px solid rgb(247, 202, 110); }
+.base-edge i { position: relative; width: 9px; height: 9px; border-radius: 50%; background: rgb(247, 202, 110); }
+
+/* chapter bands: scroll motion acts out the use case (rev 17). Rest state = no transform. */
+.intro-label .tab { display: inline-block; }
+.intro-label[data-motion="morph"] .ch { display: inline-block; font-weight: calc(200 + 300 * var(--lp, 1)); opacity: calc(.3 + .7 * var(--lp, 1)); transform: translateY(calc((1 - var(--lp, 1)) * 45%)) rotate(calc((1 - var(--lp, 1)) * -24deg)); transform-origin: 50% 80%; }
+.intro-label[data-motion="slide"] .tab { transform: translateX(var(--tx, 0px)); will-change: transform; }
+.intro-label[data-motion="slide"] { overflow: hidden; }
+
+/* step labels (M14) */
+.step-label { display: flex; align-items: center; gap: 8px; padding: 16px var(--px); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); font-size: 12px; line-height: 14.52px; letter-spacing: -0.15px; }
+.num { display: inline-flex; color: var(--muted); font-variant-numeric: tabular-nums; }
+.num::before { content: "["; }
+.num::after { content: "]"; }
+.step-name, .tab-title { font-size: 12px; line-height: 14.52px; font-weight: 400; color: var(--fg); }
+.tab { color: var(--muted); }
+.tab::before { content: "["; }
+.tab::after { content: "]"; }
+.step-label .cmd { margin-left: auto; }
+.step-label .cmd code { font-size: 12px; padding: 2px 8px; }
+
+/* chapter intros */
+
+/* chapter intro band — [TAB] at 300% on a full-bleed accent band (user request, rev 8) */
+.intro-label { display: flex; align-items: center; margin: 0 calc(50% - 50vw) 36px; padding: 22px calc(50vw - 50% + var(--px)); background: rgb(247, 202, 110); color: rgb(8, 30, 61); }
+.intro-label .tab { font-size: 36px; line-height: 40px; font-weight: 500; letter-spacing: -0.02em; color: inherit; }
+.intro-label .tab::before, .intro-label .tab::after { opacity: .45; font-weight: 400; }
+.intro-label .tab::before { margin-right: .08em; }
+.intro-label .tab::after { margin-left: .08em; }
+.chapters.sec { padding-top: 0; }
+.chapters .sec-head { margin-bottom: 28px; }
+.quote { display: grid; grid-template-columns: 1fr 300px; border: 1px solid var(--border); margin-bottom: 0; }
+.quote blockquote { padding: 32px 24px; font-size: 24px; line-height: 32px; letter-spacing: -0.4px; color: var(--fg); text-indent: -.4em; text-wrap: pretty; }
+.quote figcaption { display: flex; align-items: center; gap: 12px; padding: 24px; border-left: 1px solid var(--border); color: var(--muted); font-size: 14px; line-height: 20px; }
+.quote-mark { display: grid; place-items: center; flex: none; width: 32px; height: 32px; border-radius: 50%; background: var(--s2); color: var(--fg); }
+.quote-mark .mark { width: 14px; height: 14px; }
+.quote.compact { grid-template-columns: 1fr; margin: 0; align-self: start; }
+.quote.compact blockquote { font-size: 20px; line-height: 28px; }
+.quote.compact figcaption { border-left: 0; border-top: 1px solid var(--border); }
+/* quote — a notebook page (rev 14): graph-paper grid on the lifted navy, handwritten gold-tint ink.
+   24px squares; the hand sits on 48px lines (two squares per line). */
+.quote { display: block; margin: 8px 0 0; padding: 48px 48px 40px; border: 0; border-radius: 6px; color: #fbe7be;
+  background-color: var(--s1);
+  background-image: linear-gradient(rgba(244, 242, 236, .075) 1px, transparent 1px), linear-gradient(90deg, rgba(244, 242, 236, .075) 1px, transparent 1px);
+  background-size: 24px 24px; background-position: -1px -1px;
+  box-shadow: 0 0 0 1px var(--border); }
+.quote blockquote { padding: 0; max-width: 22em; font-family: Caveat, "Segoe Print", "Bradley Hand", cursive; font-size: 46px; line-height: 48px; font-weight: 500; font-style: normal; letter-spacing: 0; color: #fbe7be; text-indent: -.3em; text-wrap: pretty; }
+.quote .qm { color: inherit; }
+.quote figcaption { display: flex; align-items: center; gap: 12px; padding: 24px 0 0; border: 0; color: var(--muted); font-size: 14px; line-height: 24px; font-style: normal; }
+.quote .quote-mark { width: 28px; height: 28px; background: #fbe7be; color: rgb(8, 30, 61); }
+.quote.compact { padding: 24px 24px 24px 32px; margin: 0; }
+.quote.compact blockquote { font-size: 34px; line-height: 48px; }
+.quote.compact figcaption { border: 0; padding-top: 12px; }
+.stats { border-top: 1px solid var(--border); margin-top: 48px; }
+
+
+/* hero kicker highlight (rev 10) */
+.hero-lede .ink-accent { color: rgb(247, 202, 110); }
+.hero-lede em { font-style: normal; padding: 0 .22em; border-radius: 5px; background: rgb(247, 202, 110); color: rgb(8, 30, 61); text-shadow: none; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.hero-seed { margin-top: 24px; }
+
+/* step label rows — slightly lifted ground to mark the section title (rev 10) */
+.step .step-label { background: var(--s1); border-color: var(--border); padding-top: 18px; padding-bottom: 18px; }
+.step .step-label .cmd code { background: var(--page); }
+
+
+
+
+/* steps */
+.step { margin-top: 72px; }
+.step-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 48px; align-items: start; padding: 32px var(--px) 28px; }
+.step-copy { display: grid; gap: 16px; position: sticky; top: 96px; }
+.step-title { font-size: 32px; line-height: 40px; font-weight: 500; letter-spacing: -0.72px; color: var(--fg); }
+.step-copy .lede { font-size: 16px; line-height: 24px; letter-spacing: -0.2px; }
+.step-cta { margin-top: 16px; padding: 0 var(--px); }
+.cells-wrap { display: grid; gap: 12px; }
+.cells-wrap .label { padding: 0 var(--px); }
+.cells { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--border); }
+.cells li { display: flex; align-items: center; gap: 12px; padding: 18px 24px; font-size: 16px; line-height: 24px; letter-spacing: -0.2px; border-bottom: 1px solid var(--border); }
+.cells li:nth-child(odd) { border-right: 1px solid var(--border); }
+.cells li:nth-last-child(-n+2) { border-bottom: 0; }
+.cells .check { color: var(--fg); width: 18px; height: 18px; }
+
+/* mocks */
+.mock-body { padding: 24px; display: grid; gap: 16px; }
+.swatches { display: flex; gap: 6px; }
+.swatches i { flex: 1; height: 44px; border-radius: 6px; }
+.swatches .sw-cream { background: var(--fg); }
+.typecard { display: grid; grid-template-columns: auto 1fr; gap: 20px; align-items: center; padding: 16px; border-radius: var(--r-panel); background: var(--s2); }
+.aa { font-size: 56px; line-height: 1; font-weight: 500; letter-spacing: -2px; color: var(--fg); }
+.rows { display: grid; gap: 8px; }
+.rows i { height: 6px; border-radius: 3px; background: var(--border); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 9999px; font-size: 13px; line-height: 18px; color: var(--fg); box-shadow: inset 0 0 0 1px var(--border); }
+.chip.on { background: var(--fg); color: var(--page); box-shadow: none; }
+.chip.ok .check { color: var(--accent); width: 14px; height: 14px; }
+.hashes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.hashes span { padding: 10px 8px; border-radius: var(--r); background: var(--s2); text-align: center; font-size: 15px; font-weight: 500; color: var(--fg); font-variant-numeric: tabular-nums; letter-spacing: .02em; }
+.hashes span:first-child { box-shadow: inset 0 0 0 1px var(--blue); }
+.eq { font-size: 13px; color: var(--muted); }
+.table { display: grid; border-radius: var(--r-panel); box-shadow: inset 0 0 0 1px var(--border); overflow: hidden; }
+.tr { display: grid; grid-template-columns: 110px 1fr auto; align-items: center; gap: 12px; padding: 10px 14px; font-size: 14px; line-height: 20px; border-top: 1px solid var(--border); }
+.tr:first-child { border-top: 0; }
+.td.k { color: var(--muted); }
+.td.v { color: var(--fg); font-weight: 500; }
+.pill { display: inline-block; padding: 1px 8px; border-radius: 6px; background: var(--s2); font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.ba { grid-template-columns: 1fr auto 1fr; align-items: center; color: var(--dim); }
+.seg { display: inline-flex; padding: 2px; border-radius: 8px; background: var(--page); box-shadow: inset 0 0 0 1px var(--border); }
+.seg b { padding: 3px 10px; border-radius: 6px; font-size: 12px; font-weight: 500; color: var(--muted); }
+.seg b.on { background: var(--s2); color: var(--fg); }
+.wf { display: grid; gap: 8px; padding: 10px; border-radius: var(--r); background: var(--s2); box-shadow: inset 0 0 0 1px var(--border); }
+.wf i { display: block; height: 6px; border-radius: 3px; background: var(--border); }
+.wf .wf-nav { height: 8px; width: 100%; }
+.wf .wf-hero { height: 40px; border-radius: 4px; }
+.wf-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.wf-row i { height: 26px; border-radius: 4px; }
+.wf-txt { display: grid; gap: 6px; }
+.wf-txt i:nth-child(2) { width: 80%; } .wf-txt i:nth-child(3) { width: 60%; }
+.wf-after { background: var(--fg); }
+.wf-after i { background: rgb(209, 210, 210); }
+.wf-after .wf-hero { background: var(--page); height: 52px; }
+.wf-after .wf-row { grid-template-columns: repeat(2, 1fr); }
+.wf-after .wf-row i:first-child { background: var(--blue); }
+.pair { grid-template-columns: 1fr 1fr; }
+.thumb { position: relative; display: grid; gap: 8px; }
+.scan { position: absolute; left: 0; right: 0; top: 40%; height: 2px; background: var(--accent); opacity: .7; }
+.mock-foot { padding: 0 24px 24px; }
+.chain { gap: 0; }
+.sheet .meter { height: 6px; border-radius: 3px; background: var(--s2); overflow: hidden; }
+.meter i { display: block; height: 100%; background: var(--accent); border-radius: 3px; }
+.sheet .tr { grid-template-columns: 20px 1fr auto; }
+.td.idx { width: 8px; height: 8px; border-radius: 2px; background: var(--border); }
+.td.path { color: var(--fg); }
+.status { display: inline-flex; align-items: center; gap: 6px; padding: 2px 8px; border-radius: 6px; font-size: 11px; font-weight: 500; letter-spacing: .02em; }
+.status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.status.ok { color: var(--accent); background: rgba(247, 202, 110, .12); }
+.status.run { color: var(--blue); background: rgba(75, 141, 248, .10); }
+.status.wait { color: var(--dim); background: var(--s2); }
+.mock-foot-line { font-size: 12px; color: var(--muted); }
+
+/* showcase (M5 + M8) */
+.media-grid { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--border); }
+.media-card { position: relative; padding: 16px; display: grid; gap: 12px; }
+.media-card + .media-card { border-left: 1px solid var(--border); }
+.media-card img { border-radius: var(--r-panel); box-shadow: 0 0 0 1px var(--border); aspect-ratio: 1600 / 940; object-fit: cover; width: 100%; }
+.media-label { font-size: 12px; line-height: 16px; color: var(--muted); letter-spacing: .02em; }
+.after .media-label { color: var(--fg); }
+
+/* migrate band (M10) */
+.band { background: linear-gradient(to bottom, rgba(17, 38, 68, 0) 0%, rgb(17, 38, 68) 30%, rgb(17, 38, 68) 75%, rgba(17, 38, 68, 0) 100%); }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--border); border-top: 0; }
+.stat { display: grid; gap: 6px; padding: 24px; }
+.stat + .stat { border-left: 1px solid var(--border); }
+.stat strong { font-size: 24px; line-height: 32px; font-weight: 500; letter-spacing: -0.5px; color: var(--fg); }
+.stat span { font-size: 14px; line-height: 20px; color: var(--muted); }
+
+/* final CTA (M12 + M6) */
+.final-head { display: grid; justify-items: center; text-align: center; gap: 16px; padding: 0 var(--px) 48px; }
+.final-head .lede { max-width: 32em; }
+.actions { display: flex; gap: 8px; margin-top: 16px; }
+.built { font-size: 14px; color: var(--dim); }
+.inline-link { color: var(--fg); text-decoration: underline; text-decoration-color: var(--border); text-underline-offset: 3px; }
+.inline-link:hover { text-decoration-color: var(--fg); }
+.final-grid { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 24px; align-items: start; }
+.chat-body { display: grid; gap: 10px; padding: 20px; font-size: 14px; line-height: 20px; max-height: 520px; overflow: auto; }
+.msg-ctx { font-size: 12px; color: var(--dim); padding-top: 6px; }
+.msg-user { display: flex; justify-content: flex-end; }
+.msg-user span { max-width: 85%; padding: 10px 14px; border-radius: 12px; background: var(--s2); color: var(--fg); overflow-wrap: anywhere; }
+.msg-agent { display: flex; gap: 10px; align-items: flex-start; color: var(--muted); }
+.msg-ico { display: grid; place-items: center; flex: none; width: 20px; height: 20px; border-radius: 6px; background: var(--s2); color: var(--fg); }
+.msg-ico .mark { width: 11px; height: 11px; }
+.composer { display: flex; align-items: center; gap: 12px; margin: 0 16px 16px; padding: 10px 10px 10px 16px; border-radius: 12px; background: var(--s2); box-shadow: inset 0 0 0 1px var(--border); }
+.composer-in { flex: 1; height: 8px; max-width: 220px; border-radius: 4px; background: var(--border); }
+.composer-send { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--fg); color: var(--page); }
+.composer-send .ico { transform: rotate(-90deg); }
+
+/* footer (M13) */
+.foot { border-top: 1px solid var(--border); padding: 56px 0 0; overflow: clip; }
+.foot-top { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; padding: 0 var(--px); }
+.foot-brand .brand { margin-bottom: 4px; color: var(--fg); }
+.foot-gold { color: rgb(247, 202, 110); }
+.foot-brand { display: grid; gap: 12px; align-content: start; }
+.foot-col { display: grid; gap: 10px; align-content: start; font-size: 14px; color: var(--muted); }
+.foot-col a:hover { color: var(--fg); }
+.foot-h { color: var(--fg); margin-bottom: 4px; }
+.seedline { font-variant-numeric: tabular-nums; }
+.foot-big { display: flex; justify-content: space-between; margin-top: 48px; padding: 0 var(--px); font-size: clamp(64px, 17vw, 236px); line-height: .78; font-weight: 600; letter-spacing: -0.04em; color: var(--s2); user-select: none; }
+
+/* footer wordmark — each letter lights up in a stardust palette colour on hover (rev 11) */
+.foot-big span { --c: #f7ca6e; display: inline-block; transition: color 2.6s cubic-bezier(.7, 0, .3, 1), transform 1s cubic-bezier(.2, .7, .2, 1); cursor: default; }
+.foot-big span:nth-child(4n+1) { --c: #f7ca6e; }
+.foot-big span:nth-child(4n+2) { --c: #ed6f4c; }
+.foot-big span:nth-child(4n+3) { --c: #f4f2ec; }
+.foot-big span:nth-child(4n+4) { --c: #fbe7be; }
+.foot-big span:hover { color: var(--c); transition-duration: .12s, .25s, .12s; }
+@media (prefers-reduced-motion: no-preference) { .foot-big span:hover { transform: translateY(-4%); } }
+
+
+/* responsive */
+@media (max-width: 960px) {
+  .browser-body { grid-template-columns: minmax(0, 1fr); }
+  .dnav-list { flex-direction: row; overflow-x: auto; gap: 6px; padding: 10px 12px; border-right: 0; border-bottom: 1px solid var(--border); scrollbar-width: none; }
+  .dnav-grp { display: none; }
+  .dnav { grid-template-columns: auto auto; width: auto; white-space: nowrap; padding: 6px 10px 8px; }
+  .dnav-n { grid-row: auto; }
+  .dnav-s { display: none; }
+  .dstages { padding: 20px 16px; }
+  .browser-nav { display: none; }
+  .step-grid, .final-grid { grid-template-columns: 1fr; }
+  .step-copy { position: static; }
+  .routes { grid-template-columns: 56px 64px 1fr; padding: 24px 16px; }
+  .graph-root { width: 56px; height: 56px; }
+  .graph-fork { width: 64px; }
+  .gnode { font-size: 13px; padding: 8px 10px 8px 8px; gap: 8px; }
+  .gnode-ico { width: 22px; height: 22px; }
+}
+@media (max-width: 760px) {
+  :root { --sec: 64px; }
+  .nav-links { display: none; }
+  .nav-gh { margin-left: auto; padding: 6px 8px; }
+  .nav-gh span { display: none; }
+  .demo { margin: 0 12px 48px; }
+  .display { font-size: 44px; line-height: 48px; letter-spacing: -1.4px; white-space: normal; }
+  .hero-lede { font-size: 18px; line-height: 26px; }
+  .h2 { font-size: 34px; line-height: 40px; letter-spacing: -0.8px; }
+  .step-title { font-size: 26px; line-height: 32px; }
+  .plans, .media-grid, .cells, .stats, .quote, .pair, .ba { grid-template-columns: minmax(0, 1fr); }
+  .plan { padding: 24px 18px 20px; min-width: 0; }
+  .band-light .ab { gap: 8px; }
+  .band-light .ab .ab-pg, .base { width: 104px; }
+  .band-light .ab .ab-pg { height: 72px; padding: 7px; }
+  .plan + .plan, .media-card + .media-card, .stat + .stat { border-left: 0; border-top: 1px solid var(--border); }
+  .cells li:nth-child(odd) { border-right: 0; }
+  .cells li:nth-last-child(2) { border-bottom: 1px solid var(--border); }
+  .quote figcaption { border: 0; }
+  .quote { padding: 24px 24px 24px; }
+  .quote blockquote { font-size: 34px; line-height: 48px; }
+  .quote.compact blockquote { font-size: 30px; line-height: 48px; }
+  .stats { margin-top: 32px; }
+  .ba .ico { transform: rotate(90deg); justify-self: center; }
+  .sec-head.row { grid-template-columns: 1fr; }
+  .step-label { flex-wrap: wrap; }
+  .intro-label { padding-top: 16px; padding-bottom: 16px; margin-bottom: 28px; }
+  .intro-label .tab { font-size: 28px; line-height: 32px; }
+  .routes { grid-template-columns: 1fr; gap: 24px; justify-items: start; }
+  .graph-fork { display: none; }
+  .graph-lanes { gap: 24px; width: 100%; }
+  .glane { flex-direction: column; align-items: flex-start; }
+  .glink { flex: none; width: 0; height: 14px; border-top: 0; border-left: 1.5px dashed var(--border); margin-left: 22px; min-width: 0; }
+  .hashes { grid-template-columns: 1fr 1fr; }
+  .run-pill span { display: none; }
+  .browser-body { min-height: 0; }
+
+  .tr { grid-template-columns: 80px 1fr auto; }
+  .foot-top { grid-template-columns: 1fr 1fr; }
+  .foot-brand { grid-column: 1 / -1; }
+}
+
+/* ================================================================ v2 — AI-tell cleanup (2026-10-12) */
+/* #10 solid header, no glass */
+.nav { background: var(--page); backdrop-filter: none; -webkit-backdrop-filter: none; }
+/* #2 no glows: hero text sits on a scrim instead of a halo; no chromatic halos anywhere */
+.hero-nebula { opacity: .72; }
+.scan { box-shadow: none; opacity: .9; }
+.base-edge i { box-shadow: none; }
+.foot-big span:hover { text-shadow: none; transform: none; }
+.foot-big span { transition: color .5s ease; }
+/* #1 no window-in-window: demo panels lose their frame; inner boxes flatten to rules */
+.dstage .mock { background: none; box-shadow: none; border-radius: 0; overflow: visible; }
+.dstage .mock .win-bar { padding: 0 0 12px; height: auto; }
+.dstage .mock .mock-body { padding: 18px 0 0; }
+.dstage .mock .mock-foot { padding: 0; }
+.typecard { background: none; padding: 0; border-radius: 0; }
+.table { box-shadow: none; border-radius: 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.tr { padding-left: 0; padding-right: 0; }
+.dnav.on { background: transparent; }
+.dnav:hover { background: transparent; }
+.dnav.on .dnav-t { color: var(--fg); }
+/* frameless stages must not overlap mid-crossfade: out first, then in */
+.dstage { transition: opacity .18s ease, transform .3s ease, visibility 0s linear .18s; }
+.dstage.on { transition: opacity .4s ease .22s, transform .6s cubic-bezier(.2, .7, .2, 1) .22s, visibility 0s linear .22s; }
+/* #9 no faux window controls */
+.win-dots { display: none; }
+.browser-bar { gap: 12px; }
+/* #11 one authored moment (hero): no caret blink, no band motion, no hover lift */
+.demo.auto .caret { animation: none; }
+/* #20 contrast on the dated A/B thumbnail */
+.band-light .pg-old b { color: rgb(79, 94, 114); }
+/* #4/#6 step: name + command as the heading, plain list instead of the 2x2 check cells */
+.step-v2 { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); grid-template-areas: "copy mock" "list mock" "cta mock"; grid-template-rows: auto auto 1fr; column-gap: 56px; margin-top: 96px; padding: 0 var(--px); align-items: start; }
+.step-v2 .step-copy { grid-area: copy; position: static; gap: 14px; }
+.step-v2 > .window { grid-area: mock; }
+.step-v2 .plain-list { grid-area: list; margin-top: 24px; }
+.step-v2 .step-cta { grid-area: cta; padding: 0; margin-top: 20px; }
+.step-head { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
+.step-v2 .step-name { font-size: 32px; line-height: 40px; font-weight: 500; letter-spacing: -0.72px; color: var(--fg); }
+.step-v2 .step-head .cmd code { font-size: 13px; padding: 3px 10px; color: var(--muted); background: var(--s1); }
+.step-v2 .step-title { font-size: 20px; line-height: 28px; font-weight: 500; letter-spacing: -0.3px; color: rgb(214, 222, 236); }
+.step-v2 .step-title .line { display: inline; }
+.plain-list { display: grid; margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--border); }
+.plain-list li { padding: 11px 0; border-bottom: 1px solid var(--border); font-size: 15px; line-height: 22px; color: var(--fg); }
+.chapters .quote + .step-v2, .chapters .stats + .step-v2 { margin-top: 96px; }
+@media (max-width: 960px) {
+  .step-v2 { grid-template-columns: minmax(0, 1fr); grid-template-areas: "copy" "mock" "list" "cta"; grid-template-rows: none; row-gap: 24px; margin-top: 64px; }
+  .step-v2 .plain-list { margin-top: 0; }
+}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="https://stardust.style/"><svg class="mark mark-color" viewBox="0 0 32 32" aria-hidden="true"><g fill="#f7ca6e"><rect x="14" y="2" width="4" height="4"/><rect x="14" y="26" width="4" height="4"/><rect x="2" y="14" width="4" height="4"/><rect x="26" y="14" width="4" height="4"/><rect x="14" y="8" width="4" height="4" opacity=".7"/><rect x="14" y="20" width="4" height="4" opacity=".7"/><rect x="8" y="14" width="4" height="4" opacity=".7"/><rect x="20" y="14" width="4" height="4" opacity=".7"/></g><rect x="13" y="13" width="6" height="6" fill="#ed6f4c"/></svg><span>stardust</span></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="https://stardust.style/#redesign">Redesign</a>
+      <a href="https://stardust.style/#migrate">Migrate</a>
+    </nav>
+    <a class="nav-gh" href="https://github.com/adobe/skills/tree/main/plugins/stardust" aria-label="GitHub"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 .2a8 8 0 0 0-2.5 15.6c.4 0 .5-.2.5-.4v-1.5c-2.2.5-2.7-1-2.7-1-.4-.9-.9-1.2-.9-1.2-.7-.5.1-.5.1-.5.8.1 1.2.8 1.2.8.7 1.3 1.9.9 2.4.7 0-.5.3-.9.5-1.1-1.8-.2-3.6-.9-3.6-4 0-.9.3-1.6.8-2.1-.1-.2-.4-1 .1-2.1 0 0 .7-.2 2.2.8a7.4 7.4 0 0 1 4 0c1.5-1 2.2-.8 2.2-.8.4 1.1.2 1.9.1 2.1.5.6.8 1.3.8 2.1 0 3.1-1.9 3.8-3.6 4 .3.3.6.8.6 1.5v2.2c0 .2.1.5.6.4A8 8 0 0 0 8 .2"/></svg><span>GitHub</span></a>
+    <a class="nav-btn" href="https://stardust.style/#install">Install Stardust</a>
+  </div>
+</header>
+<main>
+
+<section class="hero" aria-labelledby="h-hero">
+  <div class="hero-nebula" aria-hidden="true"><canvas></canvas></div>
+  <div class="container hero-inner" data-gate="s01">
+    
+    <p class="lede hero-lede"><span>Takes a website &amp; brings it back,</span><br><span><span class="ink-accent">redesigned, fixed, migrated</span>.</span> <em>Or all three.</em></p>
+    <p class="hero-seed"><strong class="caps">SEED</strong> <span class="hash" data-seed="brand">md5(&quot;brand&quot; · 2026-10-12) → 734513cd ·</span> <span>yours alone, today only</span></p>
+    <h1 id="h-hero" class="display"><span class="line">Redesign</span> <span class="line">the Web<span class="h1-dot">.</span></span></h1>
+    
+  </div>
+  
+  <div class="demo window" role="region" aria-label="Demo: a stardust run, step by step">
+    <div class="browser-bar">
+      
+      <span class="browser-nav" aria-hidden="true"><svg viewBox="0 0 16 16" class="ico"><path d="M10 3.5 5.5 8l4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg><svg viewBox="0 0 16 16" class="ico"><path d="M6 3.5 10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <div class="addr" aria-hidden="true"><svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><g><rect x="14" y="2" width="4" height="4"/><rect x="14" y="26" width="4" height="4"/><rect x="2" y="14" width="4" height="4"/><rect x="26" y="14" width="4" height="4"/><rect x="14" y="8" width="4" height="4" opacity=".7"/><rect x="14" y="20" width="4" height="4" opacity=".7"/><rect x="8" y="14" width="4" height="4" opacity=".7"/><rect x="20" y="14" width="4" height="4" opacity=".7"/></g><rect x="13" y="13" width="6" height="6"/></svg><span class="addr-t">/stardust:extract &lt;url&gt;</span><i class="caret"></i></div>
+      
+    </div>
+    <div class="browser-body">
+      <ol class="dnav-list"><li class="dnav-grp">REDESIGN</li><li><button type="button" class="dnav on" data-go="0" aria-pressed="true"><span class="dnav-n"></span><span class="dnav-t">Extract</span><span class="dnav-s">Read the site you already have.</span><i class="dnav-bar" aria-hidden="true"></i></button></li><li><button type="button" class="dnav" data-go="1" aria-pressed="false"><span class="dnav-n"></span><span class="dnav-t">Direct</span><span class="dnav-s">One sentence in. A direction out.</span><i class="dnav-bar" aria-hidden="true"></i></button></li><li><button type="button" class="dnav" data-go="2" aria-pressed="false"><span class="dnav-n"></span><span class="dnav-t">Prototype</span><span class="dnav-s">Before and after, side by side.</span><i class="dnav-bar" aria-hidden="true"></i></button></li><li class="dnav-grp">MIGRATE AS IS</li><li><button type="button" class="dnav" data-go="3" aria-pressed="false"><span class="dnav-n"></span><span class="dnav-t">Replica</span><span class="dnav-s">The site you have, rebuilt clean.</span><i class="dnav-bar" aria-hidden="true"></i></button></li><li><button type="button" class="dnav" data-go="4" aria-pressed="false"><span class="dnav-n"></span><span class="dnav-t">Deploy</span><span class="dnav-s">One page into blocks.</span><i class="dnav-bar" aria-hidden="true"></i></button></li><li><button type="button" class="dnav" data-go="5" aria-pressed="false"><span class="dnav-n"></span><span class="dnav-t">Rollout</span><span class="dnav-s">The whole site, then the check.</span><i class="dnav-bar" aria-hidden="true"></i></button></li></ol>
+      <div class="dstages" aria-hidden="true"><div class="dstage dstage-extract on" data-cmd="/stardust:extract &lt;url&gt;"><div class="window mock">
+      <div class="win-bar"><span class="win-url">https://www.example.com/</span><span class="win-end">5 pages</span></div>
+      <div class="mock-body capture">
+        <p class="mock-label caps">BRAND SURFACE</p>
+        <div class="swatches" aria-hidden="true"><i style="background:rgb(75, 141, 248)"></i><i style="background:rgb(247, 202, 110)"></i><i style="background:rgb(224, 30, 90)"></i><i style="background:rgb(187, 62, 255)"></i><i style="background:rgb(255, 35, 35)"></i><i class="sw-cream"></i></div>
+        <div class="typecard"><span class="aa">Aa</span><span class="rows" aria-hidden="true"><i style="width:90%"></i><i style="width:70%"></i><i style="width:80%"></i><i style="width:45%"></i></span></div>
+        <div class="chips"><span class="chip on">serif display</span> <span class="chip">1.25 scale</span> <span class="chip">radius 12px</span> <span class="chip">voice: assured</span> <span class="chip">5 pages</span> <span class="chip">gradient blob hero</span></div>
+      </div>
+    </div></div><div class="dstage dstage-direct" data-cmd="/stardust:direct"><div class="window mock">
+      <div class="win-bar"><span class="win-url">/stardust:direct</span><span class="win-end">seed · <span data-today>2026-10-12</span></span></div>
+      <div class="mock-body seed">
+        <p class="mock-label caps">MD5(&quot;EXAMPLE.COM&quot; · TODAY)</p>
+        <div class="hashes"><span>a3f7c92e</span> <span>8b1d488a</span> <span>0c5ef691</span> <span>3427bbd1</span></div>
+        <p class="eq">→ resolves to</p>
+        <div class="table"><div class="tr"><span class="td k">decade</span> <span class="td v">1970s</span> <span class="td p"><span class="pill">a3</span></span></div><div class="tr"><span class="td k">craft</span> <span class="td v">letterpress</span> <span class="td p"><span class="pill">f7</span></span></div><div class="tr"><span class="td k">register</span> <span class="td v">editorial</span> <span class="td p"><span class="pill">c9</span></span></div><div class="tr"><span class="td k">ground</span> <span class="td v">inherited</span> <span class="td p"><span class="pill">—</span></span></div></div>
+      </div>
+    </div></div><div class="dstage dstage-prototype" data-cmd="/stardust:prototype"><div class="window mock">
+      <div class="win-bar"><span class="seg"><b class="on caps">BEFORE</b> <b class=" caps">AFTER</b></span><span class="win-end">6 viewports</span></div>
+      <div class="mock-body ba"><div class="wf wf-before" aria-hidden="true"><i class="wf-nav"></i><i class="wf-hero"></i><span class="wf-row"><i></i><i></i><i></i></span><span class="wf-txt"><i></i><i></i><i></i></span></div><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="wf wf-after" aria-hidden="true"><i class="wf-nav"></i><i class="wf-hero"></i><span class="wf-row"><i></i><i></i><i></i></span><span class="wf-txt"><i></i><i></i><i></i></span></div></div>
+    </div></div><div class="dstage dstage-replica" data-cmd="/stardust:replica &lt;url&gt;"><div class="window mock">
+      <div class="win-bar"><span class="win-url">gate · 2 breakpoints</span><span class="win-end ok">diff &lt; 2% ✓</span></div>
+      <div class="mock-body pair">
+        <div class="thumb"><p class="mock-label caps">LIVE</p><div class="wf" aria-hidden="true"><i class="wf-nav"></i><i class="wf-hero"></i><span class="wf-row"><i></i><i></i><i></i></span><span class="wf-txt"><i></i><i></i></span></div></div><div class="thumb"><p class="mock-label caps">REPLICA</p><div class="wf" aria-hidden="true"><i class="wf-nav"></i><i class="wf-hero"></i><span class="wf-row"><i></i><i></i><i></i></span><span class="wf-txt"><i></i><i></i></span></div><i class="scan" aria-hidden="true"></i></div>
+      </div>
+      <div class="mock-foot chips"><span class="chip ok"><svg class="ico check" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="currentColor"/><path d="m5 8.2 2 2 4-4.4" fill="none" stroke="var(--page)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>structure ✓</span></span> <span class="chip ok"><svg class="ico check" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="currentColor"/><path d="m5 8.2 2 2 4-4.4" fill="none" stroke="var(--page)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>visuals ✓</span></span> <span class="chip ok"><svg class="ico check" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="currentColor"/><path d="m5 8.2 2 2 4-4.4" fill="none" stroke="var(--page)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>pixel diff ✓</span></span></div>
+    </div></div><div class="dstage dstage-deploy" data-cmd="/stardust:deploy"><div class="window mock">
+      <div class="win-bar"><span class="win-url">index.html → blocks</span><span class="win-end">preview · publish · check</span></div>
+      <div class="mock-body chain"><div class="gnode wide"><span class="gnode-ico"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="2.5" width="11" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M5.5 8h5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></span><span class="gnode-t">hero</span><span class="gnode-ok" aria-hidden="true"><svg class="ico check" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="currentColor"/><path d="m5 8.2 2 2 4-4.4" fill="none" stroke="var(--page)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div><i class="glink v" aria-hidden="true"></i><div class="gnode wide"><span class="gnode-ico"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="2.5" width="11" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M5.5 8h5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></span><span class="gnode-t">cards</span><span class="gnode-ok" aria-hidden="true"><svg class="ico check" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="currentColor"/><path d="m5 8.2 2 2 4-4.4" fill="none" stroke="var(--page)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div><i class="glink v" aria-hidden="true"></i><div class="gnode wide"><span class="gnode-ico"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="2.5" width="11" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M5.5 8h5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></span><span class="gnode-t">text</span><span class="gnode-ok" aria-hidden="true"><svg class="ico check" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="currentColor"/><path d="m5 8.2 2 2 4-4.4" fill="none" stroke="var(--page)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div><i class="glink v" aria-hidden="true"></i><div class="gnode wide"><span class="gnode-ico"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="2.5" width="11" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M5.5 8h5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></span><span class="gnode-t">quote</span><span class="gnode-ok" aria-hidden="true"><svg class="ico check" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="currentColor"/><path d="m5 8.2 2 2 4-4.4" fill="none" stroke="var(--page)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div></div>
+    </div></div><div class="dstage dstage-rollout" data-cmd="/stardust:rollout"><div class="window mock">
+      <div class="win-bar"><span class="win-url">stardust/rollout/ledger.json</span><span class="win-end">delivered 112 / 134</span></div>
+      <div class="mock-body sheet">
+        <div class="meter" aria-hidden="true"><i style="width:83.6%"></i></div>
+        <div class="table"><div class="tr"><span class="td idx" aria-hidden="true"></span><span class="td path">/</span> <span class="td"><span class="status ok caps">DELIVERED</span></span></div><div class="tr"><span class="td idx" aria-hidden="true"></span><span class="td path">/about</span> <span class="td"><span class="status ok caps">DELIVERED</span></span></div><div class="tr"><span class="td idx" aria-hidden="true"></span><span class="td path">/products</span> <span class="td"><span class="status ok caps">DELIVERED</span></span></div><div class="tr"><span class="td idx" aria-hidden="true"></span><span class="td path">/products/beans</span> <span class="td"><span class="status ok caps">DELIVERED</span></span></div><div class="tr"><span class="td idx" aria-hidden="true"></span><span class="td path">/news/2026</span> <span class="td"><span class="status run caps">DEPLOYING</span></span></div><div class="tr"><span class="td idx" aria-hidden="true"></span><span class="td path">/contact</span> <span class="td"><span class="status wait caps">PENDING</span></span></div></div>
+        <p class="mock-foot-line">shared blocks ✓ · sitemap ✓ · redirects ✓ · links ✓</p>
+      </div>
+    </div></div></div>
+    </div>
+  </div>
+</section>
+<div class="gated" data-gate="s02-s14">
+
+<section class="sec ways band-light" id="ways" aria-labelledby="h-ways">
+  <div class="container">
+    
+    <div class="sec-head"><h2 id="h-ways" class="h2">Two ways in.</h2><p class="lede">Say what you want in a sentence and the master skill picks the route.</p></div>
+    <div class="plans"><a class="plan" href="https://stardust.style/#redesign">
+      <h3 class="plan-name">Redesign</h3>
+      <p class="plan-sub">New design on the site you have.</p>
+      <p class="plan-flow"><code>extract → direct → prototype → migrate</code></p>
+      <div class="ab ab-redesign"><span class="ab-pg pg-old"><i class="o-nav"></i><span class="o-body"><i class="o-side"></i><span class="o-txt"><i></i><i></i><i></i><i></i></span></span><b>A</b></span><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="ab-pg pg-new"><i class="n-title"></i><i class="n-sub"></i><span class="n-cards"><i></i><i></i></span><b>B</b></span></div>
+      <div class="plan-extra"><p class="label caps">SHORTCUT</p><p class="cmd"><code>/stardust:uplift &lt;url&gt;</code></p><p class="note">one URL, three pitch variants, one cinematic</p></div>
+      <p class="plan-action caps"><span class="btn-like">FOLLOW THE REDESIGN</span></p>
+    </a><a class="plan plan-2" href="https://stardust.style/#migrate">
+      <h3 class="plan-name">Migrate as is</h3>
+      <p class="plan-sub">Same design, new platform.</p>
+      <p class="plan-flow"><code>replica → deploy → rollout</code></p>
+      <div class="ab ab-migrate"><span class="ab-col"><span class="ab-pg pg-same"><i class="s-title"></i><span class="s-tiles"><i></i><i></i><i></i></span><b>A</b></span><span class="base base-old" aria-hidden="true"><i></i><i></i><i></i></span></span><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="ab-col"><span class="ab-pg pg-same"><i class="s-title"></i><span class="s-tiles"><i></i><i></i><i></i></span><b>B</b></span><span class="base base-edge" aria-hidden="true"><i></i><i></i><i></i><i></i></span></span></div>
+      <div class="plan-extra"><p class="label caps">SHORTCUT</p><p class="cmd"><code>/stardust:replica &lt;url&gt;</code></p></div>
+      <p class="plan-action caps"><span class="btn-like">FOLLOW THE MIGRATION</span></p>
+    </a></div>
+  </div>
+</section>
+<section class="sec chapters" id="redesign" aria-label="Redesign">
+  <div class="container">
+    
+    <div class="intro-label"><span class="tab caps">REDESIGN</span></div>
+    <div class="sec-head"><h2 class="h2"><span class="line">Take a live site.</span> <span class="line">Bring it back redesigned.</span></h2><p class="lede">Three skills, three steps. Each writes its files and the next one reads them. Or say what you want in a sentence and the master skill picks the route.</p></div>
+    <figure class="quote"><blockquote><p><span class="qm">“</span>You can go from global brand to regionalized site in Edge Delivery Services in under a day.<span class="qm">”</span></p></blockquote><figcaption><span class="quote-mark" aria-hidden="true"><svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><g><rect x="14" y="2" width="4" height="4"/><rect x="14" y="26" width="4" height="4"/><rect x="2" y="14" width="4" height="4"/><rect x="26" y="14" width="4" height="4"/><rect x="14" y="8" width="4" height="4" opacity=".7"/><rect x="14" y="20" width="4" height="4" opacity=".7"/><rect x="8" y="14" width="4" height="4" opacity=".7"/><rect x="20" y="14" width="4" height="4" opacity=".7"/></g><rect x="13" y="13" width="6" height="6"/></svg></span><p>A guest on Thursday Frequency · aem-live live session, 18 June 2026</p></figcaption></figure>
+    
+    
+  <article class="step step-v2" aria-labelledby="h-s06">
+    <div class="step-copy">
+      <div class="step-head"><h3 id="h-s06" class="step-name">Extract</h3><p class="cmd"><code>/stardust:extract &lt;url&gt;</code></p></div>
+      <h4 class="step-title"><span class="line">Read the site</span> <span class="line">you already have.</span></h4>
+      <p class="lede">Point it at a URL. Stardust renders each page in a real browser and writes down the palette, the type scale, the motifs, the voice and every block of copy. Five pages by default, the whole site on request. It invents nothing at this stage. The capture is the evidence the next steps argue from.</p>
+    </div>
+    <div class="window mock">
+      <div class="win-bar"><span class="win-url">https://www.example.com/</span><span class="win-end">5 pages</span></div>
+      <div class="mock-body capture">
+        <p class="mock-label caps">BRAND SURFACE</p>
+        <div class="swatches" aria-hidden="true"><i style="background:rgb(75, 141, 248)"></i><i style="background:rgb(247, 202, 110)"></i><i style="background:rgb(224, 30, 90)"></i><i style="background:rgb(187, 62, 255)"></i><i style="background:rgb(255, 35, 35)"></i><i class="sw-cream"></i></div>
+        <div class="typecard"><span class="aa">Aa</span><span class="rows" aria-hidden="true"><i style="width:90%"></i><i style="width:70%"></i><i style="width:80%"></i><i style="width:45%"></i></span></div>
+        <div class="chips"><span class="chip on">serif display</span> <span class="chip">1.25 scale</span> <span class="chip">radius 12px</span> <span class="chip">voice: assured</span> <span class="chip">5 pages</span> <span class="chip">gradient blob hero</span></div>
+      </div>
+    </div>
+    <ul class="plain-list"><li>Real browser render, not view-source</li><li>Palette, type scale, motifs, voice</li><li>Every line of copy, counted</li><li>PRODUCT.md and DESIGN.md as output</li></ul>
+    <p class="step-cta"><a class="btn btn-secondary" href="https://github.com/adobe/skills/tree/main/plugins/stardust/skills/extract"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 .2a8 8 0 0 0-2.5 15.6c.4 0 .5-.2.5-.4v-1.5c-2.2.5-2.7-1-2.7-1-.4-.9-.9-1.2-.9-1.2-.7-.5.1-.5.1-.5.8.1 1.2.8 1.2.8.7 1.3 1.9.9 2.4.7 0-.5.3-.9.5-1.1-1.8-.2-3.6-.9-3.6-4 0-.9.3-1.6.8-2.1-.1-.2-.4-1 .1-2.1 0 0 .7-.2 2.2.8a7.4 7.4 0 0 1 4 0c1.5-1 2.2-.8 2.2-.8.4 1.1.2 1.9.1 2.1.5.6.8 1.3.8 2.1 0 3.1-1.9 3.8-3.6 4 .3.3.6.8.6 1.5v2.2c0 .2.1.5.6.4A8 8 0 0 0 8 .2"/></svg><span>Read extract on GitHub</span></a></p>
+  </article>
+    
+  <article class="step step-v2" aria-labelledby="h-s07">
+    <div class="step-copy">
+      <div class="step-head"><h3 id="h-s07" class="step-name">Direct</h3><p class="cmd"><code>/stardust:direct</code></p></div>
+      <h4 class="step-title"><span class="line">One sentence in.</span> <span class="line">A direction out.</span></h4>
+      <p class="lede">Tell it what you want in plain words: warmer, more editorial, keep our type. Direct reads the capture, keeps your palette and fonts unless you ask for a rebrand, researches references when it can, and rolls the seed for whatever is still open. It writes the target spec and its reasoning, so you can argue with it.</p>
+    </div>
+    <div class="window mock">
+      <div class="win-bar"><span class="win-url">/stardust:direct</span><span class="win-end">seed · <span data-today>2026-10-12</span></span></div>
+      <div class="mock-body seed">
+        <p class="mock-label caps">MD5(&quot;EXAMPLE.COM&quot; · TODAY)</p>
+        <div class="hashes"><span>a3f7c92e</span> <span>8b1d488a</span> <span>0c5ef691</span> <span>3427bbd1</span></div>
+        <p class="eq">→ resolves to</p>
+        <div class="table"><div class="tr"><span class="td k">decade</span> <span class="td v">1970s</span> <span class="td p"><span class="pill">a3</span></span></div><div class="tr"><span class="td k">craft</span> <span class="td v">letterpress</span> <span class="td p"><span class="pill">f7</span></span></div><div class="tr"><span class="td k">register</span> <span class="td v">editorial</span> <span class="td p"><span class="pill">c9</span></span></div><div class="tr"><span class="td k">ground</span> <span class="td v">inherited</span> <span class="td p"><span class="pill">—</span></span></div></div>
+      </div>
+    </div>
+    <ul class="plain-list"><li>Brand-faithful by default, rebrand on request</li><li>References first, seed for the rest</li><li>Decade, craft, register from the roll</li><li>A target spec and its reasoning trace</li></ul>
+    <p class="step-cta"><a class="btn btn-secondary" href="https://github.com/adobe/skills/tree/main/plugins/stardust/skills/direct"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 .2a8 8 0 0 0-2.5 15.6c.4 0 .5-.2.5-.4v-1.5c-2.2.5-2.7-1-2.7-1-.4-.9-.9-1.2-.9-1.2-.7-.5.1-.5.1-.5.8.1 1.2.8 1.2.8.7 1.3 1.9.9 2.4.7 0-.5.3-.9.5-1.1-1.8-.2-3.6-.9-3.6-4 0-.9.3-1.6.8-2.1-.1-.2-.4-1 .1-2.1 0 0 .7-.2 2.2.8a7.4 7.4 0 0 1 4 0c1.5-1 2.2-.8 2.2-.8.4 1.1.2 1.9.1 2.1.5.6.8 1.3.8 2.1 0 3.1-1.9 3.8-3.6 4 .3.3.6.8.6 1.5v2.2c0 .2.1.5.6.4A8 8 0 0 0 8 .2"/></svg><span>Read direct on GitHub</span></a></p>
+  </article>
+    
+  <article class="step step-v2" aria-labelledby="h-s08">
+    <div class="step-copy">
+      <div class="step-head"><h3 id="h-s08" class="step-name">Prototype</h3><p class="cmd"><code>/stardust:prototype</code></p></div>
+      <h4 class="step-title"><span class="line">Before and after,</span> <span class="line">side by side.</span></h4>
+      <p class="lede">Prototype renders one page of the redesign as a single HTML file and puts it next to the capture. Then it runs impeccable's craft loop: critique, audit, adapt to six viewports, check the motion. It rejects template-looking output. You pick, annotate, and re-run. Approve it, and migrate carries the design to every page as static HTML.</p>
+    </div>
+    <div class="window mock">
+      <div class="win-bar"><span class="seg"><b class="on caps">BEFORE</b> <b class=" caps">AFTER</b></span><span class="win-end">6 viewports</span></div>
+      <div class="mock-body ba"><div class="wf wf-before" aria-hidden="true"><i class="wf-nav"></i><i class="wf-hero"></i><span class="wf-row"><i></i><i></i><i></i></span><span class="wf-txt"><i></i><i></i><i></i></span></div><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="wf wf-after" aria-hidden="true"><i class="wf-nav"></i><i class="wf-hero"></i><span class="wf-row"><i></i><i></i><i></i></span><span class="wf-txt"><i></i><i></i><i></i></span></div></div>
+    </div>
+    <ul class="plain-list"><li>Critique, audit, adapt, motion</li><li>Checked at six viewports</li><li>Optional cinematic motion register</li><li>Approve, then migrate to every page</li></ul>
+    <p class="step-cta"><a class="btn btn-secondary" href="https://github.com/adobe/skills/tree/main/plugins/stardust/skills/prototype"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 .2a8 8 0 0 0-2.5 15.6c.4 0 .5-.2.5-.4v-1.5c-2.2.5-2.7-1-2.7-1-.4-.9-.9-1.2-.9-1.2-.7-.5.1-.5.1-.5.8.1 1.2.8 1.2.8.7 1.3 1.9.9 2.4.7 0-.5.3-.9.5-1.1-1.8-.2-3.6-.9-3.6-4 0-.9.3-1.6.8-2.1-.1-.2-.4-1 .1-2.1 0 0 .7-.2 2.2.8a7.4 7.4 0 0 1 4 0c1.5-1 2.2-.8 2.2-.8.4 1.1.2 1.9.1 2.1.5.6.8 1.3.8 2.1 0 3.1-1.9 3.8-3.6 4 .3.3.6.8.6 1.5v2.2c0 .2.1.5.6.4A8 8 0 0 0 8 .2"/></svg><span>Read prototype on GitHub</span></a></p>
+  </article>
+  </div>
+</section>
+
+<section class="sec showcase" aria-labelledby="h-show">
+  <div class="container">
+    <div class="sec-head row"><div><h2 id="h-show" class="h2"><span class="line">Frescopa,</span> <span class="line">before and after.</span></h2><p class="lede">White-label demo site. Redesigned with extract, direct, prototype.</p></div><p class="sec-action"><a class="btn btn-secondary caps" href="https://github.com/adobe/skills/tree/main/plugins/stardust#readme">HOW IT WAS MADE</a></p></div>
+    <div class="media-grid"><figure class="media-card"><p class="media-label caps">FRESCOPA · BEFORE</p><img src="https://stardust.style/media_16ccf19c185d79d70624ec42645560623fe262946.jpg?width=2000&amp;format=webply&amp;optimize=medium" alt="Frescopa home page before the redesign" width="undefined" height="undefined" loading="lazy"></figure><figure class="media-card after"><p class="media-label caps">FRESCOPA · AFTER</p><img src="https://stardust.style/media_1add1b189f47ce94e4c4ded5443b65869d52c149d.jpg?width=2000&amp;format=webply&amp;optimize=medium" alt="Frescopa home page after the redesign" width="undefined" height="undefined" loading="lazy"></figure></div>
+  </div>
+</section>
+<section class="sec chapters band" id="migrate" aria-label="Migrate as is">
+  <div class="container">
+    
+    <div class="intro-label"><span class="tab caps">MIGRATE AS IS</span></div>
+    <div class="sec-head"><h2 class="h2"><span class="line">Keep the design.</span> <span class="line">Change the platform.</span></h2><p class="lede">Same site, new origin. Replica rebuilds it as clean HTML and proves the match. Deploy and rollout carry it to AEM Edge Delivery, one page first, then the whole site. When one site becomes many markets, with in-place authoring, drafts, translations and scheduled releases, this is the route to production.</p></div>
+    <figure class="quote"><blockquote><p><span class="qm">“</span>The ROI on being able to do that... it's undeniable.<span class="qm">”</span></p></blockquote><figcaption><span class="quote-mark" aria-hidden="true"><svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><g><rect x="14" y="2" width="4" height="4"/><rect x="14" y="26" width="4" height="4"/><rect x="2" y="14" width="4" height="4"/><rect x="26" y="14" width="4" height="4"/><rect x="14" y="8" width="4" height="4" opacity=".7"/><rect x="14" y="20" width="4" height="4" opacity=".7"/><rect x="8" y="14" width="4" height="4" opacity=".7"/><rect x="20" y="14" width="4" height="4" opacity=".7"/></g><rect x="13" y="13" width="6" height="6"/></svg></span><p>Thursday Frequency, aem-live</p></figcaption></figure>
+    <div class="stats"><div class="stat"><strong>Static HTML</strong> <span>every page, tokens, provenance · any host</span></div><div class="stat"><strong>stardust:deploy</strong> <span>one page → EDS blocks + authorable content</span></div><div class="stat"><strong>AEM Edge Delivery</strong> <span>rollout the site · qa the live pages</span></div></div>
+    
+  <article class="step step-v2" aria-labelledby="h-s11">
+    <div class="step-copy">
+      <div class="step-head"><h3 id="h-s11" class="step-name">Replica</h3><p class="cmd"><code>/stardust:replica &lt;url&gt;</code></p></div>
+      <h4 class="step-title"><span class="line">The site you have,</span> <span class="line">rebuilt clean.</span></h4>
+      <p class="lede">Replica reads the live site and recreates one page per template as clean HTML and CSS, never a DOM copy. It gates each one against the original at two breakpoints: structure, visuals, a stitched pixel diff. The only design changes allowed are the ones you list. Then migrate clones the rest of the pages.</p>
+    </div>
+    <div class="window mock">
+      <div class="win-bar"><span class="win-url">gate · 2 breakpoints</span><span class="win-end ok">diff &lt; 2% ✓</span></div>
+      <div class="mock-body pair">
+        <div class="thumb"><p class="mock-label caps">LIVE</p><div class="wf" aria-hidden="true"><i class="wf-nav"></i><i class="wf-hero"></i><span class="wf-row"><i></i><i></i><i></i></span><span class="wf-txt"><i></i><i></i></span></div></div><div class="thumb"><p class="mock-label caps">REPLICA</p><div class="wf" aria-hidden="true"><i class="wf-nav"></i><i class="wf-hero"></i><span class="wf-row"><i></i><i></i><i></i></span><span class="wf-txt"><i></i><i></i></span></div><i class="scan" aria-hidden="true"></i></div>
+      </div>
+      <div class="mock-foot chips"><span class="chip ok"><svg class="ico check" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="currentColor"/><path d="m5 8.2 2 2 4-4.4" fill="none" stroke="var(--page)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>structure ✓</span></span> <span class="chip ok"><svg class="ico check" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="currentColor"/><path d="m5 8.2 2 2 4-4.4" fill="none" stroke="var(--page)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>visuals ✓</span></span> <span class="chip ok"><svg class="ico check" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="currentColor"/><path d="m5 8.2 2 2 4-4.4" fill="none" stroke="var(--page)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>pixel diff ✓</span></span></div>
+    </div>
+    <ul class="plain-list"><li>One archetype per page type</li><li>Clean HTML and CSS, no DOM copy</li><li>Pixel diff gate at two breakpoints</li><li>migrate clones the sibling pages</li></ul>
+    <p class="step-cta"><a class="btn btn-secondary" href="https://github.com/adobe/skills/tree/main/plugins/stardust/skills/replica"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 .2a8 8 0 0 0-2.5 15.6c.4 0 .5-.2.5-.4v-1.5c-2.2.5-2.7-1-2.7-1-.4-.9-.9-1.2-.9-1.2-.7-.5.1-.5.1-.5.8.1 1.2.8 1.2.8.7 1.3 1.9.9 2.4.7 0-.5.3-.9.5-1.1-1.8-.2-3.6-.9-3.6-4 0-.9.3-1.6.8-2.1-.1-.2-.4-1 .1-2.1 0 0 .7-.2 2.2.8a7.4 7.4 0 0 1 4 0c1.5-1 2.2-.8 2.2-.8.4 1.1.2 1.9.1 2.1.5.6.8 1.3.8 2.1 0 3.1-1.9 3.8-3.6 4 .3.3.6.8.6 1.5v2.2c0 .2.1.5.6.4A8 8 0 0 0 8 .2"/></svg><span>Read replica on GitHub</span></a></p>
+  </article>
+    
+  <article class="step step-v2" aria-labelledby="h-s12">
+    <div class="step-copy">
+      <div class="step-head"><h3 id="h-s12" class="step-name">Deploy</h3><p class="cmd"><code>/stardust:deploy</code></p></div>
+      <h4 class="step-title"><span class="line">One page</span> <span class="line">into blocks.</span></h4>
+      <p class="lede">Deploy takes one page of static HTML and turns each section into an Edge Delivery block with its own CSS, and the copy into authorable content. It writes both through the Document Authoring API, previews, publishes, then reads the live page back and checks it. A page counts as deployed only when that check passes.</p>
+    </div>
+    <div class="window mock">
+      <div class="win-bar"><span class="win-url">index.html → blocks</span><span class="win-end">preview · publish · check</span></div>
+      <div class="mock-body chain"><div class="gnode wide"><span class="gnode-ico"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="2.5" width="11" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M5.5 8h5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></span><span class="gnode-t">hero</span><span class="gnode-ok" aria-hidden="true"><svg class="ico check" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="currentColor"/><path d="m5 8.2 2 2 4-4.4" fill="none" stroke="var(--page)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div><i class="glink v" aria-hidden="true"></i><div class="gnode wide"><span class="gnode-ico"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="2.5" width="11" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M5.5 8h5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></span><span class="gnode-t">cards</span><span class="gnode-ok" aria-hidden="true"><svg class="ico check" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="currentColor"/><path d="m5 8.2 2 2 4-4.4" fill="none" stroke="var(--page)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div><i class="glink v" aria-hidden="true"></i><div class="gnode wide"><span class="gnode-ico"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="2.5" width="11" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M5.5 8h5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></span><span class="gnode-t">text</span><span class="gnode-ok" aria-hidden="true"><svg class="ico check" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="currentColor"/><path d="m5 8.2 2 2 4-4.4" fill="none" stroke="var(--page)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div><i class="glink v" aria-hidden="true"></i><div class="gnode wide"><span class="gnode-ico"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="2.5" width="11" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M5.5 8h5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></span><span class="gnode-t">quote</span><span class="gnode-ok" aria-hidden="true"><svg class="ico check" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="currentColor"/><path d="m5 8.2 2 2 4-4.4" fill="none" stroke="var(--page)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div></div>
+    </div>
+    <ul class="plain-list"><li>Each section becomes one block</li><li>Copy stays editable in Document Authoring</li><li>Internal links rewritten to the new origin</li><li>Live page checked before it counts</li></ul>
+    <p class="step-cta"><a class="btn btn-secondary" href="https://github.com/adobe/skills/tree/main/plugins/stardust/skills/deploy"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 .2a8 8 0 0 0-2.5 15.6c.4 0 .5-.2.5-.4v-1.5c-2.2.5-2.7-1-2.7-1-.4-.9-.9-1.2-.9-1.2-.7-.5.1-.5.1-.5.8.1 1.2.8 1.2.8.7 1.3 1.9.9 2.4.7 0-.5.3-.9.5-1.1-1.8-.2-3.6-.9-3.6-4 0-.9.3-1.6.8-2.1-.1-.2-.4-1 .1-2.1 0 0 .7-.2 2.2.8a7.4 7.4 0 0 1 4 0c1.5-1 2.2-.8 2.2-.8.4 1.1.2 1.9.1 2.1.5.6.8 1.3.8 2.1 0 3.1-1.9 3.8-3.6 4 .3.3.6.8.6 1.5v2.2c0 .2.1.5.6.4A8 8 0 0 0 8 .2"/></svg><span>Read deploy on GitHub</span></a></p>
+  </article>
+    
+  <article class="step step-v2" aria-labelledby="h-s13">
+    <div class="step-copy">
+      <div class="step-head"><h3 id="h-s13" class="step-name">Rollout</h3><p class="cmd"><code>/stardust:rollout</code></p></div>
+      <h4 class="step-title"><span class="line">The whole site,</span> <span class="line">then the check.</span></h4>
+      <p class="lede">Rollout runs deploy across the migrated tree. It keeps a ledger of what shipped and what is left, shares blocks across pages instead of forking them, adds the sitemap and redirects, and audits every link. When it is done, qa sweeps the live site and reports what it finds. It never edits.</p>
+    </div>
+    <div class="window mock">
+      <div class="win-bar"><span class="win-url">stardust/rollout/ledger.json</span><span class="win-end">delivered 112 / 134</span></div>
+      <div class="mock-body sheet">
+        <div class="meter" aria-hidden="true"><i style="width:83.6%"></i></div>
+        <div class="table"><div class="tr"><span class="td idx" aria-hidden="true"></span><span class="td path">/</span> <span class="td"><span class="status ok caps">DELIVERED</span></span></div><div class="tr"><span class="td idx" aria-hidden="true"></span><span class="td path">/about</span> <span class="td"><span class="status ok caps">DELIVERED</span></span></div><div class="tr"><span class="td idx" aria-hidden="true"></span><span class="td path">/products</span> <span class="td"><span class="status ok caps">DELIVERED</span></span></div><div class="tr"><span class="td idx" aria-hidden="true"></span><span class="td path">/products/beans</span> <span class="td"><span class="status ok caps">DELIVERED</span></span></div><div class="tr"><span class="td idx" aria-hidden="true"></span><span class="td path">/news/2026</span> <span class="td"><span class="status run caps">DEPLOYING</span></span></div><div class="tr"><span class="td idx" aria-hidden="true"></span><span class="td path">/contact</span> <span class="td"><span class="status wait caps">PENDING</span></span></div></div>
+        <p class="mock-foot-line">shared blocks ✓ · sitemap ✓ · redirects ✓ · links ✓</p>
+      </div>
+    </div>
+    <ul class="plain-list"><li>A ledger of shipped and pending pages</li><li>Blocks shared, not forked per page</li><li>Sitemap, redirects, link audit</li><li>qa reports on the live site</li></ul>
+    <p class="step-cta"><a class="btn btn-secondary" href="https://github.com/adobe/skills/tree/main/plugins/stardust/skills/rollout"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 .2a8 8 0 0 0-2.5 15.6c.4 0 .5-.2.5-.4v-1.5c-2.2.5-2.7-1-2.7-1-.4-.9-.9-1.2-.9-1.2-.7-.5.1-.5.1-.5.8.1 1.2.8 1.2.8.7 1.3 1.9.9 2.4.7 0-.5.3-.9.5-1.1-1.8-.2-3.6-.9-3.6-4 0-.9.3-1.6.8-2.1-.1-.2-.4-1 .1-2.1 0 0 .7-.2 2.2.8a7.4 7.4 0 0 1 4 0c1.5-1 2.2-.8 2.2-.8.4 1.1.2 1.9.1 2.1.5.6.8 1.3.8 2.1 0 3.1-1.9 3.8-3.6 4 .3.3.6.8.6 1.5v2.2c0 .2.1.5.6.4A8 8 0 0 0 8 .2"/></svg><span>Read rollout on GitHub</span></a></p>
+  </article>
+  </div>
+</section>
+
+<section class="sec final" id="install" aria-labelledby="h-install">
+  <div class="container">
+    <div class="final-head">
+      <h2 id="h-install" class="h2"><span class="line">Install it.</span> <span class="line">Docs included.</span></h2>
+      <p class="lede">Stardust is a set of AI skills. Install it, then say what you want in your own words.</p>
+      <div class="actions"><p><a data-copy="[&quot;/plugin marketplace add adobe/skills&quot;,&quot;/plugin install stardust@adobe-skills&quot;]" role="button" class="btn btn-primary caps" href="https://stardust.style/#install"><span class="txt">COPY INSTALL</span></a></p><p><a class="btn btn-secondary caps" href="https://github.com/adobe/skills/tree/main/plugins/stardust#readme">README ON GITHUB</a></p></div>
+      
+    </div>
+    <div class="final-grid">
+      <figure class="quote compact"><blockquote><p><span class="qm">“</span>One of the most incredible open source skills I've ever seen.<span class="qm">”</span></p></blockquote><figcaption><span class="quote-mark" aria-hidden="true"><svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><g><rect x="14" y="2" width="4" height="4"/><rect x="14" y="26" width="4" height="4"/><rect x="2" y="14" width="4" height="4"/><rect x="26" y="14" width="4" height="4"/><rect x="14" y="8" width="4" height="4" opacity=".7"/><rect x="14" y="20" width="4" height="4" opacity=".7"/><rect x="8" y="14" width="4" height="4" opacity=".7"/><rect x="20" y="14" width="4" height="4" opacity=".7"/></g><rect x="13" y="13" width="6" height="6"/></svg></span><p>Thursday Frequency, aem-live</p></figcaption></figure>
+      <div class="window chat">
+        <div class="win-bar"><span class="win-url">~/project</span><span class="win-end" aria-hidden="true"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="m4.5 6.5 3.5 3.5 3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+        <div class="chat-body"><p class="msg-ctx">~/project ›</p><p class="msg-user"><span>/plugin marketplace add adobe/skills</span></p><p class="msg-user"><span>/plugin install stardust@adobe-skills</span></p><p class="msg-agent"><span class="msg-ico" aria-hidden="true"><svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><g><rect x="14" y="2" width="4" height="4"/><rect x="14" y="26" width="4" height="4"/><rect x="2" y="14" width="4" height="4"/><rect x="26" y="14" width="4" height="4"/><rect x="14" y="8" width="4" height="4" opacity=".7"/><rect x="14" y="20" width="4" height="4" opacity=".7"/><rect x="8" y="14" width="4" height="4" opacity=".7"/><rect x="20" y="14" width="4" height="4" opacity=".7"/></g><rect x="13" y="13" width="6" height="6"/></svg></span><span>installed stardust 0.20.0 · 14 skills</span></p><p class="msg-ctx">~/project ›</p><p class="msg-user"><span>/stardust make example.com feel like a magazine, keep our type</span></p><p class="msg-agent"><span class="msg-ico" aria-hidden="true"><svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><g><rect x="14" y="2" width="4" height="4"/><rect x="14" y="26" width="4" height="4"/><rect x="2" y="14" width="4" height="4"/><rect x="26" y="14" width="4" height="4"/><rect x="14" y="8" width="4" height="4" opacity=".7"/><rect x="14" y="20" width="4" height="4" opacity=".7"/><rect x="8" y="14" width="4" height="4" opacity=".7"/><rect x="20" y="14" width="4" height="4" opacity=".7"/></g><rect x="13" y="13" width="6" height="6"/></svg></span><span>reading example.com · 5 pages</span></p><p class="msg-agent"><span class="msg-ico" aria-hidden="true"><svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><g><rect x="14" y="2" width="4" height="4"/><rect x="14" y="26" width="4" height="4"/><rect x="2" y="14" width="4" height="4"/><rect x="26" y="14" width="4" height="4"/><rect x="14" y="8" width="4" height="4" opacity=".7"/><rect x="14" y="20" width="4" height="4" opacity=".7"/><rect x="8" y="14" width="4" height="4" opacity=".7"/><rect x="20" y="14" width="4" height="4" opacity=".7"/></g><rect x="13" y="13" width="6" height="6"/></svg></span><span>brand-faithful mode · palette and type pinned</span></p><p class="msg-agent"><span class="msg-ico" aria-hidden="true"><svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><g><rect x="14" y="2" width="4" height="4"/><rect x="14" y="26" width="4" height="4"/><rect x="2" y="14" width="4" height="4"/><rect x="26" y="14" width="4" height="4"/><rect x="14" y="8" width="4" height="4" opacity=".7"/><rect x="14" y="20" width="4" height="4" opacity=".7"/><rect x="8" y="14" width="4" height="4" opacity=".7"/><rect x="20" y="14" width="4" height="4" opacity=".7"/></g><rect x="13" y="13" width="6" height="6"/></svg></span><span>decade ✓ rolled → 1970s craft ✓ rolled → letterpress</span></p><p class="msg-agent"><span class="msg-ico" aria-hidden="true"><svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><g><rect x="14" y="2" width="4" height="4"/><rect x="14" y="26" width="4" height="4"/><rect x="2" y="14" width="4" height="4"/><rect x="26" y="14" width="4" height="4"/><rect x="14" y="8" width="4" height="4" opacity=".7"/><rect x="14" y="20" width="4" height="4" opacity=".7"/><rect x="8" y="14" width="4" height="4" opacity=".7"/><rect x="20" y="14" width="4" height="4" opacity=".7"/></g><rect x="13" y="13" width="6" height="6"/></svg></span><span>plan written to stardust/direction.md · confirm to run</span></p></div>
+        <div class="composer" aria-hidden="true"><span class="composer-in"></span><span class="composer-send"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+</main>
+
+<footer class="foot">
+  <div class="container">
+    <div class="foot-top">
+      <div class="foot-col foot-brand"><a class="brand" href="https://stardust.style/"><svg class="mark mark-color" viewBox="0 0 32 32" aria-hidden="true"><g fill="#f7ca6e"><rect x="14" y="2" width="4" height="4"/><rect x="14" y="26" width="4" height="4"/><rect x="2" y="14" width="4" height="4"/><rect x="26" y="14" width="4" height="4"/><rect x="14" y="8" width="4" height="4" opacity=".7"/><rect x="14" y="20" width="4" height="4" opacity=".7"/><rect x="8" y="14" width="4" height="4" opacity=".7"/><rect x="20" y="14" width="4" height="4" opacity=".7"/></g><rect x="13" y="13" width="6" height="6" fill="#ed6f4c"/></svg><span>stardust</span></a><span class="foot-gold">Open Source · Apache 2.0</span><span class="foot-gold">AI skills from Adobe</span></div>
+      <div class="foot-col"><p class="foot-h">Stardust</p><a href="https://stardust.style/#redesign">Redesign</a><a href="https://stardust.style/#migrate">Migrate</a></div>
+      <div class="foot-col"><p class="foot-h">Source</p><a href="https://github.com/adobe/skills/tree/main/plugins/stardust">GitHub</a><a href="https://stardust.style/#install">Install</a></div>
+      <div class="foot-col"><p class="foot-h">brief + seed = star</p><span class="seedline" data-seed-foot>md5(&quot;stardust&quot; · 2026-10-12) → 0d162baa</span></div>
+    </div>
+    <div class="foot-big" aria-label="stardust"><span>s</span><span>t</span><span>a</span><span>r</span><span>d</span><span>u</span><span>s</span><span>t</span></div>
+  </div>
+</footer>
+<script type="module">
+// Daily seed (ported from stardust.style scripts/seed.js: md5 of "<name> · <YYYY-MM-DD>", local date)
+const K=Array.from({length:64},(_, i)=>Math.floor(Math.abs(Math.sin(i+1))*2**32));const S=[7,12,17,22,5,9,14,20,4,11,16,23,6,10,15,21];
+const rot=(x,n)=>(x<<n)|(x>>>(32-n));const hx=(n)=>Array.from({length:4},(_, k)=>((n>>>(k*8))&255).toString(16).padStart(2,'0')).join('');
+function md5(str){const b=new TextEncoder().encode(str);const w=[];for(let i=0;i<b.length;i+=1)w[i>>2]|=b[i]<<((i%4)*8);w[b.length>>2]|=0x80<<((b.length%4)*8);w[(((b.length+8)>>6)<<4)+14]=b.length*8;let a=0x67452301,bb=0xefcdab89,c=0x98badcfe,d=0x10325476;for(let i=0;i<w.length;i+=16){let A=a,B=bb,C=c,D=d;for(let j=0;j<64;j+=1){let f,g;if(j<16){f=(B&C)|(~B&D);g=j;}else if(j<32){f=(D&B)|(~D&C);g=(5*j+1)%16;}else if(j<48){f=B^C^D;g=(3*j+5)%16;}else{f=C^(B|~D);g=(7*j)%16;}const t=D;D=C;C=B;B=(B+rot((A+f+K[j]+(w[i+g]|0))|0,S[(j>>4)*4+(j%4)]))|0;A=t;}a=(a+A)|0;bb=(bb+B)|0;c=(c+C)|0;d=(d+D)|0;}return [a,bb,c,d].map(hx).join('');}
+const today=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');};
+const seedHash=(n)=>md5(n+' · '+today()).slice(0,8);
+function paintSeeds(){
+  document.querySelectorAll('[data-seed]').forEach((el)=>{const n=el.dataset.seed;el.textContent='md5("'+n+'" · '+today()+') → '+seedHash(n)+' ·';});
+  document.querySelectorAll('[data-seed-foot]').forEach((el)=>{el.textContent='md5("stardust" · '+today()+') → '+seedHash('stardust');});
+  document.querySelectorAll('[data-today]').forEach((el)=>{el.textContent=today();});
+}
+paintSeeds();
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)paintSeeds();});
+
+// Hero demo: play the chapter mocks as one stardust run (rev 4). Reduced motion: no autoplay, steps stay clickable.
+(() => {
+  const demo = document.querySelector('.demo'); if (!demo) return;
+  const stages = [...demo.querySelectorAll('.dstage')]; const btns = [...demo.querySelectorAll('.dnav')]; const addr = demo.querySelector('.addr-t');
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const DUR = 4600; let cur = 0; let timer = 0; let visible = false; let started = false; const live = [];
+  const STAGGER = ['.swatches i', '.chips .chip', '.hashes span', '.seed .tr', '.thumb', '.chip.ok', '.chain .gnode', '.chain .glink', '.chain .gnode-ok', '.sheet .tr', '.sheet .status'];
+  stages.forEach((st) => {
+    STAGGER.forEach((sel) => st.querySelectorAll(sel).forEach((el, i) => el.style.setProperty('--i', i)));
+    st.querySelectorAll('.hashes span').forEach((h) => { h.dataset.final = h.textContent; });
+  });
+  demo.style.setProperty('--dur', DUR + 'ms');
+  const clearLive = () => { live.splice(0).forEach((id) => { clearInterval(id); clearTimeout(id); }); };
+  const type = (text) => {
+    addr.textContent = '';
+    let i = 0;
+    const iv = setInterval(() => { i += 1; addr.textContent = text.slice(0, i); if (i >= text.length) clearInterval(iv); }, 26);
+    live.push(iv);
+  };
+  const effects = (st) => {
+    st.querySelectorAll('.hashes span').forEach((h, i) => {
+      const f = h.dataset.final; let t = 0;
+      const iv = setInterval(() => {
+        t += 60;
+        if (t > 700 + i * 140) { clearInterval(iv); h.textContent = f; return; }
+        h.textContent = [...f].map(() => '0123456789abcdef'[Math.floor(Math.random() * 16)]).join('');
+      }, 60);
+      live.push(iv);
+    });
+    const seg = [...st.querySelectorAll('.seg b')];
+    if (seg.length === 2) {
+      seg[0].classList.add('on'); seg[1].classList.remove('on');
+      live.push(setTimeout(() => { seg[0].classList.remove('on'); seg[1].classList.add('on'); }, 1300));
+    }
+  };
+  const go = (n) => {
+    cur = n; clearTimeout(timer); clearLive();
+    stages.forEach((st, k) => { st.classList.toggle('on', k === n); st.classList.remove('play'); });
+    btns.forEach((b, k) => { b.classList.remove('on'); b.classList.toggle('past', k < n); b.setAttribute('aria-pressed', String(k === n)); });
+    void demo.offsetWidth;
+    btns[n].classList.add('on');
+    const list = btns[n].closest('.dnav-list');
+    if (list.scrollWidth > list.clientWidth) list.scrollTo({ left: btns[n].parentElement.offsetLeft - 12, behavior: reduced ? 'auto' : 'smooth' });
+    const st = stages[n];
+    demo.classList.toggle('done', false);
+    if (reduced) { addr.textContent = st.dataset.cmd; return; }
+    st.classList.add('play');
+    type(st.dataset.cmd);
+    effects(st);
+    timer = setTimeout(() => {
+      if (n === stages.length - 1) { demo.classList.add('done'); timer = setTimeout(() => visible && go(0), 1600); return; }
+      if (visible) go(n + 1);
+    }, DUR);
+  };
+  btns.forEach((b, k) => b.addEventListener('click', () => go(k)));
+  if (!reduced) demo.classList.add('auto');
+  new IntersectionObserver(([en]) => {
+    visible = en.isIntersecting;
+    if (reduced) return;
+    if (visible && !started) { started = true; go(0); } else if (visible) go(cur); else { clearTimeout(timer); clearLive(); }
+  }, { threshold: 0.25 }).observe(demo);
+})();
+
+// Chapter bands (rev 17): REDESIGN reshapes letter by letter, MIGRATE AS IS travels in unchanged.
+(() => {
+  const bands = [...document.querySelectorAll('.intro-label[data-motion]')];
+  if (!bands.length || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const clamp = (v) => Math.min(1, Math.max(0, v));
+  let queued = false;
+  const update = () => {
+    queued = false;
+    const vh = innerHeight;
+    bands.forEach((b) => {
+      const r = b.getBoundingClientRect();
+      const p = clamp((vh - r.top) / (vh * 0.72)); // 0 as the band enters, 1 once it is ~28% from the top
+      if (b.dataset.motion === 'morph') {
+        const chs = b.querySelectorAll('.ch');
+        chs.forEach((c, i) => c.style.setProperty('--lp', clamp(p * 1.6 - (i / chs.length) * 0.6).toFixed(3)));
+      } else {
+        const tab = b.querySelector('.tab');
+        const cs = getComputedStyle(b);
+        const travel = b.clientWidth - parseFloat(cs.paddingLeft) - tab.offsetWidth;
+        const e = 1 - Math.pow(1 - p, 3);
+        tab.style.setProperty('--tx', ((1 - e) * travel).toFixed(1) + 'px');
+      }
+    });
+  };
+  addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(update); } }, { passive: true });
+  addEventListener('resize', update, { passive: true });
+  update();
+})();
+
+// Same-page anchors are absolute (content fidelity); keep them in-page here.
+const canon=document.querySelector('link[rel=canonical]')?.href;
+document.addEventListener('click',(e)=>{const a=e.target.closest('a[href*="#"]');if(!a||!canon)return;const u=new URL(a.href);if(u.origin+u.pathname!==new URL(canon).origin+new URL(canon).pathname)return;const t=document.getElementById(u.hash.slice(1));if(!t||a.hasAttribute('data-copy'))return;e.preventDefault();t.scrollIntoView({block:'start'});history.replaceState(null,'',u.hash);});
+
+// Copy install (ported: copies the /plugin lines of the terminal script)
+document.querySelectorAll('[data-copy]').forEach((btn)=>{btn.addEventListener('click',async(e)=>{e.preventDefault();const t=btn.querySelector('.txt');if(t&&t.textContent!=='Copied'){const old=t.textContent;t.textContent='Copied';setTimeout(()=>{t.textContent=old;},1400);}try{await navigator.clipboard.writeText(JSON.parse(btn.dataset.copy).join('\n'));}catch(err){/* ignore */}});});
+
+</script>
+<script>const NEB_PALETTE = {"page":"#081e3d","navy":"#0f2c55","glow":"#1d3d68","gold":"#f7ca6e","text":"#f4f2ec","coral":"#ed6f4c"};
+/*
+ * Hero star nebula — ported from stardust.style blocks/hero/nebula.js (+ scripts/gl.js helpers),
+ * user-requested (rev 3). Same fragment shader verbatim; colours come from NEB_PALETTE, which the
+ * renderer injects (page = the reskin's navy ground so the nebula blends into the page).
+ * WebGL on hardware GPUs; the 2D dust field on small screens, software renderers, slow frame
+ * pacing, or when the shader fails. Reduced motion: one still frame, no animation loop.
+ */
+(() => {
+  const host = document.querySelector('.hero-nebula');
+  if (!host) return;
+  let canvas = host.querySelector('canvas');
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const small = matchMedia('(max-width: 760px)').matches;
+  const P = NEB_PALETTE;
+  const hex = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16) / 255);
+
+  const pointer = { x: 0.5, y: 0.5, tx: 0.5, ty: 0.5, tick() { this.x += (this.tx - this.x) * 0.045; this.y += (this.ty - this.y) * 0.045; } };
+  addEventListener('pointermove', (e) => { pointer.tx = e.clientX / innerWidth; pointer.ty = e.clientY / innerHeight; }, { passive: true });
+  document.documentElement.addEventListener('pointerleave', () => { pointer.tx = 0.5; pointer.ty = 0.5; });
+  let visible = true;
+  new IntersectionObserver(([en]) => { visible = en.isIntersecting; }).observe(host);
+
+  const VERT = 'attribute vec2 a; void main(){ gl_Position = vec4(a, 0., 1.); }';
+  const FRAG = `
+precision highp float;
+uniform vec2  u_res;
+uniform float u_time;
+uniform vec2  u_mouse;   // eased pointer 0..1
+uniform float u_scroll;  // 0..1 of first viewport
+uniform vec3  u_page, u_navy, u_glow, u_gold, u_text, u_coral;
+uniform vec2  u_logo;    // lockup centre in uv space
+uniform float u_energy;  // pointer energy 0..1
+
+float hash(vec2 p){ p = fract(p*vec2(123.34, 456.21)); p += dot(p, p+45.32); return fract(p.x*p.y); }
+float noise(vec2 p){
+  vec2 i = floor(p), f = fract(p);
+  vec2 u = f*f*(3.-2.*f);
+  float a = hash(i), b = hash(i+vec2(1.,0.)), c = hash(i+vec2(0.,1.)), d = hash(i+vec2(1.,1.));
+  return mix(mix(a,b,u.x), mix(c,d,u.x), u.y);
+}
+const mat2 R = mat2(0.80, 0.60, -0.60, 0.80);
+float fbm(vec2 p){
+  float v = 0., a = 0.5;
+  for (int i = 0; i < 6; i++){ v += a*noise(p); p = R*p*2.02 + 13.7; a *= 0.5; }
+  return v;
+}
+
+void main(){
+  vec2 uv = (gl_FragCoord.xy - 0.5*u_res) / u_res.y;
+  float aspect = u_res.x / u_res.y;
+  vec2 m = (u_mouse - 0.5) * vec2(aspect, 1.0);
+  float t = u_time * 0.045;
+
+  vec2 p = uv * 1.7 + vec2(0.0, u_scroll*0.6);
+  p -= m * 0.28;
+
+  vec2 dl = uv - u_logo;
+  float infl = exp(-dot(dl, dl) * 7.0) * (0.25 + u_energy);
+  float ang = infl * (1.6 + u_energy * 2.4) + u_time * 0.12 * infl;
+  mat2 rot = mat2(cos(ang), -sin(ang), sin(ang), cos(ang));
+  vec2 lc = u_logo * 1.7;
+  p = mix(p, rot * (p - lc) + lc, min(1.0, infl * 1.6));
+
+  vec2 q = vec2(fbm(p + t*1.3), fbm(p + vec2(5.2, 1.3) - t));
+  vec2 r = vec2(fbm(p + 2.3*q + vec2(1.7, 9.2) + 0.18*t), fbm(p + 2.3*q + vec2(8.3, 2.8) - 0.13*t));
+  float f = fbm(p + 2.8*r);
+
+  float dens = smoothstep(0.30, 0.86, f);
+  float wisps = pow(clamp(length(r) * 0.95, 0.0, 1.0), 3.0);
+  float veins = smoothstep(0.52, 0.66, f) * (1.0 - smoothstep(0.66, 0.80, f));
+
+  vec3 col = mix(u_page, u_navy, smoothstep(0.15, 0.65, f));
+  col = mix(col, u_glow, dens * 0.95);
+  col = mix(col, u_gold * 0.82, veins * (0.28 + 0.30*wisps));
+  col = mix(col, u_gold * 0.55, wisps * dens * 0.10);
+
+  vec3 stir = mix(u_gold, u_coral, clamp(u_energy * 1.2, 0.0, 1.0));
+  col = mix(col, stir * 0.9, infl * (0.22 + u_energy * 0.55) * (0.4 + 0.6*dens));
+  col += stir * infl * u_energy * 0.25;
+
+  vec2 c = uv - m * 0.22;
+  float rad = dot(c, c);
+  col = mix(col, u_gold * 0.9, 0.16 * exp(-rad * 7.0) * (0.55 + 0.45*dens));
+  col += u_glow * 0.25 * exp(-rad * 2.2);
+
+  vec2 sp = uv * vec2(aspect, 1.0);
+  for (int k = 0; k < 2; k++){
+    float sc = k == 0 ? 46.0 : 90.0;
+    vec2 g = (sp + m*0.06*float(k+1)) * sc;
+    vec2 id = floor(g), fr = fract(g) - 0.5;
+    float h = hash(id + float(k)*17.0);
+    if (h > 0.985){
+      vec2 o = (vec2(hash(id+0.1), hash(id+0.2)) - 0.5) * 0.6;
+      float d = length(fr - o);
+      float tw = 0.6 + 0.4*sin(u_time*(1.0+h*2.0) + h*40.0);
+      float s = smoothstep(0.09, 0.0, d) * tw;
+      col += (h > 0.995 ? u_gold : u_text) * s * (k == 0 ? 0.9 : 0.5);
+    }
+  }
+
+  float vig = smoothstep(1.35, 0.35, length(uv * vec2(0.75, 1.15)));
+  col = mix(u_page, col, 0.35 + 0.65*vig);
+  col += (hash(gl_FragCoord.xy + fract(u_time)) - 0.5) * 0.02;
+  gl_FragColor = vec4(col, 1.0);
+}`;
+  const UNIFORMS = ['u_res', 'u_time', 'u_mouse', 'u_scroll', 'u_page', 'u_navy', 'u_glow', 'u_gold', 'u_text', 'u_coral', 'u_logo', 'u_energy'];
+  const SOFTWARE = /swiftshader|llvmpipe|lavapipe|softpipe|software|basic render|mesa offscreen/i;
+
+  function slowFrames({ warmup = 8, sample = 12, limit = 80 } = {}) {
+    let last = 0; let seen = 0; const gaps = []; let done = false;
+    return (now) => {
+      if (done) return false;
+      if (last) { seen += 1; if (seen > warmup) gaps.push(now - last); }
+      last = now;
+      if (gaps.length < sample) return false;
+      done = true;
+      return gaps.sort((a, b) => a - b)[sample >> 1] > limit;
+    };
+  }
+
+  function mount2D() {
+    const ctx = canvas.getContext('2d', { alpha: false });
+    let w = 0; let h = 0; let parts = [];
+    const t0 = performance.now();
+    const resize = () => {
+      const dpr = Math.min(devicePixelRatio || 1, 2);
+      w = canvas.clientWidth; h = canvas.clientHeight;
+      canvas.width = w * dpr; canvas.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      parts = Array.from({ length: Math.round((w * h) / 4200) }, () => ({ x: Math.random() * w, y: Math.random() * h, z: Math.random(), a: 0.15 + Math.random() * 0.5, gold: Math.random() < 0.14 }));
+    };
+    const draw = (now) => {
+      pointer.tick();
+      const px = pointer.x - 0.5; const py = pointer.y - 0.5; const t = (now - t0) / 1000;
+      ctx.fillStyle = P.page; ctx.fillRect(0, 0, w, h);
+      const g = ctx.createRadialGradient(w * (0.5 + px * 0.1), h * (0.45 + py * 0.1), 0, w * 0.5, h * 0.45, Math.max(w, h) * 0.6);
+      g.addColorStop(0, P.glow); g.addColorStop(1, P.page);
+      ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+      parts.forEach((p) => {
+        if (!reduced) { p.y -= 0.03 * (0.3 + p.z); if (p.y < -2) p.y = h + 2; }
+        ctx.globalAlpha = p.a * (0.6 + 0.4 * Math.sin(t + p.z * 9));
+        ctx.fillStyle = p.gold ? P.gold : P.text;
+        ctx.beginPath(); ctx.arc(p.x + px * 40 * p.z, p.y + py * 40 * p.z, 0.4 + p.z * 1.4, 0, Math.PI * 2); ctx.fill();
+      });
+      ctx.globalAlpha = 1;
+      if (!reduced) requestAnimationFrame(draw);
+    };
+    addEventListener('resize', resize, { passive: true });
+    resize();
+    requestAnimationFrame(draw);
+    host.dataset.renderer = '2d';
+  }
+
+  function fallBack() {
+    const fresh = canvas.cloneNode(false);
+    canvas.replaceWith(fresh); canvas = fresh;
+    mount2D();
+  }
+
+  function mountGL() {
+    const gl = canvas.getContext('webgl', { antialias: false, alpha: false, powerPreference: 'high-performance', preserveDrawingBuffer: true });
+    if (!gl) return false;
+    const info = gl.getExtension('WEBGL_debug_renderer_info');
+    if (info && SOFTWARE.test(String(gl.getParameter(info.UNMASKED_RENDERER_WEBGL)))) { gl.getExtension('WEBGL_lose_context')?.loseContext(); return false; }
+    const scale = Math.min(devicePixelRatio || 1, 2) * (innerWidth > 1600 ? 0.6 : 0.75);
+    let cw = canvas.clientWidth; let ch = canvas.clientHeight;
+    new ResizeObserver(([e]) => { cw = e.contentRect.width; ch = e.contentRect.height; }).observe(canvas);
+    const resize = () => {
+      const w = Math.max(1, Math.round(cw * scale)); const h = Math.max(1, Math.round(ch * scale));
+      if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; gl.viewport(0, 0, w, h); }
+    };
+    const page = hex(P.page);
+    resize(); gl.clearColor(page[0], page[1], page[2], 1); gl.clear(gl.COLOR_BUFFER_BIT);
+
+    const compile = (type, s) => { const sh = gl.createShader(type); gl.shaderSource(sh, s); gl.compileShader(sh); return sh; };
+    const vs = compile(gl.VERTEX_SHADER, VERT); const fs = compile(gl.FRAGMENT_SHADER, FRAG);
+    const prog = gl.createProgram(); gl.attachShader(prog, vs); gl.attachShader(prog, fs); gl.linkProgram(prog);
+    const parallel = gl.getExtension('KHR_parallel_shader_compile');
+    const U = {}; const slow = slowFrames(); const t0 = performance.now();
+    let scroll = 0; let energy = 0; let lx = 0.5; let ly = 0.5; let logo = [0, 0]; let failed = false;
+    const anchor = document.querySelector('.hero .display');
+    const place = () => {
+      if (!anchor) return;
+      const r = anchor.getBoundingClientRect(); const c = canvas.getBoundingClientRect();
+      logo = [((r.left + r.width / 2 - c.left) - c.width / 2) / c.height, (c.height / 2 - (r.top + r.height / 2 - c.top)) / c.height];
+    };
+    addEventListener('scroll', () => { scroll = Math.min(1, scrollY / innerHeight); if (reduced) frame(performance.now()); }, { passive: true });
+    addEventListener('resize', place, { passive: true });
+
+    function frame(now) {
+      if (failed) return;
+      if (!reduced && slow(now)) { failed = true; fallBack(); return; }
+      if (!visible && !reduced) { requestAnimationFrame(frame); return; }
+      resize(); pointer.tick();
+      let v = Math.hypot(pointer.x - lx, pointer.y - ly) * 60; lx = pointer.x; ly = pointer.y;
+      if (v < 0.08) v = 0;
+      energy += (Math.min(1, v) - energy) * (v > energy ? 0.18 : 0.05);
+      gl.uniform2f(U.u_res, canvas.width, canvas.height);
+      gl.uniform1f(U.u_time, reduced ? 0 : (now - t0) / 1000);
+      gl.uniform2f(U.u_mouse, pointer.x, 1 - pointer.y);
+      gl.uniform1f(U.u_scroll, scroll);
+      gl.uniform2f(U.u_logo, logo[0], logo[1]);
+      gl.uniform1f(U.u_energy, reduced ? 0 : energy);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      if (!reduced) requestAnimationFrame(frame);
+    }
+    const finish = () => {
+      if (gl.isContextLost() || !gl.getProgramParameter(prog, gl.LINK_STATUS)) { failed = true; fallBack(); return; }
+      gl.useProgram(prog);
+      const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+      const a = gl.getAttribLocation(prog, 'a'); gl.enableVertexAttribArray(a); gl.vertexAttribPointer(a, 2, gl.FLOAT, false, 0, 0);
+      UNIFORMS.forEach((n) => { U[n] = gl.getUniformLocation(prog, n); });
+      ['page', 'navy', 'glow', 'gold', 'text', 'coral'].forEach((k) => gl.uniform3fv(U[`u_${k}`], hex(P[k])));
+      place();
+      requestAnimationFrame(frame);
+    };
+    const poll = () => (gl.isContextLost() || gl.getProgramParameter(prog, parallel.COMPLETION_STATUS_KHR) ? finish() : requestAnimationFrame(poll));
+    requestAnimationFrame(parallel ? poll : finish);
+    host.dataset.renderer = 'webgl';
+    return true;
+  }
+
+  if (small || !mountGL()) {
+    if (canvas.getContext && !small) fallBack(); else mount2D();
+  }
+})();
+</script>
+</body>
+</html>

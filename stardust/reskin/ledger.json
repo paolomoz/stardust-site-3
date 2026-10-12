@@ -1,0 +1,383 @@
+{
+  "donor": "https://www.tryprofound.com (bounded direct sampling: home + /features/agents pinned; /customers/plaid, /pricing, /enterprise corroboration) — no designSource stamp; donor origin recorded here for Phase 6 handoff",
+  "paletteOverride": "user request 2026-10-11: Profound black -> stardust --navy #081e3d; Profound white -> #F4F2EC; greys re-derived as navy tints (donor-tokens.json overrides{})",
+  "pages": {
+    "index": {
+      "url": "https://stardust.style/",
+      "status": "gated",
+      "scope": "main .hero.block!,main .spot-pin,main .chapters.redesign .ch-intro-block!,main .chapters.redesign .stack,main .showcase!,main .chapters.migrate .ch-intro-block!,main .chapters.migrate .stack,main .install!",
+      "normalize": "stardust/reskin/normalize/index.mjs (N-D1, N-D2, N1 un-park scroll stage, N2 drop scroll-rail duplicates, N3 finish typewriter, N4 user-requested removal of the hero version tag, N5 user-requested removal of the route diagram, N6 user-requested removal of the hero wordmark, N7 user-requested removal of the chapter intro titles, N8 removal of SCROLL, N9 hero kicker copy edit, N10 removal of \"Built on impeccable.\", N11 removal of the impeccable install lines, N12–N14 copy edits, N15 Migrate shortcut addition)",
+      "gates": {
+        "domEquality": "PASS (6625/6625 chars byte-equal, 2/2 images ordered)",
+        "slotCoverage": "PASS (45/45: 14 slot texts, all CTAs as text+absolute href, 2 images painted, metadata verbatim)",
+        "donorProbe": "PASS (33/33 incl. page-specific spec stardust/reskin/probe-spec.json)",
+        "sanity": "PASS (overflow 0px @1440, 0px @360)",
+        "eyeball": "adopted"
+      },
+      "fixIterations": {
+        "content": "seed paragraph had text-transform on the whole line (only the SEED label is uppercase in source); step CTA had been moved above the mock (reorder) — moved back after the cells",
+        "design": "removed IntersectionObserver reveal that held windows/cards at opacity:0 until scrolled (blank in full-page capture, JS-dependent content); primary .btn caps variant restored to the 14px button spec"
+      },
+      "eyeballVerdict": "Reads as Profound: dashed-guide ruled grid, centered hero with announcement chip over a product window (route node graph), plan cards, '[01] Extract' ruled step rows with 32px titles, app-window mocks (capture, seed table, before/after, gate, node chain, rollout sheet with mint status pills), 2x2 bordered check cells, quote bands, gradient band for the migrate half, chat-pane install session, Profound footer. Weakest point: source-forced UPPERCASE labels/buttons (SCROLL, FOLLOW THE REDESIGN, COPY INSTALL…) where Profound is sentence case.",
+      "residuals": [
+        {
+          "gate": "eyeball",
+          "check": "casing idiom",
+          "detail": "source renders its mono labels uppercase; byte fidelity keeps them uppercase against Profound's sentence-case idiom (styled at Profound label size/color to soften)",
+          "verdict": "accepted"
+        },
+        {
+          "gate": "eyeball",
+          "check": "hero scale",
+          "detail": "h1 follows Profound's 48px display token, far smaller than the source's giant 'Redesign the Web.' — donor-faithful by design",
+          "verdict": "accepted"
+        },
+        {
+          "gate": "slotCoverage",
+          "check": "image hosting",
+          "detail": "Frescopa images hotlinked from stardust.style EDS media (public, paints); localize at deploy time",
+          "verdict": "accepted"
+        }
+      ],
+      "flags": [
+        "og:image:alt is 'Frescopa home page before the redesign' but og:image is the stardust OG card — carried verbatim, needs owner decision",
+        "footer 'CHANGELOG · v0.19.8' vs hero 'v0.20.0' — version drift upstream, carried verbatim (footer is chrome)",
+        "meta description '…or all of it all together.' (doubled 'all') — carried verbatim",
+        "daily seed strings (hero, direct mock, footer) are recomputed client-side with the source's own md5/date routine, so the page matches the live source on any day",
+        "N9 copy edit ('Takes a website, brings it back:') exists only in the reskin — update the stardust.style hero source (DA) to make it real; the ledger guard turns N9 into a no-op once it is",
+        "N12–N15 (install title/lede, 'Two ways in.' lede, Migrate shortcut) and N9 exist only in the reskin — re-author the stardust.style source to make them real; each is guarded and becomes a no-op once the source matches"
+      ],
+      "renderedScope": "[data-gate=\"s01\"],[data-gate=\"s02-s14\"]",
+      "revisions": [
+        {
+          "rev": 2,
+          "date": "2026-10-11",
+          "request": "hero too empty; spacing too airy; bigger H1 + subtitle; add a Profound-style live demo mock of stardust as an agent desktop app (redesign prototypes, deploy to EDS, SEO + AI visibility at top)",
+          "changes": [
+            "D4 hero demo mock (illustrative, out of gate scope)",
+            "s02 route graph moved to the Two-ways-in section",
+            "sectionPaddingY 88px + tighter internal spacing",
+            "display 72/76px, hero lede 22/30px"
+          ],
+          "gates": {
+            "domEquality": "PASS 6625/6625, 2/2 images",
+            "slotCoverage": "PASS 45/45",
+            "donorProbe": "PASS 33/33",
+            "sanity": "PASS 0px overflow @1440/@360"
+          }
+        },
+        {
+          "rev": 3,
+          "date": "2026-10-11",
+          "request": "H1 on one line; add the stars shader from stardust.style to the hero",
+          "changes": [
+            "H1 lines inline + nowrap ≥761px (wraps on phones); innerText unchanged",
+            "stardust.style nebula shader (blocks/hero/nebula.js) ported verbatim to renderers/nebula.client.js: WebGL fbm nebula + twinkling stars, pointer parallax and swirl around the H1; 2D dust-field fallback on ≤760px, software GL, slow frames or shader failure; reduced motion = one still frame; paused offscreen",
+            "hero glow replaced by the nebula canvas, masked to fade into the page"
+          ],
+          "verified": "webgl path on a real GPU (Metal), 2d path in headless/SwiftShader",
+          "gates": {
+            "domEquality": "PASS",
+            "slotCoverage": "PASS 45/45",
+            "donorProbe": "PASS 33/33",
+            "sanity": "PASS"
+          }
+        },
+        {
+          "rev": 4,
+          "date": "2026-10-11",
+          "request": "the agent-app demo was too abstract; reuse the chapter mocks (Extract … Rollout) as an animated demo that looks like it runs in a browser",
+          "changes": [
+            "D4 replaced: browser chrome (address bar types each step's /stardust command, Running pill) + step list grouped Redesign / Migrate as is + the six chapter mocks (same MOCKS markup) played in sequence with per-mock animation (swatches/tags, hash roll + table, before→after wipe, scan + gate checks, blocks landing, meter + deliveries)",
+            "autoplay 4.6s/step, loops; clickable steps; pauses offscreen; reduced motion = no autoplay, static mocks, steps still clickable; mobile = horizontal step chips",
+            "metrics strip / chat / deployment rail removed with the old demo",
+            "step parsing refactored into parseStep() shared by chapters and demo"
+          ],
+          "gates": {
+            "domEquality": "PASS",
+            "slotCoverage": "PASS 45/45",
+            "donorProbe": "PASS 33/33",
+            "sanity": "PASS"
+          }
+        },
+        {
+          "rev": 5,
+          "date": "2026-10-11",
+          "request": "remove the version above the H1",
+          "changes": [
+            "N4 added to normalize/index.mjs (user-requested content removal of .hero .ver 'v0.20.0'); content model re-captured (6625 → 6617 chars)",
+            "renderer: version tag optional; announcement chip keeps the stardust tag only"
+          ],
+          "gates": {
+            "domEquality": "PASS 6617/6617",
+            "slotCoverage": "PASS 45/45",
+            "donorProbe": "PASS 33/33",
+            "sanity": "PASS"
+          }
+        },
+        {
+          "rev": 6,
+          "date": "2026-10-11",
+          "request": "Two ways in: remove the route diagram; make the section background different, full width",
+          "changes": [
+            "N5 added (user-requested content removal of .spotlight .spot-media); re-captured: 13 slots, 6561 chars",
+            "renderer resolves logical slot ids around the removal; routes() renders nothing",
+            "Two ways in = full-width cream band (#F4F2EC ground, navy ink, light plan cards; second card's action inverted to navy)",
+            "probe spec: heading/lede assertions retargeted to the dark chapters; +2 assertions for the light band"
+          ],
+          "gates": {
+            "domEquality": "PASS 6561/6561",
+            "slotCoverage": "PASS 44/44",
+            "donorProbe": "PASS 35/35",
+            "sanity": "PASS"
+          }
+        },
+        {
+          "rev": 7,
+          "date": "2026-10-11",
+          "request": "remove the stardust chip above the H1 (more space for the demo); keep margin below the demo before the light section",
+          "changes": [
+            "N6 added (user-requested content removal of .hero .hero-word 'stardust'); re-captured: 6552 chars",
+            "announcement chip no longer rendered (both its strings removed)",
+            "demo window fully rounded with 72px (48px mobile) below it before the cream band; hero copy padding tightened"
+          ],
+          "gates": {
+            "domEquality": "PASS 6552/6552",
+            "slotCoverage": "PASS 44/44",
+            "donorProbe": "PASS 35/35",
+            "sanity": "PASS"
+          }
+        },
+        {
+          "rev": 8,
+          "date": "2026-10-11",
+          "request": "chapter label: just [REDESIGN], 300% font size, band in an accent colour",
+          "changes": [
+            "N7 added (user-requested removal of .chapters .sc-title — 'Redesign', 'Migrate as is'), applied to both chapter intros for consistency; re-captured: 6529 chars",
+            "intro label = full-bleed band in palette.accent (mint rgb(8,255,182)) with navy ink; [TAB] at 36px (300% of 12px), brackets CSS-generated; 28px on phones",
+            "demo step-list group labels now use the tab text",
+            "probe: +2 assertions (band accent, 36px tab); step-label size retargeted to step rows"
+          ],
+          "gates": {
+            "domEquality": "PASS 6529/6529",
+            "slotCoverage": "PASS 44/44",
+            "donorProbe": "PASS 37/37",
+            "sanity": "PASS"
+          }
+        },
+        {
+          "rev": 9,
+          "date": "2026-10-11",
+          "request": "use stardust's own palette accent instead of Profound mint",
+          "changes": [
+            "palette.accent → stardust --gold #f7ca6e rgb(247, 202, 110): chapter bands, status pills, Running pill, checks, meter, scan, footer status, finished demo steps",
+            "translucent status/pill grounds re-tinted from mint to gold; chart swatch 2 mint → gold"
+          ],
+          "gates": {
+            "domEquality": "PASS 6529/6529",
+            "slotCoverage": "PASS 44/44",
+            "donorProbe": "PASS 37/37 (band accent asserts the new token)",
+            "sanity": "PASS"
+          }
+        },
+        {
+          "rev": 10,
+          "date": "2026-10-12",
+          "request": "remove SCROLL; kicker -> 'Takes a website, brings it back:' / 'redesigned, fixed, migrated. Or all three.' with 'Or all three.' highlighted; step label rows on a slightly different ground; quote visually distinct",
+          "changes": [
+            "N8 user-requested removal of .hero .scroll",
+            "N9 user-requested COPY EDIT of the kicker's first line (guarded; live source still has the old copy until re-authored)",
+            "re-captured: 6523 chars; seed strings now 2026-10-12",
+            "'Or all three.' highlighted in accent gold (navy ink)",
+            "step label rows on surface1 with a navy command chip",
+            "quote = gold-tinted panel, 3px gold edge, 30px/500 text, gold attribution mark; compact install quote matches",
+            "probe: primary-button assertions retargeted to main .btn-primary (COPY INSTALL) now that the hero button is gone"
+          ],
+          "gates": {
+            "domEquality": "PASS 6523/6523",
+            "slotCoverage": "PASS 43/43",
+            "donorProbe": "PASS 37/37",
+            "sanity": "PASS"
+          }
+        },
+        {
+          "rev": 11,
+          "date": "2026-10-12",
+          "request": "footer wordmark: each letter turns a stardust palette colour on hover",
+          "changes": [
+            "footer (chrome, out of gate scope): .foot-big letters cycle gold #f7ca6e, coral #ed6f4c, cream #f4f2ec, gold-tint #fbe7be; instant on hover with a soft glow and a slight lift, 2.6s fade back so a sweep leaves a trail; lift skipped under reduced motion"
+          ],
+          "gates": {
+            "donorProbe": "PASS 37/37",
+            "sanity": "PASS"
+          }
+        },
+        {
+          "rev": 12,
+          "date": "2026-10-12",
+          "request": "quotes: remove the left vertical band (AI slop), invent something different; look at Refero",
+          "references": [
+            "Refero: cartesia.ai/industries/gaming testimonial (big open quote, one phrase marker-highlighted)",
+            "Refero: anthropic.com/customers, rox.com/customers (type-led quotes, quiet attribution)"
+          ],
+          "changes": [
+            "quote module rebuilt with no container: 40px/400 type (26px compact, 28px mobile), gold curly quotes hanging into the margin, one gold-marked punchline per quote (same marker as the hero 'Or all three.')",
+            "punchline split is fail-loud: phrase must occur once and the pieces must rejoin to the captured string",
+            "attribution: small muted line beside the gold stardust badge",
+            "stats row regains its own top border"
+          ],
+          "gates": {
+            "domEquality": "PASS 6523/6523",
+            "slotCoverage": "PASS 43/43",
+            "donorProbe": "PASS 37/37",
+            "sanity": "PASS"
+          }
+        },
+        {
+          "rev": 13,
+          "date": "2026-10-12",
+          "request": "quotes: remove the word highlights, use a background colour to differentiate, make them italic",
+          "changes": [
+            "punchline highlights removed (PUNCHLINES = [])",
+            "quotes = stardust gold-tint #fbe7be cards (16px radius, no border/edge), navy ink, 36px italic (24px compact, 26px mobile)",
+            "real Inter italic loaded (rsms InterVariable-Italic.woff2, OFL) under the same interVariable family — no synthesized oblique",
+            "attribution in muted navy beside a navy badge with a gold-tint mark"
+          ],
+          "gates": {
+            "domEquality": "PASS 6523/6523",
+            "slotCoverage": "PASS 43/43",
+            "donorProbe": "PASS 37/37",
+            "sanity": "PASS"
+          }
+        },
+        {
+          "rev": 14,
+          "date": "2026-10-12",
+          "request": "quotes: light yellow handwritten text on a page-colour background with notebook lines/squares",
+          "changes": [
+            "quote = notebook page: surface1 navy with a 24px cream graph-paper grid (7.5% opacity), 6px radius, hairline edge; no margin rule",
+            "text in stardust gold-tint #fbe7be, Caveat 500 (Google Fonts, OFL) at 46px on 48px lines (34px compact/mobile), aligned to two grid squares",
+            "Inter italic face dropped (unused); attribution stays Inter, muted"
+          ],
+          "gates": {
+            "domEquality": "PASS 6523/6523",
+            "slotCoverage": "PASS 43/43",
+            "donorProbe": "PASS 37/37",
+            "sanity": "PASS"
+          }
+        },
+        {
+          "rev": 15,
+          "date": "2026-10-12",
+          "request": "remove mentions that stardust is built on impeccable",
+          "changes": [
+            "N10 user-requested removal of .install .credit ('Built on impeccable.'); re-captured: 6502 chars",
+            "footer (chrome): 'Built on impeccable' link removed from the Source column"
+          ],
+          "gates": {
+            "domEquality": "PASS 6502/6502",
+            "slotCoverage": "PASS 43/43",
+            "donorProbe": "PASS 37/37",
+            "sanity": "PASS"
+          }
+        },
+        {
+          "rev": 16,
+          "date": "2026-10-12",
+          "request": "remove impeccable from the install demo too",
+          "changes": [
+            "N11 user-requested removal of the three impeccable lines from the install terminal (marketplace add, install, 'installed impeccable · design craft'); re-captured: 6385 chars",
+            "Copy install now copies only the two stardust /plugin lines (derived from the model)"
+          ],
+          "remaining_mentions_not_changed": [
+            "install lede: 'It needs impeccable for the design craft and Playwright to render pages. Install both…'",
+            "Prototype step body: '…runs impeccable's craft loop…'"
+          ],
+          "gates": {
+            "domEquality": "PASS 6385/6385",
+            "slotCoverage": "PASS 42/42",
+            "donorProbe": "PASS 37/37",
+            "sanity": "PASS"
+          }
+        },
+        {
+          "rev": 17,
+          "date": "2026-10-12",
+          "request": "batch: accent verbs; install title/lede; hero line 1; drop 'Or open a door yourself.'; Migrate shortcut; distinct A/B per use case; band scroll motion per use case; footer simplified",
+          "changes": [
+            "hero: 'redesigned, fixed, migrated' in accent gold (period stays body colour; split byte-verified)",
+            "N9 reworded: hero line 1 → 'Takes a website & brings it back,'",
+            "N12 install heading 'Then ask it.' → 'Docs included.'; N13 install lede → 'Stardust is a set of AI skills. Install it, then say what you want in your own words.'; N14 'Two ways in.' lede drops 'Or open a door yourself.'",
+            "N15 content ADDITION: Shortcut + '/stardust:replica <url>' in the Migrate door, cloned from the Redesign door's .short (label + command, no note)",
+            "re-captured: 6292 chars",
+            "A→B drawn per use case: redesign = dated grey page → new navy/gold page; migrate = identical page on an old server stack → on a gold edge network",
+            "chapter bands scroll motion: REDESIGN letters morph (weight 200→500, tilt/drop → upright, staggered); MIGRATE AS IS slides in from the right, unchanged (ease-out); rest state = static; off under reduced motion",
+            "footer (chrome) simplified to 4 columns: brand + 'Open Source · Apache 2.0' + 'AI skills from Adobe' (gold) | Stardust: Redesign, Migrate | Source: GitHub, Install | brief + seed = star + daily md5 line",
+            "sanity fix: plan cards overflowed 13px at 360 (A→B drawings) — grid column minmax(0,1fr), smaller thumbnails on phones"
+          ],
+          "gates": {
+            "domEquality": "PASS 6292/6292",
+            "slotCoverage": "PASS 42/42",
+            "donorProbe": "PASS 37/37",
+            "sanity": "PASS (after fix)"
+          }
+        },
+        {
+          "rev": 18,
+          "date": "2026-10-12",
+          "request": "stardust logo in header and footer in its own (yellow) colours; header: Redesign + Migrate left after the logo, GitHub (with mark) right next to Install",
+          "changes": [
+            "nav + footer brand mark: gold #f7ca6e arms (70% inner squares kept) + coral #ed6f4c core, as on stardust.style; all other uses of the mark stay monochrome",
+            "nav (chrome): Redesign, Migrate left-aligned after the brand; GitHub with the GitHub mark moved right beside the Install Stardust button; phones show the GitHub icon only"
+          ],
+          "gates": {
+            "domEquality": "PASS",
+            "donorProbe": "PASS 37/37",
+            "sanity": "PASS"
+          }
+        }
+      ]
+    },
+    "index-v2": {
+      "url": "https://stardust.style/",
+      "status": "gated",
+      "derivedFrom": "index (rev 18) — v1 kept unchanged at pages/index.html",
+      "normalize": "stardust/reskin/normalize/index-v2.mjs = index.mjs (N-D1…N15, awaited) + V2-N16 step numbers removed + V2-N17 'In this step' labels removed",
+      "tokens": "stardust/reskin/donor-tokens-v2.json (mutedFg rgb(169,187,214), dimFg rgb(138,158,190))",
+      "probeSpec": "stardust/reskin/probe-spec-v2.json",
+      "renderedScope": "[data-gate=\"s01\"],[data-gate=\"s02-s14\"]",
+      "request": "fix AI tells 1, 2, 4 ([01] rows + IN THIS STEP), 6, 9, 10, 11, 12, 19–20 in a new file",
+      "changes": [
+        "#1 demo panels unframed inside the browser window; typecard + tables flattened to rules; active demo step no longer a filled card",
+        "#2 all glows removed (hero text halos, scan line, edge dots, Running dot, footer hover) — rules stripped from the stylesheet, not just overridden; hero legibility via nebula at 72% opacity instead",
+        "#4 '[01] Extract' label rows removed: step name (h3, 32px) + command chip are the heading; tagline (h4) below at 20px; V2-N16 removes the step numbers, V2-N17 the 'IN THIS STEP' labels",
+        "#6 the six 2×2 check-icon cell grids → one plain ruled list per step, under the copy",
+        "#9 faux window dots removed from all windows",
+        "#10 header solid navy, no backdrop blur",
+        "#11 one authored moment = the hero (nebula + demo run); band morph/slide off, caret static, footer hover = colour only",
+        "#12 'Running' pill removed",
+        "#19–20 secondary text navy-tinted (8.5:1 / ≥4.8:1); dated-thumbnail 'A' darkened",
+        "frameless demo stages crossfade sequentially (out, then in) so steps never overlap"
+      ],
+      "gates": {
+        "domEquality": "PASS 6190/6190",
+        "slotCoverage": "PASS 42/42",
+        "donorProbe": "PASS 40/40",
+        "sanity": "PASS",
+        "impeccableDetector": "89 → 21 (19 cramped-padding false positives, 1 nested = #8 page drawings not in scope, 1 grid = requested notebook quotes)"
+      },
+      "notIncluded": [
+        "#3 notebook grid (user-requested)",
+        "#5 numbered sections beyond the [01] rows (demo list keeps 01–03)",
+        "#7 big-stat row",
+        "#8 placeholder drawings",
+        "#13 pill overload",
+        "#14 ambient section glows",
+        "#15 uppercase labels",
+        "#16 CSS brackets",
+        "#17 hero formula",
+        "#18 giant footer wordmark"
+      ]
+    }
+  }
+}

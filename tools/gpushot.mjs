@@ -1,0 +1,10 @@
+import { chromium } from 'playwright';
+import { pathToFileURL } from 'node:url';
+import { resolve } from 'node:path';
+const b = await chromium.launch({ headless: false, args: ['--use-angle=metal', '--enable-gpu', '--ignore-gpu-blocklist', '--window-position=-2400,0'] });
+const p = await b.newPage({ viewport: { width: 1440, height: 1000 } });
+await p.goto(pathToFileURL(resolve('stardust/reskin/pages/' + (process.argv[3] || 'index') + '.html')).href, { waitUntil: 'networkidle' });
+await p.waitForTimeout(5000);
+console.log('renderer:', await p.evaluate(() => document.querySelector('.hero-nebula').dataset.renderer));
+await p.screenshot({ path: process.argv[2] });
+await b.close();

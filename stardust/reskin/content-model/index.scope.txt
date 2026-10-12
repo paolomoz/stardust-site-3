@@ -1,0 +1,1 @@
+main .hero.block!,main .spot-pin,main .chapters.redesign .ch-intro-block!,main .chapters.redesign .stack,main .showcase!,main .chapters.migrate .ch-intro-block!,main .chapters.migrate .stack,main .install!

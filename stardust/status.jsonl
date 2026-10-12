@@ -1,0 +1,2 @@
+{"ts":"2026-10-11T07:32:31Z","skill":"stardust:reskin","phase":"ingest-donor","event":"start"}
+{"ts":"2026-10-11T07:55:28Z","skill":"stardust:reskin","phase":"gates","event":"end","detail":"index gated: content PASS, donor-probe 33/33, sanity PASS"}

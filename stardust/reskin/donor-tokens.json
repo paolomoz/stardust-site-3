@@ -1,0 +1,241 @@
+{
+  "donor": "https://www.tryprofound.com",
+  "curatedFrom": "Bounded direct sampling (getComputedStyle, 1440x900, Chromium) of https://www.tryprofound.com/ (pinned reference page, all module families except numbered steps) and https://www.tryprofound.com/features/agents (pinned reference for the numbered-step / quote / 4-up cell families). Corroboration only: /customers/plaid, /pricing, /enterprise. Raw samples: stardust/canon-source/samples/home.json; screenshots: stardust/canon-source/assets/screenshots/{home,features-agents,customers-plaid,pricing,enterprise}.png.",
+  "note": "Pinned reference page: tryprofound.com home (container 1088px, radius 8px, 32px buttons). /features/agents shares the same system (verified: same container, radii, button spec, label 12px) and is pinned only for M14/M15/M16. USER PALETTE OVERRIDE (2026-10-11): Profound's black ground is replaced by stardust dark blue --navy #081e3d (from stardust.style styles.css), and Profound's white/near-white is replaced by #F4F2EC. Profound's neutral grey ladder (surfaces, hairlines, secondary text) is re-derived as mixes of #F4F2EC into #081e3d at the same luminance steps Profound uses over black, so every 'grey' is a navy tint. Each overridden value records its donor original under overrides{} for audit.",
+  "overrides": {
+    "rule": "black rgb(0,0,0) -> rgb(8,30,61) (#081e3d); white/near-white -> rgb(244,242,236) (#F4F2EC); greys -> mix(#F4F2EC into #081e3d, same % as donor grey over black)",
+    "pageBg": {
+      "donor": "rgb(0, 0, 0)",
+      "applied": "rgb(8, 30, 61)"
+    },
+    "headingFg": {
+      "donor": "rgb(237, 242, 245)",
+      "applied": "rgb(244, 242, 236)"
+    },
+    "displayMuted": {
+      "donor": "rgb(209, 209, 209)",
+      "applied": "rgb(209, 210, 210)",
+      "mix": 0.85
+    },
+    "mutedFg": {
+      "donor": "rgb(159, 159, 159)",
+      "applied": "rgb(154, 161, 170)",
+      "mix": 0.62
+    },
+    "dimFg": {
+      "donor": "rgb(130, 130, 130)",
+      "applied": "rgb(126, 136, 149)",
+      "mix": 0.5
+    },
+    "surface1": {
+      "donor": "rgb(13, 13, 13)",
+      "applied": "rgb(17, 38, 68)",
+      "mix": 0.04
+    },
+    "surface2": {
+      "donor": "rgb(26, 26, 28)",
+      "applied": "rgb(29, 49, 77)",
+      "mix": 0.09
+    },
+    "border": {
+      "donor": "rgb(35, 35, 35)",
+      "applied": "rgb(36, 55, 82)",
+      "mix": 0.12
+    },
+    "secondaryBtn": {
+      "donor": "rgb(51, 51, 51)",
+      "applied": "rgb(50, 68, 93)",
+      "mix": 0.18
+    },
+    "primaryBtnBg": {
+      "donor": "rgb(255, 255, 255)",
+      "applied": "rgb(244, 242, 236)"
+    },
+    "primaryBtnFg": {
+      "donor": "rgb(34, 34, 34)",
+      "applied": "rgb(8, 30, 61)"
+    },
+    "userLayout2": {
+      "date": "2026-10-11",
+      "request": "hero too empty, spacing too airy; H1 and subtitle bigger",
+      "display": {
+        "donor": "48px/56px, -1.08px",
+        "applied": "72px/76px, -2.4px (tracking ratio between Profound display -0.0225em and statement -0.0525em)"
+      },
+      "heroLede": {
+        "donor": "18px/24px",
+        "applied": "22px/30px"
+      },
+      "sectionPaddingY": {
+        "donor": "120px",
+        "applied": "88px"
+      }
+    },
+    "userHero3": {
+      "date": "2026-10-11",
+      "request": "H1 on one line; add the stars shader from stardust.style to the hero",
+      "nebula": "stardust.style blocks/hero/nebula.js fragment shader ported verbatim (renderers/nebula.client.js); palette: page #081e3d (reskin ground), navy #0f2c55, glow #1d3d68 (both lifted one step so the nebula reads on the navy ground), gold #f7ca6e, text #f4f2ec, coral #ed6f4c (stardust brand colours, scoped to the hero canvas only)"
+    },
+    "accentRev9": {
+      "date": "2026-10-11",
+      "request": "use stardust's own accent instead of Profound mint",
+      "donor": "rgb(8, 255, 182)",
+      "applied": "rgb(247, 202, 110) (stardust --gold #f7ca6e)"
+    },
+    "quoteRev14": {
+      "date": "2026-10-12",
+      "request": "handwritten notebook quotes",
+      "font": "Caveat (Google Fonts, OFL) — quotes only",
+      "ink": "#fbe7be (stardust --gold-tint)",
+      "ground": "palette.surface1 + 24px graph grid rgba(244, 242, 236, .075)"
+    }
+  },
+  "palette": {
+    "pageBg": "rgb(8, 30, 61)",
+    "headingFg": "rgb(244, 242, 236)",
+    "bodyFg": "rgb(244, 242, 236)",
+    "displayMuted": "rgb(209, 210, 210)",
+    "mutedFg": "rgb(154, 161, 170)",
+    "dimFg": "rgb(126, 136, 149)",
+    "surface1": "rgb(17, 38, 68)",
+    "surface2": "rgb(29, 49, 77)",
+    "border": "rgb(36, 55, 82)",
+    "darkBandBg": "rgb(17, 38, 68)",
+    "darkBandFg": "rgb(244, 242, 236)",
+    "accent": "rgb(247, 202, 110)",
+    "accentNote": "stardust --gold #f7ca6e (user request rev 9) — replaces Profound's mint rgb(8, 255, 182) for bands, status, checks, meters",
+    "chart": [
+      "rgb(75, 141, 248)",
+      "rgb(247, 202, 110)",
+      "rgb(224, 30, 90)",
+      "rgb(187, 62, 255)",
+      "rgb(255, 35, 35)"
+    ],
+    "chartNote": "Profound chart/series colors sampled from home (bars, line chart legend, negative delta red) — used for mock data viz only",
+    "announceTint": "lab(70.0429 42.5156 75.8207)"
+  },
+  "type": {
+    "family": "interVariable, \"interVariable Fallback\", \"SF Pro Display\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+    "familyNote": "Inter (rsms, SIL OFL 1.1) — open license, so the variable woff2 is loaded under the donor's own family name 'interVariable' from rsms.me; the full donor stack is the token string.",
+    "display": {
+      "fontSize": "72px",
+      "lineHeight": "76px",
+      "fontWeight": "500",
+      "letterSpacing": "-2.4px"
+    },
+    "statement": {
+      "fontSize": "54px",
+      "lineHeight": "56px",
+      "fontWeight": "500",
+      "letterSpacing": "-2.835px",
+      "color": "rgb(209, 210, 210)"
+    },
+    "h2": {
+      "fontSize": "48px",
+      "lineHeight": "56px",
+      "fontWeight": "500",
+      "letterSpacing": "-1.08px"
+    },
+    "stepTitle": {
+      "fontSize": "32px",
+      "lineHeight": "40px",
+      "fontWeight": "500",
+      "letterSpacing": "-0.72px"
+    },
+    "cardTitle": {
+      "fontSize": "18px",
+      "lineHeight": "24px",
+      "fontWeight": "400",
+      "letterSpacing": "-0.045px"
+    },
+    "cellTitle": {
+      "fontSize": "16px",
+      "lineHeight": "24px",
+      "fontWeight": "400",
+      "letterSpacing": "-0.2px"
+    },
+    "body": {
+      "fontSize": "16px",
+      "lineHeight": "24px",
+      "fontWeight": "400"
+    },
+    "lede": {
+      "fontSize": "18px",
+      "lineHeight": "24px",
+      "fontWeight": "400",
+      "letterSpacing": "-0.045px"
+    },
+    "small": {
+      "fontSize": "14px",
+      "lineHeight": "20px",
+      "fontWeight": "400"
+    },
+    "eyebrow": {
+      "fontSize": "12px",
+      "lineHeight": "14.52px",
+      "fontWeight": "400",
+      "letterSpacing": "-0.15px",
+      "color": "rgb(154, 161, 170)",
+      "style": "Profound step labels are sentence case, '[01] Use Templates' — bracketed number in mutedFg, label in headingFg"
+    },
+    "heroLede": {
+      "fontSize": "22px",
+      "lineHeight": "30px",
+      "fontWeight": "400",
+      "letterSpacing": "-0.2px"
+    }
+  },
+  "layout": {
+    "containerMaxWidth": "1088px",
+    "containerPadding": "0 16px",
+    "contentPx": "16px",
+    "sectionPaddingY": "88px",
+    "navHeight": "56px",
+    "grid": "1088px frame with vertical 1px dashed guides at the frame edges; sections separated by full-bleed 1px solid hairlines (border); feature cells are 1px-bordered grids (2-up, 3-up, 4-up) with 32px 24px cell padding"
+  },
+  "buttons": {
+    "primary": {
+      "background": "rgb(244, 242, 236)",
+      "color": "rgb(8, 30, 61)",
+      "borderRadius": "8px",
+      "padding": "6px 12px",
+      "fontSize": "14px",
+      "fontWeight": "500",
+      "height": "32px"
+    },
+    "secondary": {
+      "background": "rgb(50, 68, 93)",
+      "color": "rgb(244, 242, 236)",
+      "borderRadius": "8px",
+      "padding": "6px 12px",
+      "fontSize": "14px",
+      "fontWeight": "500",
+      "boxShadow": "rgb(50, 68, 93) 0px 0px 0px 1px"
+    },
+    "chip": {
+      "borderRadius": "9999px",
+      "padding": "8px 12px",
+      "fontSize": "14px",
+      "activeBg": "rgb(244, 242, 236)",
+      "activeFg": "rgb(8, 30, 61)",
+      "border": "1px solid rgb(36, 55, 82)"
+    }
+  },
+  "radii": {
+    "card": "8px",
+    "panel": "12px",
+    "window": "16px",
+    "button": "8px",
+    "pill": "9999px"
+  },
+  "shadows": {
+    "window": "0 0 0 1px rgb(36, 55, 82), 0 24px 80px rgba(3, 12, 26, 0.6)"
+  },
+  "motifs": [
+    "Dashed vertical guides framing the 1088px column, full-bleed hairlines between sections — the page reads as a ruled grid.",
+    "Product-UI mocks everywhere: app windows with sidebar/title bar, chat bubbles, node graphs, sheets with status pills — the product IS the illustration.",
+    "Soft radial light leak top-left of the hero; gradient bands (transparent -> surface1) mark the enterprise half.",
+    "Numbered steps '[01] Use Templates' as a ruled label row above a 32px step title, then a 2x2 bordered cell grid and a large mock.",
+    "Buttons are small (32px), quiet: one light primary, the rest muted secondary. Sentence case everywhere; no uppercase tracking."
+  ]
+}

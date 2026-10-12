@@ -1,0 +1,933 @@
+{
+ "body": {
+  "backgroundColor": "rgba(0, 0, 0, 0)",
+  "color": "rgb(237, 242, 245)",
+  "fontFamily": "interVariable, \"interVariable Fallback\", \"SF Pro Display\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+  "fontSize": "16px",
+  "lineHeight": "24px",
+  "fontWeight": "400"
+ },
+ "h1": {
+  "fontFamily": "interVariable, \"interVariable Fallback\", \"SF Pro Display\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+  "fontSize": "48px",
+  "lineHeight": "56px",
+  "fontWeight": "500",
+  "letterSpacing": "-1.08px",
+  "color": "rgb(237, 242, 245)",
+  "textTransform": "none"
+ },
+ "h1text": "The AI marketing platform to win in\nChatGPT\nAI search platforms",
+ "h2s": [
+  {
+   "t": "See your AI Marketer at work",
+   "fontFamily": "interVariable, \"interVariable Fallback\", \"SF Pro Display\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+   "fontSize": "54px",
+   "lineHeight": "56px",
+   "fontWeight": "500",
+   "letterSpacing": "-2.835px",
+   "color": "rgb(209, 209, 209)",
+   "textTransform": "none"
+  },
+  {
+   "t": "Your AI Marketer makes it possible",
+   "fontFamily": "interVariable, \"interVariable Fallback\", \"SF Pro Display\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+   "fontSize": "48px",
+   "lineHeight": "56px",
+   "fontWeight": "500",
+   "letterSpacing": "-1.08px",
+   "color": "rgb(237, 242, 245)",
+   "textTransform": "none"
+  },
+  {
+   "t": "Underpinned by the context marketers need",
+   "fontFamily": "interVariable, \"interVariable Fallback\", \"SF Pro Display\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+   "fontSize": "48px",
+   "lineHeight": "56px",
+   "fontWeight": "500",
+   "letterSpacing": "-1.08px",
+   "color": "rgb(237, 242, 245)",
+   "textTransform": "none"
+  },
+  {
+   "t": "Engineered for marketers with higher standards",
+   "fontFamily": "interVariable, \"interVariable Fallback\", \"SF Pro Display\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+   "fontSize": "48px",
+   "lineHeight": "56px",
+   "fontWeight": "500",
+   "letterSpacing": "-1.08px",
+   "color": "rgb(237, 242, 245)",
+   "textTransform": "none"
+  },
+  {
+   "t": "Reinforced by every new data point",
+   "fontFamily": "interVariable, \"interVariable Fallback\", \"SF Pro Display\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+   "fontSize": "48px",
+   "lineHeight": "56px",
+   "fontWeight": "500",
+   "letterSpacing": "-1.08px",
+   "color": "rgb(237, 242, 245)",
+   "textTransform": "none"
+  },
+  {
+   "t": "Enterprise capabilities trusted by a third of the ",
+   "fontFamily": "interVariable, \"interVariable Fallback\", \"SF Pro Display\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+   "fontSize": "48px",
+   "lineHeight": "56px",
+   "fontWeight": "500",
+   "letterSpacing": "-1.08px",
+   "color": "rgb(237, 242, 245)",
+   "textTransform": "none"
+  }
+ ],
+ "h3s": [
+  {
+   "t": "Recents",
+   "fontFamily": "interVariable, \"interVariable Fallback\", \"SF Pro Display\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+   "fontSize": "12px",
+   "lineHeight": "16px",
+   "fontWeight": "400",
+   "letterSpacing": "normal",
+   "color": "rgb(168, 168, 173)",
+   "textTransform": "none"
+  },
+  {
+   "t": "Wins AI answers by creating, optimizing, and influ",
+   "fontFamily": "interVariable, \"interVariable Fallback\", \"SF Pro Display\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+   "fontSize": "18px",
+   "lineHeight": "24px",
+   "fontWeight": "400",
+   "letterSpacing": "-0.045px",
+   "color": "rgb(237, 242, 245)",
+   "textTransform": "none"
+  },
+  {
+   "t": "",
+   "fontFamily": "interVariable, \"interVariable Fallback\", \"SF Pro Display\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+   "fontSize": "18px",
+   "lineHeight": "24px",
+   "fontWeight": "400",
+   "letterSpacing": "-0.045px",
+   "color": "rgb(237, 242, 245)",
+   "textTransform": "none"
+  },
+  {
+   "t": "",
+   "fontFamily": "interVariable, \"interVariable Fallback\", \"SF Pro Display\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+   "fontSize": "18px",
+   "lineHeight": "24px",
+   "fontWeight": "400",
+   "letterSpacing": "-0.045px",
+   "color": "rgb(237, 242, 245)",
+   "textTransform": "none"
+  },
+  {
+   "t": "",
+   "fontFamily": "interVariable, \"interVariable Fallback\", \"SF Pro Display\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+   "fontSize": "18px",
+   "lineHeight": "24px",
+   "fontWeight": "400",
+   "letterSpacing": "-0.045px",
+   "color": "rgb(237, 242, 245)",
+   "textTransform": "none"
+  },
+  {
+   "t": "",
+   "fontFamily": "interVariable, \"interVariable Fallback\", \"SF Pro Display\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+   "fontSize": "18px",
+   "lineHeight": "24px",
+   "fontWeight": "400",
+   "letterSpacing": "-0.045px",
+   "color": "rgb(237, 242, 245)",
+   "textTransform": "none"
+  }
+ ],
+ "ps": [
+  {
+   "t": "Multiply what you can accomplish with an AI Market",
+   "fontFamily": "interVariable, \"interVariable Fallback\", \"SF Pro Display\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+   "fontSize": "18px",
+   "lineHeight": "24px",
+   "fontWeight": "400",
+   "letterSpacing": "-0.045px",
+   "color": "oklab(0.958213 -0.00393006 -0.00537848 / 0.6)",
+   "textTransform": "none"
+  },
+  {
+   "t": "Find an opportunity to improve Wrenfield’s visibil",
+   "fontFamily": "interVariable, \"interVariable Fallback\", \"SF Pro Display\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+   "fontSize": "14px",
+   "lineHeight": "20px",
+   "fontWeight": "400",
+   "letterSpacing": "normal",
+   "color": "rgb(250, 250, 250)",
+   "textTransform": "none"
+  },
+  {
+   "t": "Based on your last marketing team meeting, I notic",
+   "fontFamily": "interVariable, \"interVariable Fallback\", \"SF Pro Display\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+   "fontSize": "14px",
+   "lineHeight": "22px",
+   "fontWeight": "400",
+   "letterSpacing": "normal",
+   "color": "rgb(250, 250, 250)",
+   "textTransform": "none"
+  },
+  {
+   "t": "An animated product demonstration. Select a projec",
+   "fontFamily": "interVariable, \"interVariable Fallback\", \"SF Pro Display\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+   "fontSize": "16px",
+   "lineHeight": "24px",
+   "fontWeight": "400",
+   "letterSpacing": "-0.2px",
+   "color": "rgb(209, 209, 209)",
+   "textTransform": "none"
+  },
+  {
+   "t": "The rise of AI Search created an impossible amount",
+   "fontFamily": "interVariable, \"interVariable Fallback\", \"SF Pro Display\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+   "fontSize": "48px",
+   "lineHeight": "56px",
+   "fontWeight": "500",
+   "letterSpacing": "-1.08px",
+   "color": "rgb(237, 242, 245)",
+   "textTransform": "none"
+  },
+  {
+   "t": "It identifies the work worth doing, drafts it, and",
+   "fontFamily": "interVariable, \"interVariable Fallback\", \"SF Pro Display\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+   "fontSize": "18px",
+   "lineHeight": "24px",
+   "fontWeight": "400",
+   "letterSpacing": "-0.045px",
+   "color": "rgb(159, 159, 159)",
+   "textTransform": "none"
+  },
+  {
+   "t": "Rewrites pages with citation decay and stages them",
+   "fontFamily": "interVariable, \"interVariable Fallback\", \"SF Pro Display\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+   "fontSize": "16px",
+   "lineHeight": "24px",
+   "fontWeight": "400",
+   "letterSpacing": "-0.2px",
+   "color": "rgb(159, 159, 159)",
+   "textTransform": "none"
+  },
+  {
+   "t": "You:\nFind the pages we are losing in AI answers an",
+   "fontFamily": "interVariable, \"interVariable Fallback\", \"SF Pro Display\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+   "fontSize": "14px",
+   "lineHeight": "20px",
+   "fontWeight": "400",
+   "letterSpacing": "-0.175px",
+   "color": "rgb(237, 242, 245)",
+   "textTransform": "none"
+  }
+ ],
+ "btns": [
+  {
+   "t": "Get a Demo",
+   "cls": "relative z-[5] flex h-max w-max items-center justify-center rounded-lg text-cent",
+   "top": 12,
+   "h": 32,
+   "bg": "rgb(255, 255, 255)",
+   "color": "rgb(34, 34, 34)",
+   "radius": "8px",
+   "pad": "6px 12px",
+   "fs": "14px",
+   "fw": "500",
+   "border": "0px solid lab(91.6229 -0.159115 -2.26791)",
+   "shadow": "none"
+  },
+  {
+   "t": "",
+   "cls": "paragraph-large-mobile relative z-10 flex w-full items-center rounded-lg bg-blac",
+   "top": 227,
+   "h": 48,
+   "bg": "rgb(0, 0, 0)",
+   "color": "rgb(237, 242, 245)",
+   "radius": "8px",
+   "pad": "16px 8px 8px",
+   "fs": "17px",
+   "fw": "500",
+   "border": "0px solid lab(91.6229 -0.159115 -2.26791)",
+   "shadow": "none"
+  },
+  {
+   "t": "",
+   "cls": "paragraph-large-mobile relative z-10 flex w-full items-center rounded-lg bg-blac",
+   "top": 283,
+   "h": 48,
+   "bg": "rgb(0, 0, 0)",
+   "color": "rgb(237, 242, 245)",
+   "radius": "8px",
+   "pad": "16px 8px 8px",
+   "fs": "17px",
+   "fw": "500",
+   "border": "0px solid lab(91.6229 -0.159115 -2.26791)",
+   "shadow": "none"
+  },
+  {
+   "t": "",
+   "cls": "paragraph-large-mobile relative z-10 flex w-full items-center rounded-lg bg-blac",
+   "top": 339,
+   "h": 48,
+   "bg": "rgb(0, 0, 0)",
+   "color": "rgb(237, 242, 245)",
+   "radius": "8px",
+   "pad": "16px 8px 8px",
+   "fs": "17px",
+   "fw": "500",
+   "border": "0px solid lab(91.6229 -0.159115 -2.26791)",
+   "shadow": "none"
+  },
+  {
+   "t": "Get a demo",
+   "cls": "relative z-[5] flex h-max w-max items-center justify-center rounded-lg text-cent",
+   "top": 432,
+   "h": 32,
+   "bg": "rgb(255, 255, 255)",
+   "color": "rgb(34, 34, 34)",
+   "radius": "8px",
+   "pad": "6px 12px",
+   "fs": "14px",
+   "fw": "500",
+   "border": "0px solid lab(91.6229 -0.159115 -2.26791)",
+   "shadow": "none"
+  },
+  {
+   "t": "Get started",
+   "cls": "relative z-[5] flex h-max w-max items-center justify-center rounded-lg text-cent",
+   "top": 432,
+   "h": 32,
+   "bg": "rgb(51, 51, 51)",
+   "color": "rgb(237, 242, 245)",
+   "radius": "8px",
+   "pad": "6px 12px",
+   "fs": "14px",
+   "fw": "500",
+   "border": "0px solid lab(91.6229 -0.159115 -2.26791)",
+   "shadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgb(51, 51, 51) 0px 0px 0px 1px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"
+  },
+  {
+   "t": "AEO content",
+   "cls": "relative flex h-8 w-full items-center gap-2 rounded-lg px-2 text-left text-text-",
+   "top": 896,
+   "h": 32,
+   "bg": "rgb(36, 36, 38)",
+   "color": "rgb(250, 250, 250)",
+   "radius": "8px",
+   "pad": "0px 8px",
+   "fs": "13px",
+   "fw": "500",
+   "border": "0px solid lab(91.6229 -0.159115 -2.26791)",
+   "shadow": "none"
+  },
+  {
+   "t": "AEO/SEO",
+   "cls": "paragraph-small-mobile md:paragraph-small-desktop relative flex cursor-pointer t",
+   "top": 4959,
+   "h": 38,
+   "bg": "rgb(237, 242, 245)",
+   "color": "rgb(0, 0, 0)",
+   "radius": "3.35544e+07px",
+   "pad": "8px 12px",
+   "fs": "14px",
+   "fw": "400",
+   "border": "1px solid rgba(0, 0, 0, 0)",
+   "shadow": "none"
+  },
+  {
+   "t": "See Prompt Volumes",
+   "cls": "relative z-[5] flex h-max w-max items-center justify-center rounded-lg text-cent",
+   "top": 6459,
+   "h": 32,
+   "bg": "rgb(51, 51, 51)",
+   "color": "rgb(237, 242, 245)",
+   "radius": "8px",
+   "pad": "6px 12px",
+   "fs": "14px",
+   "fw": "500",
+   "border": "0px solid lab(91.6229 -0.159115 -2.26791)",
+   "shadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgb(51, 51, 51) 0px 0px 0px 1px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"
+  },
+  {
+   "t": "See Answer Engine Insights",
+   "cls": "relative z-[5] flex h-max w-max items-center justify-center rounded-lg text-cent",
+   "top": 6459,
+   "h": 32,
+   "bg": "rgb(51, 51, 51)",
+   "color": "rgb(237, 242, 245)",
+   "radius": "8px",
+   "pad": "6px 12px",
+   "fs": "14px",
+   "fw": "500",
+   "border": "0px solid lab(91.6229 -0.159115 -2.26791)",
+   "shadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgb(51, 51, 51) 0px 0px 0px 1px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"
+  },
+  {
+   "t": "See Context Manager",
+   "cls": "relative z-[5] flex h-max w-max items-center justify-center rounded-lg text-cent",
+   "top": 7015,
+   "h": 32,
+   "bg": "rgb(51, 51, 51)",
+   "color": "rgb(237, 242, 245)",
+   "radius": "8px",
+   "pad": "6px 12px",
+   "fs": "14px",
+   "fw": "500",
+   "border": "0px solid lab(91.6229 -0.159115 -2.26791)",
+   "shadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgb(51, 51, 51) 0px 0px 0px 1px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"
+  },
+  {
+   "t": "View story",
+   "cls": "relative z-[5] flex h-max w-max items-center justify-center rounded-lg text-cent",
+   "top": 8148,
+   "h": 32,
+   "bg": "rgb(51, 51, 51)",
+   "color": "rgb(237, 242, 245)",
+   "radius": "8px",
+   "pad": "6px 12px",
+   "fs": "14px",
+   "fw": "500",
+   "border": "0px solid lab(91.6229 -0.159115 -2.26791)",
+   "shadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgb(51, 51, 51) 0px 0px 0px 1px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"
+  },
+  {
+   "t": "View story",
+   "cls": "relative z-[5] flex h-max w-max items-center justify-center rounded-lg text-cent",
+   "top": 8148,
+   "h": 32,
+   "bg": "rgb(51, 51, 51)",
+   "color": "rgb(237, 242, 245)",
+   "radius": "8px",
+   "pad": "6px 12px",
+   "fs": "14px",
+   "fw": "500",
+   "border": "0px solid lab(91.6229 -0.159115 -2.26791)",
+   "shadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgb(51, 51, 51) 0px 0px 0px 1px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"
+  },
+  {
+   "t": "View story",
+   "cls": "relative z-[5] flex h-max w-max items-center justify-center rounded-lg text-cent",
+   "top": 8148,
+   "h": 32,
+   "bg": "rgb(51, 51, 51)",
+   "color": "rgb(237, 242, 245)",
+   "radius": "8px",
+   "pad": "6px 12px",
+   "fs": "14px",
+   "fw": "500",
+   "border": "0px solid lab(91.6229 -0.159115 -2.26791)",
+   "shadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgb(51, 51, 51) 0px 0px 0px 1px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"
+  },
+  {
+   "t": "View story",
+   "cls": "relative z-[5] flex h-max w-max items-center justify-center rounded-lg text-cent",
+   "top": 8148,
+   "h": 32,
+   "bg": "rgb(51, 51, 51)",
+   "color": "rgb(237, 242, 245)",
+   "radius": "8px",
+   "pad": "6px 12px",
+   "fs": "14px",
+   "fw": "500",
+   "border": "0px solid lab(91.6229 -0.159115 -2.26791)",
+   "shadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgb(51, 51, 51) 0px 0px 0px 1px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"
+  },
+  {
+   "t": "See Agent Analytics",
+   "cls": "relative z-[5] flex h-max w-max items-center justify-center rounded-lg text-cent",
+   "top": 9072,
+   "h": 32,
+   "bg": "rgb(51, 51, 51)",
+   "color": "rgb(237, 242, 245)",
+   "radius": "8px",
+   "pad": "6px 12px",
+   "fs": "14px",
+   "fw": "500",
+   "border": "0px solid lab(91.6229 -0.159115 -2.26791)",
+   "shadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgb(51, 51, 51) 0px 0px 0px 1px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"
+  },
+  {
+   "t": "See Benchmarking",
+   "cls": "relative z-[5] flex h-max w-max items-center justify-center rounded-lg text-cent",
+   "top": 9063,
+   "h": 32,
+   "bg": "rgb(51, 51, 51)",
+   "color": "rgb(237, 242, 245)",
+   "radius": "8px",
+   "pad": "6px 12px",
+   "fs": "14px",
+   "fw": "500",
+   "border": "0px solid lab(91.6229 -0.159115 -2.26791)",
+   "shadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgb(51, 51, 51) 0px 0px 0px 1px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"
+  },
+  {
+   "t": "See FactCheck",
+   "cls": "relative z-[5] flex h-max w-max items-center justify-center rounded-lg text-cent",
+   "top": 9068,
+   "h": 32,
+   "bg": "rgb(51, 51, 51)",
+   "color": "rgb(237, 242, 245)",
+   "radius": "8px",
+   "pad": "6px 12px",
+   "fs": "14px",
+   "fw": "500",
+   "border": "0px solid lab(91.6229 -0.159115 -2.26791)",
+   "shadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgb(51, 51, 51) 0px 0px 0px 1px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"
+  },
+  {
+   "t": "See Sentiment",
+   "cls": "relative z-[5] flex h-max w-max items-center justify-center rounded-lg text-cent",
+   "top": 9068,
+   "h": 32,
+   "bg": "rgb(51, 51, 51)",
+   "color": "rgb(237, 242, 245)",
+   "radius": "8px",
+   "pad": "6px 12px",
+   "fs": "14px",
+   "fw": "500",
+   "border": "0px solid lab(91.6229 -0.159115 -2.26791)",
+   "shadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgb(51, 51, 51) 0px 0px 0px 1px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"
+  },
+  {
+   "t": "See Shopping",
+   "cls": "relative z-[5] flex h-max w-max items-center justify-center rounded-lg text-cent",
+   "top": 9068,
+   "h": 32,
+   "bg": "rgb(51, 51, 51)",
+   "color": "rgb(237, 242, 245)",
+   "radius": "8px",
+   "pad": "6px 12px",
+   "fs": "14px",
+   "fw": "500",
+   "border": "0px solid lab(91.6229 -0.159115 -2.26791)",
+   "shadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgb(51, 51, 51) 0px 0px 0px 1px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"
+  },
+  {
+   "t": "Explore Command Center",
+   "cls": "relative z-[5] flex h-max w-max items-center justify-center rounded-lg text-cent",
+   "top": 9683,
+   "h": 32,
+   "bg": "rgb(51, 51, 51)",
+   "color": "rgb(237, 242, 245)",
+   "radius": "8px",
+   "pad": "6px 12px",
+   "fs": "14px",
+   "fw": "500",
+   "border": "0px solid lab(91.6229 -0.159115 -2.26791)",
+   "shadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgb(51, 51, 51) 0px 0px 0px 1px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"
+  },
+  {
+   "t": "Explore enterprise security",
+   "cls": "relative z-[5] flex h-max w-max items-center justify-center rounded-lg text-cent",
+   "top": 10756,
+   "h": 32,
+   "bg": "rgb(51, 51, 51)",
+   "color": "rgb(237, 242, 245)",
+   "radius": "8px",
+   "pad": "6px 12px",
+   "fs": "14px",
+   "fw": "500",
+   "border": "0px solid lab(91.6229 -0.159115 -2.26791)",
+   "shadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgb(51, 51, 51) 0px 0px 0px 1px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"
+  },
+  {
+   "t": "Browse integrations",
+   "cls": "relative z-[5] flex h-max w-max items-center justify-center rounded-lg text-cent",
+   "top": 10756,
+   "h": 32,
+   "bg": "rgb(51, 51, 51)",
+   "color": "rgb(237, 242, 245)",
+   "radius": "8px",
+   "pad": "6px 12px",
+   "fs": "14px",
+   "fw": "500",
+   "border": "0px solid lab(91.6229 -0.159115 -2.26791)",
+   "shadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgb(51, 51, 51) 0px 0px 0px 1px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"
+  },
+  {
+   "t": "See All\n(opens in a new tab)",
+   "cls": "relative z-[5] flex h-max w-max items-center justify-center rounded-lg text-cent",
+   "top": 11101,
+   "h": 32,
+   "bg": "rgb(51, 51, 51)",
+   "color": "rgb(237, 242, 245)",
+   "radius": "8px",
+   "pad": "6px 12px",
+   "fs": "14px",
+   "fw": "500",
+   "border": "0px solid lab(91.6229 -0.159115 -2.26791)",
+   "shadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgb(51, 51, 51) 0px 0px 0px 1px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"
+  },
+  {
+   "t": "Get a demo",
+   "cls": "relative z-[5] flex h-max w-max items-center justify-center rounded-lg text-cent",
+   "top": 12202,
+   "h": 32,
+   "bg": "rgb(255, 255, 255)",
+   "color": "rgb(34, 34, 34)",
+   "radius": "8px",
+   "pad": "6px 12px",
+   "fs": "14px",
+   "fw": "500",
+   "border": "0px solid lab(91.6229 -0.159115 -2.26791)",
+   "shadow": "none"
+  }
+ ],
+ "maxWidths": {
+  "1088px": 17,
+  "704px": 1,
+  "1440px": 1,
+  "720px": 1
+ },
+ "sections": [
+  {
+   "cls": "flex min-h-0 flex-1 flex-col gap-2 overflow-y-auto overflow-",
+   "pt": "8px",
+   "pb": "64px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "bgi": "none",
+   "h": 72
+  },
+  {
+   "cls": "relative shrink-0 bg-black pb-8",
+   "pt": "0px",
+   "pb": "32px",
+   "bg": "rgb(0, 0, 0)",
+   "bgi": "none",
+   "h": 32
+  },
+  {
+   "cls": "-mt-header-height relative-z-5 border-border-light border-b",
+   "pt": "0px",
+   "pb": "0px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "bgi": "none",
+   "h": 1740
+  },
+  {
+   "cls": "relative isolate flex min-h-0 min-w-0 flex-1 flex-col",
+   "pt": "0px",
+   "pb": "0px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "bgi": "none",
+   "h": 696
+  },
+  {
+   "cls": "relative-z-5 mt-30",
+   "pt": "0px",
+   "pb": "0px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "bgi": "none",
+   "h": 2610
+  },
+  {
+   "cls": "relative-z-5 mt-30 md:mt-40",
+   "pt": "0px",
+   "pb": "0px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "bgi": "none",
+   "h": 852
+  },
+  {
+   "cls": "relative-z-5 mt-30 border-border-light border-b bg-linear-to",
+   "pt": "0px",
+   "pb": "120px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "bgi": "linear-gradient(in oklab, rgba(0, 0, 0, 0) 40%, rgb(13, 13, 13) 100%)",
+   "h": 1543
+  },
+  {
+   "cls": "relative z-30 mt-30 overflow-x-clip md:mt-40",
+   "pt": "0px",
+   "pb": "0px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "bgi": "none",
+   "h": 851
+  },
+  {
+   "cls": "relative z-30 mt-30 overflow-x-clip",
+   "pt": "0px",
+   "pb": "0px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "bgi": "none",
+   "h": 804
+  },
+  {
+   "cls": "relative-z-5 mt-30 border-border-light border-t bg-linear-to",
+   "pt": "96px",
+   "pb": "0px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "bgi": "linear-gradient(to top in oklab, rgba(0, 0, 0, 0) 60%, rgb(19, 19, 19) 100%)",
+   "h": 1524
+  },
+  {
+   "cls": "relative-z-5 mt-30",
+   "pt": "0px",
+   "pb": "0px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "bgi": "none",
+   "h": 852
+  },
+  {
+   "cls": "relative-z-5 mt-30 border-border-light border-y",
+   "pt": "0px",
+   "pb": "0px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "bgi": "none",
+   "h": 418
+  }
+ ],
+ "colors": [
+  [
+   "borderTopColor:lab(91.6229 -0.159115 -2.26791)",
+   2497
+  ],
+  [
+   "color:rgb(237, 242, 245)",
+   1758
+  ],
+  [
+   "color:rgb(159, 159, 159)",
+   323
+  ],
+  [
+   "borderTopColor:rgb(35, 35, 35)",
+   115
+  ],
+  [
+   "color:rgb(250, 250, 250)",
+   113
+  ],
+  [
+   "color:rgb(130, 130, 130)",
+   80
+  ],
+  [
+   "color:rgb(168, 168, 173)",
+   53
+  ],
+  [
+   "color:rgb(80, 80, 80)",
+   50
+  ],
+  [
+   "color:rgb(255, 255, 255)",
+   36
+  ],
+  [
+   "backgroundColor:rgb(0, 0, 0)",
+   33
+  ],
+  [
+   "color:rgb(21, 21, 21)",
+   29
+  ],
+  [
+   "backgroundColor:rgb(51, 51, 51)",
+   22
+  ],
+  [
+   "backgroundColor:rgb(19, 19, 19)",
+   16
+  ],
+  [
+   "backgroundColor:rgba(255, 255, 255, 0.1)",
+   13
+  ],
+  [
+   "backgroundColor:rgb(44, 44, 44)",
+   12
+  ],
+  [
+   "color:rgb(8, 255, 182)",
+   12
+  ],
+  [
+   "backgroundColor:rgb(255, 255, 255)",
+   10
+  ],
+  [
+   "color:rgb(224, 30, 90)",
+   10
+  ],
+  [
+   "color:rgb(34, 34, 34)",
+   9
+  ],
+  [
+   "color:rgb(209, 209, 209)",
+   9
+  ],
+  [
+   "color:rgb(10, 10, 11)",
+   9
+  ],
+  [
+   "backgroundColor:rgb(235, 235, 235)",
+   9
+  ],
+  [
+   "color:rgb(187, 62, 255)",
+   8
+  ],
+  [
+   "color:rgb(35, 35, 35)",
+   8
+  ],
+  [
+   "backgroundColor:rgb(20, 20, 20)",
+   7
+  ],
+  [
+   "backgroundColor:rgb(13, 13, 13)",
+   7
+  ],
+  [
+   "color:lab(70.0429 42.5156 75.8207)",
+   6
+  ],
+  [
+   "color:rgb(255, 35, 35)",
+   6
+  ],
+  [
+   "color:rgb(0, 0, 0)",
+   5
+  ],
+  [
+   "backgroundColor:rgb(37, 37, 37)",
+   5
+  ],
+  [
+   "color:rgb(134, 134, 139)",
+   4
+  ],
+  [
+   "borderTopColor:rgb(44, 44, 44)",
+   4
+  ],
+  [
+   "borderTopColor:oklab(0.256152 0.0000116825 0.000005126 / 0.6)",
+   4
+  ],
+  [
+   "color:color(srgb 0.544902 0.544902 0.544902)",
+   4
+  ],
+  [
+   "backgroundColor:rgb(36, 36, 38)",
+   3
+  ],
+  [
+   "color:rgb(108, 108, 117)",
+   3
+  ],
+  [
+   "backgroundColor:rgb(26, 26, 28)",
+   3
+  ],
+  [
+   "color:rgb(99, 99, 102)",
+   3
+  ],
+  [
+   "backgroundColor:rgb(75, 141, 248)",
+   3
+  ],
+  [
+   "backgroundColor:oklab(0 0 0 / 0.85)",
+   2
+  ]
+ ],
+ "radii": {
+  "6px": 18,
+  "40px": 1,
+  "8px": 159,
+  "3.35544e+07px": 38,
+  "2px": 1,
+  "12px": 10,
+  "20px": 3,
+  "0px 3.35544e+07px 3.35544e+07px 0px": 2,
+  "16px": 14,
+  "4px": 21,
+  "5px": 2,
+  "": 8,
+  "0px 4px 4px 0px": 12,
+  "17px": 1,
+  "0px 8px 8px": 1,
+  "0px 0px 3px": 9,
+  "1px": 2
+ },
+ "families": {
+  "interVariable, \"interVariable Fallback\", \"SF Pro Display\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif": 2595,
+  "": 8,
+  "Georgia, \"Times New Roman\", serif": 29
+ },
+ "links": [
+  "/",
+  "/customers",
+  "/pricing",
+  "/careers",
+  "/contact-sales",
+  "/features/answer-engine-insights",
+  "/features/prompt-volumes",
+  "/features/shopping",
+  "/features/agent-analytics",
+  "/features/agents",
+  "/features/context-manager",
+  "/features/aim",
+  "/aeo-report",
+  "/profound-index",
+  "/aeo-guide",
+  "/events",
+  "/webinars",
+  "/research",
+  "/blog",
+  "/reports-guides",
+  "/newsroom",
+  "/marketing-engineer",
+  "/community",
+  "/podcasts",
+  "/agent-templates",
+  "/integrations",
+  "/zeroclick",
+  "/solutions/aeo-teams",
+  "/solutions/content-teams",
+  "/solutions/pr-teams",
+  "/solutions/agencies",
+  "/partners",
+  "/partners/apply",
+  "/solutions/travel-and-hospitality",
+  "/solutions/retail",
+  "/solutions/pharma",
+  "/zeroclick?utm_source=website&utm_medium=home-page&utm_campaign=seriesd-webinar-marketing-team-future&utm_term=banner",
+  "/customers/plaid",
+  "/customers/mongodb",
+  "/customers/gr0",
+  "/customers/ramp",
+  "/features/agent-analytics/benchmarking",
+  "/features/answer-engine-insights/factcheck",
+  "/features/answer-engine-insights/sentiment",
+  "/blog/introducing-command-center",
+  "/enterprise",
+  "/blog/the-ai-mention-effect",
+  "/blog/commercial-conversations-in-chatgpt-more-than-doubled-in-a-year",
+  "/blog/is-once-a-day-enough",
+  "/blog/does-ai-keep-office-hours",
+  "/blog/where-do-ai-citations-come-from",
+  "/blog/the-parrot-problem",
+  "/blog/state-of-ai-search-in-travel",
+  "/blog/christmas-in-july-how-retailers-win-the-ai-shelf",
+  "/blog/chatgpt-shopping-deep-dive",
+  "/features/aim/projects",
+  "/features/documents",
+  "/features/pages",
+  "/articles",
+  "/brand",
+  "/engineering",
+  "/vulnerability-reporting",
+  "/ai-instructions"
+ ]
+}

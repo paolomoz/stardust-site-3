@@ -1,0 +1,11 @@
+import { chromium } from 'playwright';
+import { readFileSync } from 'node:fs';
+import { pathToFileURL } from 'node:url';
+import { resolve } from 'node:path';
+const m = JSON.parse(readFileSync('stardust/reskin/content-model/' + (process.argv[2] || 'index') + '/content-model.json', 'utf8'));
+const b = await chromium.launch(); const p = await b.newPage({ viewport: { width: 1440, height: 900 } });
+await p.goto(pathToFileURL(resolve('stardust/reskin/pages/' + (process.argv[2] || 'index') + '.html')).href, { waitUntil: 'networkidle' });
+const t = await p.evaluate(() => ['[data-gate="s01"]','[data-gate="s02-s14"]'].map(s=>document.querySelector(s).innerText).join(' ').replace(/\s+/g, ' ').trim());
+const ref = m.visibleTextNormalized; let i = 0; while (i < ref.length && ref[i] === t[i]) i++;
+console.log(ref.length, t.length, i === ref.length && t.length === ref.length ? 'EQUAL' : `diverge @${i}\n src: ${ref.slice(i-40,i+60)}\n rnd: ${t.slice(i-40,i+60)}`);
+await b.close();
