@@ -108,6 +108,7 @@ function runDemo(demo) {
   };
   const go = (n) => {
     cur = n; clearTimeout(timer); clearLive();
+    demo.dispatchEvent(new CustomEvent('stage:go', { detail: n }));
     stages.forEach((st, k) => { st.classList.toggle('on', k === n); st.classList.remove('play'); });
     btns.forEach((b, k) => { b.classList.remove('on'); b.classList.toggle('past', k < n); b.setAttribute('aria-pressed', String(k === n)); });
     // eslint-disable-next-line no-void
@@ -128,6 +129,29 @@ function runDemo(demo) {
   };
   btns.forEach((b, k) => b.addEventListener('click', () => go(k)));
   if (!reduced) demo.classList.add('auto');
+
+  // Only the playing stage keeps its mock mounted (AI readability: hidden presentational clones
+  // add words). All mocks are mounted while measuring, the stage area's height is locked to the
+  // tallest one, then inactive mocks are released; each stage remounts when it plays.
+  const box = demo.querySelector('.dstages');
+  const mocks = stages.map((st) => st.firstElementChild);
+  const lock = () => {
+    stages.forEach((st, k) => { if (!st.firstElementChild) st.append(mocks[k]); });
+    box.style.minHeight = '';
+    box.style.minHeight = `${box.getBoundingClientRect().height}px`;
+    stages.forEach((st, k) => { if (k !== cur) st.replaceChildren(); });
+  };
+  const mount = (n) => { if (!stages[n].firstElementChild) stages[n].append(mocks[n]); };
+  const release = () => setTimeout(() => stages.forEach((st, k) => { if (k !== cur) st.replaceChildren(); }), 700);
+  const firstLock = new IntersectionObserver(([en]) => {
+    if (!en.isIntersecting) return;
+    firstLock.disconnect();
+    requestAnimationFrame(() => requestAnimationFrame(lock));
+  });
+  firstLock.observe(demo);
+  let rz = 0;
+  window.addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(lock, 200); }, { passive: true });
+  demo.addEventListener('stage:go', (e) => { mount(e.detail); release(); });
   new IntersectionObserver(([en]) => {
     visible = en.isIntersecting;
     if (reduced) return;
