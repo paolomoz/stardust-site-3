@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta
@@ -7,64 +7,77 @@
     content="script-src 'nonce-aem' 'strict-dynamic' 'unsafe-inline' http: https:; base-uri 'self'; object-src 'none';"
     move-to-http-header="true"
   >
-  <title>Page not found</title>
+  <title>Page not found — Stardust</title>
+  <meta name="robots" content="noindex">
   <script nonce="aem" type="text/javascript">
     window.isErrorPage = true;
     window.errorCode = '404';
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta property="og:title" content="Page not found">
+  <meta property="og:title" content="Page not found — Stardust">
+  <link rel="icon" href="/favicon.svg">
   <script nonce="aem" src="/scripts/scripts.js" type="module"></script>
   <script nonce="aem" type="module">
+    import mountNebula from '/blocks/stage/nebula.js';
+
     window.addEventListener('load', () => {
+      // the missing path, shown like the hero's seed line (runtime value)
+      const path = document.querySelector('.error-path');
+      if (path) path.textContent = window.location.pathname;
+      // "Go back" only when the visitor came from this site
       if (document.referrer) {
         const { origin, pathname } = new URL(document.referrer);
         if (origin === window.location.origin) {
-          const backBtn = document.createElement('a');
-          backBtn.classList.add('button', 'error-button-back');
-          backBtn.href = pathname;
-          backBtn.textContent = 'Go back';
-          backBtn.title = 'Go back';
-          const btnContainer = document.querySelector('.button-container');
-          btnContainer.append(backBtn);
+          const p = document.createElement('p');
+          p.className = 'button-wrapper';
+          const back = document.createElement('a');
+          back.className = 'button secondary';
+          back.href = pathname;
+          back.textContent = 'Go back';
+          p.append(back);
+          document.querySelector('.hero-cta').append(p);
         }
+      }
+      const host = document.querySelector('.hero-nebula');
+      if (host) {
+        mountNebula(host, {
+          page: '#081e3d', navy: '#0f2c55', glow: '#1d3d68', gold: '#f7ca6e', text: '#f4f2ec', coral: '#ed6f4c',
+        });
       }
     });
   </script>
   <script nonce="aem" type="module">
     import { sampleRUM } from '/scripts/aem.js';
+
     sampleRUM('404', { source: document.referrer });
   </script>
   <link rel="stylesheet" href="/styles/styles.css">
   <style>
-    main.error {
+    main.error .section.hero {
       min-height: calc(100vh - var(--nav-height));
       display: flex;
-      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      padding-bottom: var(--sec);
     }
 
-    main.error .error-number {
-      width: 100%;
-    }
-
-    main.error .error-number text {
-      font-family: monospace;
-    }
+    main.error .hero-cta { order: 3; }
+    main.error .hero-seed { order: 4; }
+    main.error .hero-seed .error-path { color: var(--muted); }
   </style>
-  <link rel="stylesheet" href="/styles/lazy-styles.css">
 </head>
 
 <body>
   <header></header>
   <main class="error">
-    <div class="section">
-      <svg viewBox="1 0 38 18" class="error-number">
-        <text x="0" y="17">404</text>
-      </svg>
-      <h2 class="error-message">Page Not Found</h2>
-      <p class="button-container">
-        <a href="/" class="button secondary error-button-home">Go home</a>
-      </p>
+    <div class="section hero">
+      <div class="hero-nebula" aria-hidden="true"><canvas></canvas></div>
+      <div class="container hero-inner">
+        <div class="display"><h1>Nothing here but stardust.</h1></div>
+        <div class="lede hero-lede"><p>This page isn't part of stardust.style, or it has moved.</p></div>
+        <div class="hero-cta"><p><strong><a href="/">Back to the home page</a></strong></p></div>
+        <p class="hero-seed"><strong>404</strong> <span class="error-path"></span></p>
+      </div>
     </div>
   </main>
   <footer></footer>
