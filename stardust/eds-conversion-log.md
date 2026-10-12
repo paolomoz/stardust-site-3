@@ -87,3 +87,25 @@ Shared runtime: `scripts/stardust.js` (icons, brand mark, seed md5 ported from s
 - Design changes: edit the renderer, re-render v3, re-run `build-styles.py`, re-run the pixel diff
   (`tools/proto-shot.mjs` + `tools/pixdiff.py`) at 1440 / 768 / 390.
 - `npm i` prunes `--no-save` Playwright: run `npm i` first, then `npm i --no-save playwright`.
+
+## Go-live configuration (2026-10-12, pre-cutover)
+
+| Item | State |
+|---|---|
+| Production host | config service `cdn.json` → `{"prod":{"host":"stardust.style"}}` (host only — no push invalidation yet) |
+| robots.txt | config service: `Allow: /` + `Sitemap: https://stardust.style/sitemap.xml`; served only when `X-Forwarded-Host` is set (aem.page/aem.live stay noindex) |
+| Sitemap | default (no config): lists only `https://stardust.style/`; `/nav` and `/footer` carry `Robots: noindex` |
+| Canonical / og:url | metadata `Canonical: https://stardust.style/` (also what the pipeline derives under XFH) |
+| Redirects | DA sheet `/redirects`: `/docs → /` (carried from the current site), `/og/stardust.jpg → ` the rehosted share image |
+| 404 | `404.html` in the new design (nebula hero, home + go-back, the missing path) |
+| Repo | github.com/paolomoz/stardust-site-3 — public |
+
+Verified against `main--stardust-site-3--paolomoz.aem.live` with `x-forwarded-host: stardust.style`:
+200 + no `x-robots-tag` on `/`, canonical/og:url `https://stardust.style/`, robots.txt as above,
+sitemap `<loc>https://stardust.style/</loc>` only, `/docs` 301 → `/`, unknown paths 404 with the new page.
+
+Cutover (Cloudflare, owner): point the stardust.style worker's `ORIGIN_HOSTNAME` at
+`main--stardust-site-3--paolomoz.aem.live` (worker must send `X-Forwarded-Host` and strip
+`x-robots-tag` / `age` — the official adobe/aem-cloudflare-prod-worker does), route `stardust.style/*`.
+For push invalidation add `type: cloudflare`, `plan`, `zoneId`, `apiToken` (Zone › Cache Purge) to
+`cdn.json` prod.
