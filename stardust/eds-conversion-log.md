@@ -109,3 +109,12 @@ Cutover (Cloudflare, owner): point the stardust.style worker's `ORIGIN_HOSTNAME`
 `x-robots-tag` / `age` — the official adobe/aem-cloudflare-prod-worker does), route `stardust.style/*`.
 For push invalidation add `type: cloudflare`, `plan`, `zoneId`, `apiToken` (Zone › Cache Purge) to
 `cdn.json` prod.
+
+## Cutover (2026-10-12)
+
+Cloudflare worker `stardust-prod-worker` (routes `stardust.style/*`, `www.stardust.style/*`):
+`ORIGIN_HOSTNAME` main--stardust-site-eds-2--paolomoz.aem.live → **main--stardust-site-3--paolomoz.aem.live**
+(code and `PUSH_INVALIDATION` unchanged). Rollback = set it back. The worker's own redirects
+(`/docs*`, `/aem*`, old media → `/og/stardust.jpg`) still run before the origin. Cache key follows
+the origin URL, so no purge was needed. Verified on https://stardust.style: new page, canonical,
+robots, sitemap, favicon, redirects, 404, render identical to aem.live.
