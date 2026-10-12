@@ -1,0 +1,13 @@
+import { chromium } from 'playwright';
+const url = process.argv[2];
+const b = await chromium.launch(); const ctx = await b.newContext({ viewport: { width: 412, height: 823 }, deviceScaleFactor: 1.75, isMobile: true, hasTouch: true, userAgent: 'Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Mobile Safari/537.36' });
+const p = await ctx.newPage(); const cdp = await ctx.newCDPSession(p);
+await cdp.send('Network.enable'); await cdp.send('Network.emulateNetworkConditions', { offline: false, latency: 150, downloadThroughput: (1.6 * 1024 * 1024) / 8, uploadThroughput: (750 * 1024) / 8 });
+await cdp.send('Emulation.setCPUThrottlingRate', { rate: 4 });
+await p.addInitScript(() => { window.__ls = []; new PerformanceObserver((l) => { for (const e of l.getEntries()) if (!e.hadRecentInput) window.__ls.push({ t: Math.round(e.startTime), v: +e.value.toFixed(4), src: e.sources.map((s) => ({ n: s.node ? (s.node.className || s.node.nodeName) + '' : '?', prev: `${s.previousRect.y | 0}+${s.previousRect.height | 0}`, cur: `${s.currentRect.y | 0}+${s.currentRect.height | 0}` })) }); }).observe({ type: 'layout-shift', buffered: true }); });
+await p.goto(url, { waitUntil: 'load', timeout: 120000 }); await p.waitForTimeout(8000);
+const ls = await p.evaluate(() => window.__ls);
+console.log('CLS', ls.reduce((a, e) => a + e.v, 0).toFixed(4));
+for (const e of ls) console.log(e.t + 'ms', e.v, JSON.stringify(e.src).slice(0, 300));
+console.log('fonts loaded at:', await p.evaluate(() => performance.getEntriesByType('resource').filter((r) => /woff2/.test(r.name)).map((r) => `${r.name.split('/').pop()} ${Math.round(r.responseEnd)}ms ${Math.round(r.transferSize / 1024)}KB`).join(' | ')));
+await b.close();

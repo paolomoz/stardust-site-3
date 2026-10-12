@@ -150,35 +150,61 @@ function runDemo(demo) {
   if (!reduced) demo.classList.add('auto');
 
   // Only the playing stage keeps its mock mounted (AI readability: hidden presentational clones
-  // add words). All mocks are mounted while measuring, the stage area's height is locked to the
-  // tallest one, then inactive mocks are released; each stage remounts when it plays.
+  // add words). All mocks stay mounted until the brand font has loaded, so the stage area's
+  // natural height is the tallest mock in its final font; it is then locked, inactive mocks are
+  // released, and autoplay starts. Nothing can change the stage area's height afterwards, so a
+  // stage change never shifts layout (CLS), whatever the font timing.
   const box = demo.querySelector('.dstages');
   const mocks = stages.map((st) => st.firstElementChild);
+  let locked = false;
   const lock = () => {
     stages.forEach((st, k) => { if (!st.firstElementChild) st.append(mocks[k]); });
     box.style.minHeight = '';
     box.style.minHeight = `${box.getBoundingClientRect().height}px`;
     stages.forEach((st, k) => { if (k !== cur) st.replaceChildren(); });
+    locked = true;
   };
   const mount = (n) => { if (!stages[n].firstElementChild) stages[n].append(mocks[n]); };
-  const release = () => setTimeout(() => {
-    stages.forEach((st, k) => { if (k !== cur) st.replaceChildren(); });
-  }, 700);
-  const firstLock = new IntersectionObserver(([en]) => {
-    if (!en.isIntersecting) return;
-    firstLock.disconnect();
-    requestAnimationFrame(() => requestAnimationFrame(lock));
+  const release = () => {
+    if (!locked) return;
+    setTimeout(() => stages.forEach((st, k) => { if (k !== cur) st.replaceChildren(); }), 700);
+  };
+  // document.fonts.check() is true before fonts.css even registers the face — test the face itself
+  const interLoaded = () => [...document.fonts]
+    .some((f) => f.family.replace(/["']/g, '') === 'interVariable' && f.status === 'loaded');
+  const fontsSettled = new Promise((resolve) => {
+    if (interLoaded()) { resolve(); return; }
+    const check = () => {
+      if (!interLoaded()) return;
+      document.fonts.removeEventListener('loadingdone', check);
+      resolve();
+    };
+    document.fonts.addEventListener('loadingdone', check);
+    setTimeout(resolve, 5000);
   });
-  firstLock.observe(demo);
+  const ready = new Promise((resolve) => {
+    const io = new IntersectionObserver(([en]) => {
+      if (!en.isIntersecting) return;
+      io.disconnect();
+      fontsSettled.then(() => requestAnimationFrame(() => requestAnimationFrame(() => {
+        lock();
+        resolve();
+      })));
+    });
+    io.observe(demo);
+  });
   let rz = 0;
-  window.addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(lock, 200); }, { passive: true });
+  window.addEventListener('resize', () => {
+    clearTimeout(rz);
+    rz = setTimeout(() => { if (locked) lock(); }, 200);
+  }, { passive: true });
   demo.addEventListener('stage:go', (e) => { mount(e.detail); release(); });
   new IntersectionObserver(([en]) => {
     visible = en.isIntersecting;
     if (reduced) return;
     if (visible && !started) {
       started = true;
-      go(0);
+      ready.then(() => { if (visible) go(0); }); // autoplay only once the stage area is locked
     } else if (visible) {
       go(cur);
     } else {
