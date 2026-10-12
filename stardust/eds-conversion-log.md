@@ -118,3 +118,17 @@ Cloudflare worker `stardust-prod-worker` (routes `stardust.style/*`, `www.stardu
 (`/docs*`, `/aem*`, old media → `/og/stardust.jpg`) still run before the origin. Cache key follows
 the origin URL, so no purge was needed. Verified on https://stardust.style: new page, canonical,
 robots, sitemap, favicon, redirects, 404, render identical to aem.live.
+
+## Post-cutover PSI hardening (2026-10-12)
+
+PSI mobile on stardust.style scored 91: CLS 0.165 attributed to the demo stage (the stage area was
+height-locked while the fallback font showed, then autoplay changed stages) and Speed Index 4.0 s
+(the full 352 KB Inter arrived at ~4.6 s on PSI's network). Fixes:
+- `fonts/inter-variable.woff2` subset to Latin + the site's glyphs → 107 KB (opsz + wght, all
+  layout features); regenerate from the rsms original with the `pyftsubset` line in the commit.
+- Demo: all mocks stay mounted until the `interVariable` face reports `loaded` (or 5 s), then the
+  stage area is locked, hidden mocks released, autoplay started. Note `document.fonts.check()`
+  returns true before fonts.css registers the face — the face status is checked instead.
+Local Lighthouse (PSI's simulate mode) ×3 on the origin: 100 / CLS 0.009 / SI 1.1–1.5 s.
+Cloudflare caches code for 4 h and has no purge credentials — code changes reach stardust.style
+after the TTL or a manual "Purge Everything".
