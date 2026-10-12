@@ -68,8 +68,11 @@ main :is(h1, h2, h3, h4), footer :is(h1, h2, h3, h4) { font: inherit; letter-spa
 main :is(span, b) > p, header :is(span, b) > p, footer :is(span, b) > p, .window p { display: contents; }
 .hero-seed > p, .flow:where(ol) li p, .foot-col ul, .foot-col li, .foot-brand-link, .foot-brand-link p { display: contents; }
 .flow:where(ol) li { font-size: 14px; line-height: 20px; color: var(--muted); }
+.flow:where(ol) .flow-arrow { font-size: 16px; line-height: 24px; } /* the prototype arrow sits in the body line box */
 /* the "Two ways in" head + cards stack as in the prototype's flex column */
 .ways .doors > .container { display: flex; flex-direction: column; }
+/* the prototype's `.chapters .quote + .step-v2` sibling rule, across EDS block wrappers */
+main .section.chapters .quote-wrapper + .step-wrapper .step-v2 { margin-top: 96px; }
 /* button wrappers from decorateButtons() */
 p.button-wrapper { margin: 0; }
 /* Experience Workspace edit mode: repaint CTAs from their authored marks (EW3) */

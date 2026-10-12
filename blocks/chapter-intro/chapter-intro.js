@@ -17,7 +17,12 @@ export default async function decorate(block) {
     section.classList.add('sec', 'chapters');
     if (block.classList.contains('band')) section.classList.add('band');
     const id = ['redesign', 'migrate'].find((v) => block.classList.contains(v));
-    if (id) section.id = id;
+    if (id) {
+      // the pipeline auto-ids headings from their text (an h3 "Redesign" → #redesign): the chapter
+      // anchor must be unique, so clear any other element holding it
+      document.querySelectorAll(`[id="${id}"]`).forEach((n) => { if (n !== section) n.removeAttribute('id'); });
+      section.id = id;
+    }
   }
   const head = el('div', 'sec-head', h2 ? el('div', 'h2', h2) : null, lede ? el('div', 'lede', lede) : null);
   const band = el('div', 'intro-label', el('span', 'tab', label));
