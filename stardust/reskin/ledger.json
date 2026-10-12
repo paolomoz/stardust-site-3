@@ -381,7 +381,7 @@
     },
     "index-v3": {
       "url": "https://stardust.style/",
-      "status": "gated",
+      "status": "deployed",
       "derivedFrom": "index-v2 (v1 and v2 kept unchanged)",
       "normalize": "stardust/reskin/normalize/index-v3.mjs = index-v2.mjs (awaited) + V3-N18 authored casing (text-transform:none on the source)",
       "tokens": "stardust/reskin/donor-tokens-v3.json (v2 + type.mono for genuine code)",
@@ -407,7 +407,26 @@
         "#8 placeholder page drawings",
         "#17 centred SaaS hero formula",
         "#18 giant footer wordmark"
-      ]
+      ],
+      "deploy": {
+        "date": "2026-10-12",
+        "site": "paolomoz/stardust-site-3",
+        "preview": "https://main--stardust-site-3--paolomoz.aem.page/",
+        "live": "https://main--stardust-site-3--paolomoz.aem.live/",
+        "pixelDiff": {
+          "1440": "0.002%",
+          "768": "0.085%",
+          "390": "0.078%",
+          "heights": "identical"
+        },
+        "aiReadability": "100%",
+        "ewEditable": "154/154",
+        "cls": {
+          "1440": 0.0013,
+          "390": 0.0059
+        },
+        "log": "stardust/eds-conversion-log.md"
+      }
     }
   }
 }
