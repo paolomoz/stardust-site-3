@@ -1,0 +1,14 @@
+import { chromium } from 'playwright';
+const b = await chromium.launch(); const ctx = await b.newContext({ viewport: { width: 1440, height: 900 }, permissions: ['clipboard-read', 'clipboard-write'] });
+const p = await ctx.newPage(); const errs = []; p.on('pageerror', (e) => errs.push(e.message));
+await p.goto(process.argv[2], { waitUntil: 'load' }); await p.waitForTimeout(1500);
+await p.click('.dnav[data-go="3"]'); await p.waitForTimeout(900);
+console.log('demo step 4:', await p.evaluate(() => ({ on: [...document.querySelectorAll('.dstage')].findIndex((s) => s.classList.contains('on')), mounted: [...document.querySelectorAll('.dstage')].map((s) => (s.firstElementChild ? 1 : 0)).join(''), addr: document.querySelector('.addr-t').textContent })));
+await p.waitForTimeout(1200);
+console.log('after release:', await p.evaluate(() => [...document.querySelectorAll('.dstage')].map((s) => (s.firstElementChild ? 1 : 0)).join('')));
+await p.locator('#install a.button.primary').scrollIntoViewIfNeeded(); await p.click('#install a.button.primary'); await p.waitForTimeout(200);
+console.log('copy label:', await p.locator('#install a.button.primary').innerText(), '| clipboard:', JSON.stringify(await p.evaluate(() => navigator.clipboard.readText())));
+await p.click('header .nav-links a:first-child'); await p.waitForTimeout(1200);
+console.log('nav → #redesign top:', await p.evaluate(() => Math.round(document.getElementById('redesign').getBoundingClientRect().top)), 'ids:', await p.evaluate(() => document.querySelectorAll('[id="redesign"]').length));
+console.log('errors:', errs);
+await b.close();

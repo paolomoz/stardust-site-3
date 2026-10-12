@@ -49,16 +49,25 @@ export default async function decorate(block) {
     });
   }
 
-  const head = el('div', 'final-head',
+  const head = el(
+    'div',
+    'final-head',
     h2 ? el('div', 'h2', h2) : null,
     lede ? el('div', 'lede', lede) : null,
-    el('div', 'actions', ctas));
-  const figure = el('figure', 'quote compact',
+    el('div', 'actions', ctas),
+  );
+  const figure = el(
+    'figure',
+    'quote compact',
     el('blockquote', null, quote),
-    el('figcaption', null, html(`<span class="quote-mark" aria-hidden="true">${ICONS.mark}</span>`), who));
-  const win = el('div', 'window chat',
+    el('figcaption', null, html(`<span class="quote-mark" aria-hidden="true">${ICONS.mark}</span>`), who),
+  );
+  const win = el(
+    'div',
+    'window chat',
     el('div', 'win-bar', el('span', 'win-url', title), html(`<span class="win-end" aria-hidden="true">${ICONS.chev}</span>`)),
     chat,
-    html(`<div class="composer" aria-hidden="true"><span class="composer-in"></span><span class="composer-send">${ICONS.arrow}</span></div>`));
+    html(`<div class="composer" aria-hidden="true"><span class="composer-in"></span><span class="composer-send">${ICONS.arrow}</span></div>`),
+  );
   block.replaceChildren(el('div', 'container', head, el('div', 'final-grid', figure, win)));
 }

@@ -7,7 +7,9 @@
  */
 import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
-import { ICONS, el, html, seedHash, todayISO } from '../../scripts/stardust.js';
+import {
+  ICONS, el, html, seedHash, todayISO,
+} from '../../scripts/stardust.js';
 
 export default async function decorate(block) {
   const footerMeta = getMetadata('footer');
@@ -44,6 +46,10 @@ export default async function decorate(block) {
   big.setAttribute('aria-label', 'stardust');
   if (word) [...word.textContent.trim()].forEach((ch) => big.append(el('span', null, ch)));
 
-  block.replaceChildren(el('div', 'foot', el('div', 'container',
-    el('div', 'foot-top', brandCol, col(s2), col(s3), seedCol), big)));
+  block.replaceChildren(el('div', 'foot', el(
+    'div',
+    'container',
+    el('div', 'foot-top', brandCol, col(s2), col(s3), seedCol),
+    big,
+  )));
 }

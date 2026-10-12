@@ -21,10 +21,13 @@ function ab(migrate, a, b) {
       pg.append(slot('b', null, lbl));
       return pg;
     };
-    return el('div', 'ab ab-migrate',
+    return el(
+      'div',
+      'ab ab-migrate',
       el('span', 'ab-col', page(a), html('<span class="base base-old" aria-hidden="true"><i></i><i></i><i></i></span>')),
       html(ICONS.arrow),
-      el('span', 'ab-col', page(b), html('<span class="base base-edge" aria-hidden="true"><i></i><i></i><i></i><i></i></span>')));
+      el('span', 'ab-col', page(b), html('<span class="base base-edge" aria-hidden="true"><i></i><i></i><i></i><i></i></span>')),
+    );
   }
   const old = html('<span class="ab-pg pg-old"><i class="o-nav"></i><span class="o-body"><i class="o-side"></i><span class="o-txt"><i></i><i></i><i></i><i></i></span></span></span>');
   old.append(slot('b', null, a));

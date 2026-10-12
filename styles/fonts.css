@@ -1,5 +1,7 @@
 /* Self-hosted brand faces (SIL OFL 1.1): Inter (rsms) and Caveat (Google Fonts). Loaded by
    loadFonts() after first paint; the metric-matched fallbacks live in styles.css. */
 @font-face { font-family: interVariable; src: url("../fonts/inter-variable.woff2") format("woff2"); font-weight: 100 900; font-style: normal; font-display: swap; }
+
 @font-face { font-family: Caveat; src: url("../fonts/caveat-500.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
+
 @font-face { font-family: Caveat; src: url("../fonts/caveat-600.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }

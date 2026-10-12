@@ -14,10 +14,14 @@
  * presentational clones of the step blocks' authored text (EW4: instrumentation stripped).
  * @ew-exempt <p> demo clones — presentational copies of the step blocks' authored lines
  */
-import { ICONS, MOCKS, el, html, seedHash, todayISO, stripInstrumentation } from '../../scripts/stardust.js';
+import {
+  ICONS, MOCKS, el, html, seedHash, todayISO, stripInstrumentation,
+} from '../../scripts/stardust.js';
 import mountNebula from './nebula.js';
 
-const NEB_PALETTE = { page: '#081e3d', navy: '#0f2c55', glow: '#1d3d68', gold: '#f7ca6e', text: '#f4f2ec', coral: '#ed6f4c' };
+const NEB_PALETTE = {
+  page: '#081e3d', navy: '#0f2c55', glow: '#1d3d68', gold: '#f7ca6e', text: '#f4f2ec', coral: '#ed6f4c',
+};
 const wrap = (node, cls) => el('div', cls, node);
 
 /** Build the demo from the page's (not yet decorated) chapter-intro + step blocks. */
@@ -41,10 +45,13 @@ function buildDemo(main) {
       const lines = [...(rows[4]?.querySelectorAll('p') || [])].map((p) => stripInstrumentation(p.cloneNode(true)));
       const key = (name?.textContent || '').trim().toLowerCase();
       if (!name || !MOCKS[key]) return;
-      const btn = el('button', `dnav${k ? '' : ' on'}`,
+      const btn = el(
+        'button',
+        `dnav${k ? '' : ' on'}`,
         el('span', 'dnav-t', name.textContent.trim()),
         el('span', 'dnav-s', title ? title.textContent.trim() : ''),
-        html('<i class="dnav-bar" aria-hidden="true"></i>'));
+        html('<i class="dnav-bar" aria-hidden="true"></i>'),
+      );
       btn.type = 'button';
       btn.dataset.go = k;
       btn.setAttribute('aria-pressed', k ? 'false' : 'true');
@@ -56,11 +63,17 @@ function buildDemo(main) {
       k += 1;
     });
   });
-  const demo = el('div', 'demo window',
-    el('div', 'browser-bar',
-      html(`<span class="browser-nav" aria-hidden="true"><svg viewBox="0 0 16 16" class="ico"><path d="M10 3.5 5.5 8l4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg><svg viewBox="0 0 16 16" class="ico"><path d="M6 3.5 10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>`),
-      el('div', 'addr', html(ICONS.mark), el('span', 'addr-t', firstCmd), html('<i class="caret"></i>'))),
-    el('div', 'browser-body', nav, stages));
+  const demo = el(
+    'div',
+    'demo window',
+    el(
+      'div',
+      'browser-bar',
+      html('<span class="browser-nav" aria-hidden="true"><svg viewBox="0 0 16 16" class="ico"><path d="M10 3.5 5.5 8l4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg><svg viewBox="0 0 16 16" class="ico"><path d="M6 3.5 10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>'),
+      el('div', 'addr', html(ICONS.mark), el('span', 'addr-t', firstCmd), html('<i class="caret"></i>')),
+    ),
+    el('div', 'browser-body', nav, stages),
+  );
   demo.setAttribute('role', 'region');
   demo.setAttribute('aria-label', 'Demo: a stardust run, step by step');
   demo.querySelector('.addr').setAttribute('aria-hidden', 'true');
@@ -83,11 +96,17 @@ function runDemo(demo) {
     st.querySelectorAll('.hashes span').forEach((h) => { h.dataset.final = h.textContent; });
   });
   demo.style.setProperty('--dur', `${DUR}ms`);
-  const clearLive = () => { live.splice(0).forEach((id) => { clearInterval(id); clearTimeout(id); }); };
+  const clearLive = () => {
+    live.splice(0).forEach((id) => { clearInterval(id); clearTimeout(id); });
+  };
   const type = (text) => {
     addr.textContent = '';
     let i = 0;
-    const iv = setInterval(() => { i += 1; addr.textContent = text.slice(0, i); if (i >= text.length) clearInterval(iv); }, 26);
+    const iv = setInterval(() => {
+      i += 1;
+      addr.textContent = text.slice(0, i);
+      if (i >= text.length) clearInterval(iv);
+    }, 26);
     live.push(iv);
   };
   const effects = (st) => {
@@ -142,7 +161,9 @@ function runDemo(demo) {
     stages.forEach((st, k) => { if (k !== cur) st.replaceChildren(); });
   };
   const mount = (n) => { if (!stages[n].firstElementChild) stages[n].append(mocks[n]); };
-  const release = () => setTimeout(() => stages.forEach((st, k) => { if (k !== cur) st.replaceChildren(); }), 700);
+  const release = () => setTimeout(() => {
+    stages.forEach((st, k) => { if (k !== cur) st.replaceChildren(); });
+  }, 700);
   const firstLock = new IntersectionObserver(([en]) => {
     if (!en.isIntersecting) return;
     firstLock.disconnect();
@@ -155,7 +176,15 @@ function runDemo(demo) {
   new IntersectionObserver(([en]) => {
     visible = en.isIntersecting;
     if (reduced) return;
-    if (visible && !started) { started = true; go(0); } else if (visible) go(cur); else { clearTimeout(timer); clearLive(); }
+    if (visible && !started) {
+      started = true;
+      go(0);
+    } else if (visible) {
+      go(cur);
+    } else {
+      clearTimeout(timer);
+      clearLive();
+    }
   }, { threshold: 0.25 }).observe(demo);
 }
 

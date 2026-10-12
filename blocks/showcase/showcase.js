@@ -19,8 +19,11 @@ export default async function decorate(block) {
     const pic = r.querySelector('picture, img');
     return el('figure', `media-card${k ? ' after' : ''}`, cap ? el('div', 'media-label', cap) : null, pic);
   });
-  const head = el('div', 'sec-head row',
+  const head = el(
+    'div',
+    'sec-head row',
     el('div', null, h2 ? el('div', 'h2', h2) : null, lede ? el('div', 'lede', lede) : null),
-    action ? el('div', 'sec-action', action) : null);
+    action ? el('div', 'sec-action', action) : null,
+  );
   block.replaceChildren(el('div', 'container', head, el('div', 'media-grid', figs)));
 }

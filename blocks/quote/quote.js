@@ -9,8 +9,11 @@ import { ICONS, el, html } from '../../scripts/stardust.js';
 
 export default async function decorate(block) {
   const [quote, who] = [...block.querySelectorAll('p')];
-  const figure = el('figure', 'quote',
+  const figure = el(
+    'figure',
+    'quote',
     el('blockquote', null, quote),
-    el('figcaption', null, html(`<span class="quote-mark" aria-hidden="true">${ICONS.mark}</span>`), who));
+    el('figcaption', null, html(`<span class="quote-mark" aria-hidden="true">${ICONS.mark}</span>`), who),
+  );
   block.replaceChildren(el('div', 'container', figure));
 }

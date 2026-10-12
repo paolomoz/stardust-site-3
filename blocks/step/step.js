@@ -13,7 +13,9 @@
  *   7. <p><em><a>Read … on GitHub</a></em></p> — secondary button
  * Generated text (runtime, allowlisted): the Direct mock's date (today).
  */
-import { ICONS, MOCKS, el, html } from '../../scripts/stardust.js';
+import {
+  ICONS, MOCKS, el, html,
+} from '../../scripts/stardust.js';
 
 const wrap = (node, cls) => (node ? el('div', cls, node) : null);
 
@@ -28,10 +30,13 @@ export default async function decorate(block) {
   const cta = block.querySelector('a.button, p a');
   const key = (name?.textContent || '').trim().toLowerCase();
 
-  const copy = el('div', 'step-copy',
+  const copy = el(
+    'div',
+    'step-copy',
     el('div', 'step-head', wrap(name, 'step-name'), wrap(cmd, 'cmd')),
     wrap(title, 'step-title'),
-    wrap(body, 'lede'));
+    wrap(body, 'lede'),
+  );
   const mock = MOCKS[key] ? MOCKS[key](mockLines) : null;
   const ctaWrap = cta ? el('div', 'step-cta', cta.closest('p') || cta) : null;
   if (cta) cta.prepend(html(ICONS.github));

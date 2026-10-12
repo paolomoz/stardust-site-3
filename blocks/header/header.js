@@ -1,8 +1,10 @@
 /**
  * header — site chrome (v3 prototype `header.nav`), template-slotted from the authored /nav
- * document's three sections: 1. brand link · 2. <ul> of section links · 3. GitHub link, install CTA.
+ * document's three sections: 1. brand link · 2. <ul> of section links
+ * · 3. GitHub link, install CTA.
  * Behaviour: in-page anchors scroll natively (CSS scroll-behavior); no menus.
- * @ew-exempt <p> nav wrappers — the anchors move into the chrome bar (chrome, link labels stay editable)
+ * @ew-exempt <p> nav wrappers — the anchors move into the chrome bar
+ *   (chrome; the link labels stay editable)
  */
 import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';

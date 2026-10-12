@@ -16,7 +16,9 @@ css = re.sub(r'@font-face \{[^}]*\}\s*', '', css)
 fonts = '''/* Self-hosted brand faces (SIL OFL 1.1): Inter (rsms) and Caveat (Google Fonts). Loaded by
    loadFonts() after first paint; the metric-matched fallbacks live in styles.css. */
 @font-face { font-family: interVariable; src: url("../fonts/inter-variable.woff2") format("woff2"); font-weight: 100 900; font-style: normal; font-display: swap; }
+
 @font-face { font-family: Caveat; src: url("../fonts/caveat-500.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
+
 @font-face { font-family: Caveat; src: url("../fonts/caveat-600.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
 '''
 # 2. fallbacks second in every stack (the Inter token already names "interVariable Fallback")
@@ -55,32 +57,79 @@ header .header, footer .footer { visibility: hidden; }
 header .header[data-block-status="loaded"], footer .footer[data-block-status="loaded"] { visibility: visible; }
 
 /* ================================================================ lifted prototype cascade */
+/* Generated, byte-faithful lift of the approved prototype's single cascade (pixel parity < 1%):
+   stylelint formatting rules are disabled for this section only; the hand-maintained layers above
+   and below stay linted. */
+/* stylelint-disable */
 '''
 adapt = '''
+/* stylelint-enable */
 /* ================================================================ EDS adaptation layer */
+/* It must follow the lifted cascade it adapts, so selector order cannot ascend in specificity. */
+/* stylelint-disable no-descending-specificity, no-duplicate-selectors -- intentional overrides of the lift */
 /* sticky chrome on the host element */
-body > header { position: sticky; top: 0; z-index: 50; }
+body > header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
 /* empty sections (the metadata block's) collapse */
 main .section:empty { display: none; }
 /* authored headings sit inside class-carrying wrappers (EW2): the wrapper owns the type */
-main :is(h1, h2, h3, h4), footer :is(h1, h2, h3, h4) { font: inherit; letter-spacing: inherit; color: inherit; margin: 0; text-wrap: inherit; }
+main :is(h1, h2, h3, h4), footer :is(h1, h2, h3, h4) {
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  margin: 0;
+  text-wrap: inherit;
+}
 /* authored paragraphs slotted into inline positions render inline (their text joins the slot) */
 main :is(span, b) > p, header :is(span, b) > p, footer :is(span, b) > p, .window p { display: contents; }
 .hero-seed > p, .flow:where(ol) li p, .foot-col ul, .foot-col li, .foot-brand-link, .foot-brand-link p { display: contents; }
-.flow:where(ol) li { font-size: 14px; line-height: 20px; color: var(--muted); }
-.flow:where(ol) .flow-arrow { font-size: 16px; line-height: 24px; } /* the prototype arrow sits in the body line box */
+.flow:where(ol) li {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--muted);
+}
+.flow:where(ol) .flow-arrow {
+  font-size: 16px;
+  line-height: 24px;
+} /* the prototype arrow sits in the body line box */
 /* the "Two ways in" head + cards stack as in the prototype's flex column */
-.ways .doors > .container { display: flex; flex-direction: column; }
+.ways .doors > .container {
+  display: flex;
+  flex-direction: column;
+}
 /* the prototype's `.chapters .quote + .step-v2` sibling rule, across EDS block wrappers */
 main .section.chapters .quote-wrapper + .step-wrapper .step-v2 { margin-top: 96px; }
 /* button wrappers from decorateButtons() */
 p.button-wrapper { margin: 0; }
 /* Experience Workspace edit mode: repaint CTAs from their authored marks (EW3) */
-.prosemirror-editor p > :is(strong, em) > a:any-link { display: inline-flex; align-items: center; height: 32px; padding: 6px 12px; border-radius: 8px; font-size: 14px; font-weight: 500; }
-.prosemirror-editor p > strong > a:any-link { background: rgb(244, 242, 236); color: rgb(8, 30, 61); }
-.prosemirror-editor p > em > a:any-link { background: rgb(50, 68, 93); color: rgb(244, 242, 236); font-style: normal; }
-a .prosemirror-editor a:any-link { color: inherit; text-decoration: none; }
+.prosemirror-editor p > :is(strong, em) > a:any-link {
+  display: inline-flex;
+  align-items: center;
+  height: 32px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.prosemirror-editor p > strong > a:any-link {
+  background: rgb(244, 242, 236);
+  color: rgb(8, 30, 61);
+}
+.prosemirror-editor p > em > a:any-link {
+  background: rgb(50, 68, 93);
+  color: rgb(244, 242, 236);
+  font-style: normal;
+}
+a .prosemirror-editor a:any-link {
+  color: inherit;
+  text-decoration: none;
+}
 '''
 (ROOT / 'styles/styles.css').write_text(head + css.strip() + '\n' + adapt)
 (ROOT / 'styles/fonts.css').write_text(fonts)
-print('styles.css', len(head + css + adapt), 'bytes; fonts.css written')
+import subprocess
+subprocess.run(['npx', 'stylelint', '--fix', 'styles/styles.css', 'styles/fonts.css'], cwd=ROOT, capture_output=True)
+print('styles.css', len(head + css + adapt), 'bytes; fonts.css written; stylelint --fix applied to the linted layers')

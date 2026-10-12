@@ -65,7 +65,15 @@ export function md5(str) {
     let A = a; let B = b; let C = c; let D = d;
     for (let j = 0; j < 64; j += 1) {
       let f; let g;
-      if (j < 16) { f = (B & C) | (~B & D); g = j; } else if (j < 32) { f = (D & B) | (~D & C); g = (5 * j + 1) % 16; } else if (j < 48) { f = B ^ C ^ D; g = (3 * j + 5) % 16; } else { f = C ^ (B | ~D); g = (7 * j) % 16; }
+      if (j < 16) {
+        f = (B & C) | (~B & D); g = j;
+      } else if (j < 32) {
+        f = (D & B) | (~D & C); g = (5 * j + 1) % 16;
+      } else if (j < 48) {
+        f = B ^ C ^ D; g = (3 * j + 5) % 16;
+      } else {
+        f = C ^ (B | ~D); g = (7 * j) % 16;
+      }
       const t = D; D = C; C = B;
       B = (B + rot((A + f + K[j] + (w[i + g] | 0)) | 0, S[(j >> 4) * 4 + (j % 4)])) | 0;
       A = t;
@@ -102,11 +110,14 @@ export const MOCKS = {
     const tags = t.splice(0);
     const chips = el('div', 'chips');
     tags.forEach((g, k) => { if (k) chips.append(' '); chips.append(s('span', k ? 'chip' : 'chip on', g)); });
-    const body = el('div', 'mock-body capture',
+    const body = el(
+      'div',
+      'mock-body capture',
       s('div', 'mock-label', label),
       html('<div class="swatches" aria-hidden="true"><i style="background:rgb(75, 141, 248)"></i><i style="background:rgb(247, 202, 110)"></i><i style="background:rgb(224, 30, 90)"></i><i style="background:rgb(187, 62, 255)"></i><i style="background:rgb(255, 35, 35)"></i><i class="sw-cream"></i></div>'),
       el('div', 'typecard', s('span', 'aa', aa), html('<span class="rows" aria-hidden="true"><i style="width:90%"></i><i style="width:70%"></i><i style="width:80%"></i><i style="width:45%"></i></span>')),
-      chips);
+      chips,
+    );
     return el('div', 'window mock', bar(url, end), body);
   },
   direct(t) {
@@ -125,8 +136,12 @@ export const MOCKS = {
       const [k, v, p] = take(t, 3, 'direct row');
       table.append(el('div', 'tr', s('span', 'td k', k), ' ', s('span', 'td v', v), ' ', el('span', 'td p', s('span', 'pill', p))));
     }
-    return el('div', 'window mock', el('div', 'win-bar', s('span', 'win-url', url), endSlot),
-      el('div', 'mock-body seed', s('div', 'mock-label', label), hashBox, s('div', 'eq', eq), table));
+    return el(
+      'div',
+      'window mock',
+      el('div', 'win-bar', s('span', 'win-url', url), endSlot),
+      el('div', 'mock-body seed', s('div', 'mock-label', label), hashBox, s('div', 'eq', eq), table),
+    );
   },
   prototype(t) {
     const tabs = take(t, 2, 'prototype');
@@ -134,8 +149,12 @@ export const MOCKS = {
     const seg = el('span', 'seg');
     tabs.forEach((b, k) => { if (k) seg.append(' '); seg.append(s('b', k ? '' : 'on', b)); });
     const wf = (cls) => html(`<div class="wf ${cls}" aria-hidden="true"><i class="wf-nav"></i><i class="wf-hero"></i><span class="wf-row"><i></i><i></i><i></i></span><span class="wf-txt"><i></i><i></i><i></i></span></div>`);
-    return el('div', 'window mock', el('div', 'win-bar', seg, s('span', 'win-end', end)),
-      el('div', 'mock-body ba', wf('wf-before'), html(ICONS.arrow), wf('wf-after')));
+    return el(
+      'div',
+      'window mock',
+      el('div', 'win-bar', seg, s('span', 'win-end', end)),
+      el('div', 'mock-body ba', wf('wf-before'), html(ICONS.arrow), wf('wf-after')),
+    );
   },
   replica(t) {
     const [url, end, l1, l2] = take(t, 4, 'replica');
@@ -164,10 +183,17 @@ export const MOCKS = {
     while (t.length) {
       const [path, st] = take(t, 2, 'rollout row');
       const word = st.textContent.trim().toLowerCase();
-      const cls = /deliver/.test(word) ? 'ok' : /deploy/.test(word) ? 'run' : 'wait';
+      let cls = 'wait';
+      if (/deliver/.test(word)) cls = 'ok';
+      else if (/deploy/.test(word)) cls = 'run';
       table.append(el('div', 'tr', html('<span class="td idx" aria-hidden="true"></span>'), s('span', 'td path', path), ' ', el('span', 'td', s('span', `status ${cls}`, st))));
     }
-    return el('div', 'window mock', bar(url, end), el('div', 'mock-body sheet',
-      html(`<div class="meter" aria-hidden="true"><i style="width:${pct}%"></i></div>`), table, s('div', 'mock-foot-line', foot)));
+    return el('div', 'window mock', bar(url, end), el(
+      'div',
+      'mock-body sheet',
+      html(`<div class="meter" aria-hidden="true"><i style="width:${pct}%"></i></div>`),
+      table,
+      s('div', 'mock-foot-line', foot),
+    ));
   },
 };
