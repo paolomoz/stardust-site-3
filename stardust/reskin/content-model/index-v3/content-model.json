@@ -1,0 +1,2547 @@
+{
+  "_provenance": {
+    "writtenBy": "stardust:reskin/capture-content.mjs",
+    "capturedAt": "2026-10-12T07:56:58.708Z",
+    "url": "https://stardust.style/",
+    "viewport": "1440x900",
+    "scope": "main .hero.block!,main .spot-pin,main .chapters.redesign .ch-intro-block!,main .chapters.redesign .stack,main .showcase!,main .chapters.migrate .ch-intro-block!,main .chapters.migrate .stack,main .install!",
+    "normalize": {
+      "source": "/Users/paolo/stardust/2026-08/stardust-site-redesign-profound/stardust/reskin/normalize/index-v3.mjs",
+      "ledger": [
+        {
+          "id": "N-D1",
+          "what": "remove cookie/consent chrome (OneTrust, Cookiebot, Usercentrics, generic cookie-banner ids/classes)",
+          "why": "overlay chrome injected by a CMP, not page content; re-added at deploy time"
+        },
+        {
+          "id": "N-D2",
+          "what": "de-carousel slick/swiper/splide/glide: remove clone slides, force real slides visible+static, drop dots/arrows",
+          "why": "hidden slides are absent from innerText and clones duplicate it — rotating carousels break byte determinism; the reskin renders all slides statically in DOM order"
+        },
+        {
+          "id": "N1",
+          "what": "flatten the scroll-choreography stage: scroll every .sc-group/.sc-layer into view once so lazily-built blocks (chapters.migrate, install) decorate, then force every parked/waiting layer visible (visibility/opacity/display) and settle reveal/scramble animations",
+          "why": "the live page parks off-screen layers with visibility:hidden, so innerText depends on scroll position (3168 chars at load, 848–3729 while scrolling); un-parking gives a deterministic reading-order reference with every authored chapter present. Presentation-only — no node is removed"
+        },
+        {
+          "id": "N2",
+          "what": "remove scroll-rail chrome: .sc-rail, .rail-overlay, .lane-tab, .lane-in, .sc-probe",
+          "why": "progress-rail decoration that duplicates the chapter names (\"REDESIGN\", \"Migrate as is\") as a scroll indicator — duplication, not content"
+        },
+        {
+          "id": "N3",
+          "what": "finish the install terminal typewriter by clicking its own [data-skip] control (the block removes the skip button and writes the full script)",
+          "why": "the terminal types the authored script at random 14–54ms per key on reveal — innerText is time-dependent mid-typing; skip is the block's own deterministic end state. The \"skip\" label is transient UI, not content"
+        },
+        {
+          "id": "N4",
+          "what": "remove the hero version tag (.hero .ver — \"v0.20.0\")",
+          "why": "USER-REQUESTED CONTENT REMOVAL (2026-10-11, \"remove the version above the H1\"). Not chrome — an explicit owner decision, recorded here so capture and gate exclude it identically"
+        },
+        {
+          "id": "N5",
+          "what": "remove the spotlight route diagram (.spotlight .spot-media — labels: extract direct prototype migrate replica deploy rollout)",
+          "why": "USER-REQUESTED CONTENT REMOVAL (2026-10-11, \"Two ways in.\" section: remove the route diagram). Owner decision; capture and gate exclude it identically"
+        },
+        {
+          "id": "N6",
+          "what": "remove the hero wordmark text (.hero .hero-word — \"stardust\")",
+          "why": "USER-REQUESTED CONTENT REMOVAL (2026-10-11, \"remove the stardust chip above the H1 to make more space for the demo\"). The brand stays in the nav; capture and gate exclude it identically"
+        },
+        {
+          "id": "N7",
+          "what": "remove the chapter intro titles (.chapters .sc-title — \"Redesign\", \"Migrate as is\") next to their [TAB] labels",
+          "why": "USER-REQUESTED CONTENT REMOVAL (2026-10-11, \"just say REDESIGN in square brackets\"); applied to both chapter intros for consistency. The tab label carries the same word"
+        },
+        {
+          "id": "N8",
+          "what": "remove the hero scroll link (.hero .scroll — \"SCROLL\")",
+          "why": "USER-REQUESTED CONTENT REMOVAL (2026-10-12, \"remove SCROLL which is useless\"). Owner decision"
+        },
+        {
+          "id": "N9",
+          "what": "COPY EDIT of the hero kicker first line: \"Takes a website. Brings it back\" -> \"Takes a website & brings it back,\" (rev 17 wording; only when the old string is present)",
+          "why": "USER-REQUESTED COPY CHANGE (2026-10-12). Not yet on the live source: until the stardust.style hero is re-authored, the live page still reads the old line. Guarded, so it becomes a no-op once the source carries the new copy"
+        },
+        {
+          "id": "N10",
+          "what": "remove the install credit line (.install .credit — \"Built on impeccable.\")",
+          "why": "USER-REQUESTED CONTENT REMOVAL (2026-10-12, \"remove mentions that stardust is built on impeccable — that has been reducing over time\"). Owner decision"
+        },
+        {
+          "id": "N11",
+          "what": "remove the impeccable lines from the install terminal (.install .terminal pre span containing \"impeccable\": the marketplace add, the install command, and the \"installed impeccable · design craft\" reply)",
+          "why": "USER-REQUESTED CONTENT REMOVAL (2026-10-12, \"remove impeccable from the install demo too\"). Runs after N3 finished the typewriter. Owner decision"
+        },
+        {
+          "id": "N12",
+          "what": "COPY EDIT of the install heading second line: \"Then ask it.\" -> \"Docs included.\" (guarded on the old string)",
+          "why": "USER-REQUESTED COPY CHANGE (2026-10-12): heading becomes \"Install it. Docs included.\" Not on the live source until re-authored"
+        },
+        {
+          "id": "N13",
+          "what": "COPY EDIT of the install lede -> \"Stardust is a set of AI skills. Install it, then say what you want in your own words.\" (guarded on the exact old paragraph)",
+          "why": "USER-REQUESTED COPY CHANGE (2026-10-12); drops the impeccable/Playwright dependency sentence and \"Slash commands are optional.\" Not on the live source until re-authored"
+        },
+        {
+          "id": "N14",
+          "what": "COPY EDIT of the \"Two ways in.\" lede: drop the trailing sentence \" Or open a door yourself.\" (guarded on the exact old paragraph)",
+          "why": "USER-REQUESTED COPY CHANGE (2026-10-12). Not on the live source until re-authored"
+        },
+        {
+          "id": "N15",
+          "what": "CONTENT ADDITION in the \"Migrate as is\" door: clone the Redesign door's Shortcut label + command paragraphs and set the command to \"/stardust:replica <url>\", inserted before \"Follow the migration\"",
+          "why": "USER-REQUESTED ADDITION (2026-10-12, \"put a shortcut like in the redesign box: /stardust:replica <url>\"). Cloned from the source's own elements so markup/casing match. Not on the live source until re-authored"
+        },
+        {
+          "id": "V2-N16",
+          "what": "remove the chapter step numbers (.chapter .ch-no .num-display — \"0 1\", \"0 2\", \"0 3\" ×2)",
+          "why": "USER-REQUESTED (v2, AI-tell #4/#5): numbered eyebrow rows above step titles removed; the step name + command move into the heading. v2 only"
+        },
+        {
+          "id": "V2-N17",
+          "what": "remove the \"In this step\" labels (.chapter .ch-covers > .label) ×6",
+          "why": "USER-REQUESTED (v2, AI-tell #4): kicker above the checklist removed; the list stands on its own. v2 only"
+        },
+        {
+          "id": "V3-N18",
+          "what": "neutralise text-transform on the source (main * { text-transform: none })",
+          "why": "USER-REQUESTED (v3, AI-tell #15): stardust.style authors its labels in sentence case (\"Follow the redesign\", \"In this step\", \"Shortcut\") and only uppercases them in CSS. Presentation-only: the captured text becomes the authored text; no characters change"
+        }
+      ]
+    },
+    "nav": {
+      "live": true,
+      "waitUntil": "domcontentloaded",
+      "headed": false
+    }
+  },
+  "metadata": {
+    "title": "Stardust — Redesign the Web.",
+    "description": "Stardust takes a website and brings it back redesigned, fixed, migrated, or all of it all together. AI skills from Adobe. Open source, Apache 2.0.",
+    "canonical": "https://stardust.style/",
+    "ogTags": {
+      "og:title": "Stardust — Redesign the Web.",
+      "og:description": "Stardust takes a website and brings it back redesigned, fixed, migrated, or all of it all together. AI skills from Adobe. Open source, Apache 2.0.",
+      "og:url": "https://stardust.style/",
+      "og:image": "https://stardust.style/og/stardust.jpg?width=1200&format=pjpg&optimize=medium",
+      "og:image:secure_url": "https://stardust.style/og/stardust.jpg?width=1200&format=pjpg&optimize=medium",
+      "og:image:alt": "Frescopa home page before the redesign"
+    },
+    "twitterTags": {
+      "twitter:card": "summary_large_image",
+      "twitter:title": "Stardust — Redesign the Web.",
+      "twitter:description": "Stardust takes a website and brings it back redesigned, fixed, migrated, or all of it all together. AI skills from Adobe. Open source, Apache 2.0.",
+      "twitter:image": "https://stardust.style/og/stardust.jpg?width=1200&format=pjpg&optimize=medium"
+    },
+    "jsonLd": [],
+    "lang": "en",
+    "favicon": "https://stardust.style/favicon.svg"
+  },
+  "scope": [
+    {
+      "sel": "main .hero.block",
+      "whole": true
+    },
+    {
+      "sel": "main .spot-pin",
+      "whole": false
+    },
+    {
+      "sel": "main .chapters.redesign .ch-intro-block",
+      "whole": true
+    },
+    {
+      "sel": "main .chapters.redesign .stack",
+      "whole": false
+    },
+    {
+      "sel": "main .showcase",
+      "whole": true
+    },
+    {
+      "sel": "main .chapters.migrate .ch-intro-block",
+      "whole": true
+    },
+    {
+      "sel": "main .chapters.migrate .stack",
+      "whole": false
+    },
+    {
+      "sel": "main .install",
+      "whole": true
+    }
+  ],
+  "visibleTextNormalized": "Takes a website & brings it back, redesigned, fixed, migrated. Or all three. seed md5(\"brand\" · 2026-10-12) → 734513cd · yours alone, today only Redesign the Web. Two ways in. Say what you want in a sentence and the master skill picks the route. Redesign New design on the site you have. extract → direct → prototype → migrate A B Shortcut /stardust:uplift <url> one URL, three pitch variants, one cinematic Follow the redesign Migrate as is Same design, new platform. replica → deploy → rollout A B Shortcut /stardust:replica <url> Follow the migration Redesign Take a live site. Bring it back redesigned. Three skills, three steps. Each writes its files and the next one reads them. Or say what you want in a sentence and the master skill picks the route. “You can go from global brand to regionalized site in Edge Delivery Services in under a day.” A guest on Thursday Frequency · aem-live live session, 18 June 2026 Extract /stardust:extract <url> Read the site you already have. Point it at a URL. Stardust renders each page in a real browser and writes down the palette, the type scale, the motifs, the voice and every block of copy. Five pages by default, the whole site on request. It invents nothing at this stage. The capture is the evidence the next steps argue from. https://www.example.com/ 5 pages Brand surface Aa serif display 1.25 scale radius 12px voice: assured 5 pages gradient blob hero Real browser render, not view-source Palette, type scale, motifs, voice Every line of copy, counted PRODUCT.md and DESIGN.md as output Read extract on GitHub Direct /stardust:direct One sentence in. A direction out. Tell it what you want in plain words: warmer, more editorial, keep our type. Direct reads the capture, keeps your palette and fonts unless you ask for a rebrand, researches references when it can, and rolls the seed for whatever is still open. It writes the target spec and its reasoning, so you can argue with it. /stardust:direct seed · 2026-10-12 md5(\"example.com\" · today) a3f7c92e 8b1d488a 0c5ef691 3427bbd1 → resolves to decade 1970s a3 craft letterpress f7 register editorial c9 ground inherited — Brand-faithful by default, rebrand on request References first, seed for the rest Decade, craft, register from the roll A target spec and its reasoning trace Read direct on GitHub Prototype /stardust:prototype Before and after, side by side. Prototype renders one page of the redesign as a single HTML file and puts it next to the capture. Then it runs impeccable's craft loop: critique, audit, adapt to six viewports, check the motion. It rejects template-looking output. You pick, annotate, and re-run. Approve it, and migrate carries the design to every page as static HTML. Before After 6 viewports Critique, audit, adapt, motion Checked at six viewports Optional cinematic motion register Approve, then migrate to every page Read prototype on GitHub Frescopa, before and after. White-label demo site. Redesigned with extract, direct, prototype. How it was made Frescopa · before Frescopa · after Migrate as is Keep the design. Change the platform. Same site, new origin. Replica rebuilds it as clean HTML and proves the match. Deploy and rollout carry it to AEM Edge Delivery, one page first, then the whole site. When one site becomes many markets, with in-place authoring, drafts, translations and scheduled releases, this is the route to production. “The ROI on being able to do that... it's undeniable.” Thursday Frequency, aem-live Static HTML every page, tokens, provenance · any host stardust:deploy one page → EDS blocks + authorable content AEM Edge Delivery rollout the site · qa the live pages Replica /stardust:replica <url> The site you have, rebuilt clean. Replica reads the live site and recreates one page per template as clean HTML and CSS, never a DOM copy. It gates each one against the original at two breakpoints: structure, visuals, a stitched pixel diff. The only design changes allowed are the ones you list. Then migrate clones the rest of the pages. gate · 2 breakpoints diff < 2% ✓ live replica structure ✓ visuals ✓ pixel diff ✓ One archetype per page type Clean HTML and CSS, no DOM copy Pixel diff gate at two breakpoints migrate clones the sibling pages Read replica on GitHub Deploy /stardust:deploy One page into blocks. Deploy takes one page of static HTML and turns each section into an Edge Delivery block with its own CSS, and the copy into authorable content. It writes both through the Document Authoring API, previews, publishes, then reads the live page back and checks it. A page counts as deployed only when that check passes. index.html → blocks preview · publish · check hero cards text quote Each section becomes one block Copy stays editable in Document Authoring Internal links rewritten to the new origin Live page checked before it counts Read deploy on GitHub Rollout /stardust:rollout The whole site, then the check. Rollout runs deploy across the migrated tree. It keeps a ledger of what shipped and what is left, shares blocks across pages instead of forking them, adds the sitemap and redirects, and audits every link. When it is done, qa sweeps the live site and reports what it finds. It never edits. stardust/rollout/ledger.json delivered 112 / 134 / delivered /about delivered /products delivered /products/beans delivered /news/2026 deploying /contact pending shared blocks ✓ · sitemap ✓ · redirects ✓ · links ✓ A ledger of shipped and pending pages Blocks shared, not forked per page Sitemap, redirects, link audit qa reports on the live site Read rollout on GitHub Install it. Docs included. Stardust is a set of AI skills. Install it, then say what you want in your own words. Copy install README on GitHub “One of the most incredible open source skills I've ever seen.” Thursday Frequency, aem-live ~/project ~/project › /plugin marketplace add adobe/skills /plugin install stardust@adobe-skills installed stardust 0.20.0 · 14 skills ~/project › /stardust make example.com feel like a magazine, keep our type reading example.com · 5 pages brand-faithful mode · palette and type pinned decade ✓ rolled → 1970s craft ✓ rolled → letterpress plan written to stardust/direction.md · confirm to run",
+  "coverage": {
+    "bodyTextLen": 6541,
+    "scopeTextLen": 6190,
+    "ratio": 0.946,
+    "h1Text": "Redesign the Web.",
+    "h1InScope": true
+  },
+  "sections": [
+    {
+      "slot": "s01",
+      "rootTag": "div",
+      "rootClass": "hero block",
+      "visibleText": "Takes a website & brings it back, redesigned, fixed, migrated. Or all three. seed md5(\"brand\" · 2026-10-12) → 734513cd · yours alone, today only Redesign the Web.",
+      "headings": [
+        {
+          "level": "h1",
+          "text": "Redesign the Web."
+        }
+      ],
+      "paragraphs": [
+        "Takes a website & brings it back, redesigned, fixed, migrated. Or all three.",
+        "seed md5(\"brand\" · 2026-10-12) → 734513cd · yours alone, today only"
+      ],
+      "listItems": [],
+      "ctas": [],
+      "images": [],
+      "formControls": [],
+      "leftovers": [],
+      "ordered": [
+        {
+          "kind": "paragraph",
+          "text": "Takes a website & brings it back, redesigned, fixed, migrated. Or all three.",
+          "display": "block",
+          "children": [
+            {
+              "kind": "text",
+              "text": "Takes a website & brings it back,",
+              "parentTag": "span",
+              "parentClass": "",
+              "sep": ""
+            },
+            {
+              "kind": "text",
+              "text": "redesigned, fixed, migrated.",
+              "parentTag": "span",
+              "parentClass": "",
+              "sep": " "
+            },
+            {
+              "kind": "text",
+              "text": "Or all three.",
+              "parentTag": "em",
+              "parentClass": "",
+              "sep": " "
+            }
+          ],
+          "sep": ""
+        },
+        {
+          "kind": "paragraph",
+          "text": "seed md5(\"brand\" · 2026-10-12) → 734513cd · yours alone, today only",
+          "display": "flex",
+          "children": [
+            {
+              "kind": "text",
+              "text": "seed",
+              "parentTag": "strong",
+              "parentClass": "",
+              "sep": ""
+            },
+            {
+              "kind": "text",
+              "text": "md5(\"brand\" · 2026-10-12) → 734513cd ·",
+              "parentTag": "span",
+              "parentClass": "hash",
+              "sep": " "
+            },
+            {
+              "kind": "text",
+              "text": "yours alone, today only",
+              "parentTag": "span",
+              "parentClass": "hash",
+              "sep": " "
+            }
+          ],
+          "sep": " "
+        },
+        {
+          "kind": "heading",
+          "text": "Redesign the Web.",
+          "display": "block",
+          "level": "h1",
+          "children": [
+            {
+              "kind": "text",
+              "text": "Redesign",
+              "parentTag": "span",
+              "parentClass": "",
+              "sep": ""
+            },
+            {
+              "kind": "text",
+              "text": "the Web",
+              "parentTag": "span",
+              "parentClass": "",
+              "sep": " "
+            },
+            {
+              "kind": "text",
+              "text": ".",
+              "parentTag": "span",
+              "parentClass": "accent",
+              "sep": ""
+            }
+          ],
+          "sep": " "
+        }
+      ],
+      "orderedVerified": true
+    },
+    {
+      "slot": "s02",
+      "rootTag": "div",
+      "rootClass": "spot-copy",
+      "visibleText": "Two ways in. Say what you want in a sentence and the master skill picks the route.",
+      "headings": [
+        {
+          "level": "h2",
+          "text": "Two ways in."
+        }
+      ],
+      "paragraphs": [
+        "Say what you want in a sentence and the master skill picks the route."
+      ],
+      "listItems": [],
+      "ctas": [],
+      "images": [],
+      "formControls": [],
+      "leftovers": [],
+      "ordered": [
+        {
+          "kind": "heading",
+          "text": "Two ways in.",
+          "display": "block",
+          "level": "h2",
+          "sep": ""
+        },
+        {
+          "kind": "paragraph",
+          "text": "Say what you want in a sentence and the master skill picks the route.",
+          "display": "block",
+          "sep": " "
+        }
+      ],
+      "orderedVerified": true
+    },
+    {
+      "slot": "s03",
+      "rootTag": "div",
+      "rootClass": "spot-tiles doors",
+      "visibleText": "Redesign New design on the site you have. extract → direct → prototype → migrate A B Shortcut /stardust:uplift <url> one URL, three pitch variants, one cinematic Follow the redesign Migrate as is Same design, new platform. replica → deploy → rollout A B Shortcut /stardust:replica <url> Follow the migration",
+      "headings": [
+        {
+          "level": "h3",
+          "text": "Redesign"
+        },
+        {
+          "level": "h3",
+          "text": "Migrate as is"
+        }
+      ],
+      "paragraphs": [
+        "New design on the site you have.",
+        "extract → direct → prototype → migrate",
+        "Shortcut",
+        "/stardust:uplift <url>",
+        "one URL, three pitch variants, one cinematic",
+        "Follow the redesign",
+        "Same design, new platform.",
+        "replica → deploy → rollout",
+        "Shortcut",
+        "/stardust:replica <url>",
+        "Follow the migration"
+      ],
+      "listItems": [],
+      "ctas": [
+        {
+          "text": "Redesign New design on the site you have. extract → direct → prototype → migrate A B Shortcut /stardust:uplift <url> one URL, three pitch variants, one cinematic Follow the redesign",
+          "href": "#redesign",
+          "absHref": "https://stardust.style/#redesign",
+          "classes": "stile door gold"
+        },
+        {
+          "text": "Migrate as is Same design, new platform. replica → deploy → rollout A B Shortcut /stardust:replica <url> Follow the migration",
+          "href": "#migrate",
+          "absHref": "https://stardust.style/#migrate",
+          "classes": "stile door light"
+        }
+      ],
+      "images": [],
+      "formControls": [],
+      "leftovers": [],
+      "ordered": [
+        {
+          "kind": "cta",
+          "text": "Redesign New design on the site you have. extract → direct → prototype → migrate A B Shortcut /stardust:uplift <url> one URL, three pitch variants, one cinematic Follow the redesign",
+          "display": "grid",
+          "href": "#redesign",
+          "absHref": "https://stardust.style/#redesign",
+          "classes": "stile door gold",
+          "children": [
+            {
+              "kind": "heading",
+              "text": "Redesign",
+              "display": "block",
+              "level": "h3",
+              "sep": ""
+            },
+            {
+              "kind": "paragraph",
+              "text": "New design on the site you have.",
+              "display": "block",
+              "sep": " "
+            },
+            {
+              "kind": "paragraph",
+              "text": "extract → direct → prototype → migrate",
+              "display": "block",
+              "sep": " "
+            },
+            {
+              "kind": "text",
+              "text": "A",
+              "parentTag": "b",
+              "parentClass": "",
+              "sep": " "
+            },
+            {
+              "kind": "text",
+              "text": "B",
+              "parentTag": "b",
+              "parentClass": "",
+              "sep": " "
+            },
+            {
+              "kind": "paragraph",
+              "text": "Shortcut",
+              "display": "block",
+              "sep": " "
+            },
+            {
+              "kind": "paragraph",
+              "text": "/stardust:uplift <url>",
+              "display": "block",
+              "sep": " "
+            },
+            {
+              "kind": "paragraph",
+              "text": "one URL, three pitch variants, one cinematic",
+              "display": "block",
+              "sep": " "
+            },
+            {
+              "kind": "paragraph",
+              "text": "Follow the redesign",
+              "display": "block",
+              "sep": " "
+            }
+          ],
+          "sep": ""
+        },
+        {
+          "kind": "cta",
+          "text": "Migrate as is Same design, new platform. replica → deploy → rollout A B Shortcut /stardust:replica <url> Follow the migration",
+          "display": "grid",
+          "href": "#migrate",
+          "absHref": "https://stardust.style/#migrate",
+          "classes": "stile door light",
+          "children": [
+            {
+              "kind": "heading",
+              "text": "Migrate as is",
+              "display": "block",
+              "level": "h3",
+              "sep": ""
+            },
+            {
+              "kind": "paragraph",
+              "text": "Same design, new platform.",
+              "display": "block",
+              "sep": " "
+            },
+            {
+              "kind": "paragraph",
+              "text": "replica → deploy → rollout",
+              "display": "block",
+              "sep": " "
+            },
+            {
+              "kind": "text",
+              "text": "A",
+              "parentTag": "b",
+              "parentClass": "",
+              "sep": " "
+            },
+            {
+              "kind": "text",
+              "text": "B",
+              "parentTag": "b",
+              "parentClass": "",
+              "sep": " "
+            },
+            {
+              "kind": "paragraph",
+              "text": "Shortcut",
+              "display": "block",
+              "sep": " "
+            },
+            {
+              "kind": "paragraph",
+              "text": "/stardust:replica <url>",
+              "display": "block",
+              "sep": " "
+            },
+            {
+              "kind": "paragraph",
+              "text": "Follow the migration",
+              "display": "block",
+              "sep": " "
+            }
+          ],
+          "sep": " "
+        }
+      ],
+      "orderedVerified": true
+    },
+    {
+      "slot": "s04",
+      "rootTag": "div",
+      "rootClass": "container ch-intro-block sc-layer sc-intro waiting",
+      "visibleText": "Redesign Take a live site. Bring it back redesigned. Three skills, three steps. Each writes its files and the next one reads them. Or say what you want in a sentence and the master skill picks the route. “You can go from global brand to regionalized site in Edge Delivery Services in under a day.” A guest on Thursday Frequency · aem-live live session, 18 June 2026",
+      "headings": [
+        {
+          "level": "h2",
+          "text": "Take a live site. Bring it back redesigned."
+        }
+      ],
+      "paragraphs": [
+        "Three skills, three steps. Each writes its files and the next one reads them. Or say what you want in a sentence and the master skill picks the route.",
+        "“You can go from global brand to regionalized site in Edge Delivery Services in under a day.”",
+        "A guest on Thursday Frequency · aem-live live session, 18 June 2026"
+      ],
+      "listItems": [],
+      "ctas": [],
+      "images": [],
+      "formControls": [],
+      "leftovers": [
+        {
+          "text": "Redesign",
+          "parentTag": "b",
+          "parentClass": ""
+        }
+      ],
+      "ordered": [
+        {
+          "kind": "text",
+          "text": "Redesign",
+          "parentTag": "b",
+          "parentClass": "",
+          "sep": ""
+        },
+        {
+          "kind": "heading",
+          "text": "Take a live site. Bring it back redesigned.",
+          "display": "block",
+          "level": "h2",
+          "children": [
+            {
+              "kind": "text",
+              "text": "Take a live site.",
+              "parentTag": "span",
+              "parentClass": "",
+              "sep": ""
+            },
+            {
+              "kind": "text",
+              "text": "Bring it back redesigned.",
+              "parentTag": "span",
+              "parentClass": "lane-ink",
+              "sep": " "
+            }
+          ],
+          "sep": " "
+        },
+        {
+          "kind": "paragraph",
+          "text": "Three skills, three steps. Each writes its files and the next one reads them. Or say what you want in a sentence and the master skill picks the route.",
+          "display": "block",
+          "sep": " "
+        },
+        {
+          "kind": "paragraph",
+          "text": "“You can go from global brand to regionalized site in Edge Delivery Services in under a day.”",
+          "display": "block",
+          "sep": " "
+        },
+        {
+          "kind": "paragraph",
+          "text": "A guest on Thursday Frequency · aem-live live session, 18 June 2026",
+          "display": "block",
+          "sep": " "
+        }
+      ],
+      "orderedVerified": true
+    },
+    {
+      "slot": "s05",
+      "rootTag": "article",
+      "rootClass": "chapter sc-layer sc-panel in waiting",
+      "visibleText": "Extract /stardust:extract <url> Read the site you already have. Point it at a URL. Stardust renders each page in a real browser and writes down the palette, the type scale, the motifs, the voice and every block of copy. Five pages by default, the whole site on request. It invents nothing at this stage. The capture is the evidence the next steps argue from. https://www.example.com/ 5 pages Brand surface Aa serif display 1.25 scale radius 12px voice: assured 5 pages gradient blob hero Real browser render, not view-source Palette, type scale, motifs, voice Every line of copy, counted PRODUCT.md and DESIGN.md as output Read extract on GitHub",
+      "headings": [
+        {
+          "level": "h3",
+          "text": "Extract"
+        },
+        {
+          "level": "h4",
+          "text": "Read the site you already have."
+        }
+      ],
+      "paragraphs": [
+        "/stardust:extract <url>",
+        "Point it at a URL. Stardust renders each page in a real browser and writes down the palette, the type scale, the motifs, the voice and every block of copy. Five pages by default, the whole site on request. It invents nothing at this stage. The capture is the evidence the next steps argue from."
+      ],
+      "listItems": [
+        "Real browser render, not view-source",
+        "Palette, type scale, motifs, voice",
+        "Every line of copy, counted",
+        "PRODUCT.md and DESIGN.md as output"
+      ],
+      "ctas": [
+        {
+          "text": "Read extract on GitHub",
+          "href": "https://github.com/adobe/skills/tree/main/plugins/stardust/skills/extract",
+          "absHref": "https://github.com/adobe/skills/tree/main/plugins/stardust/skills/extract",
+          "classes": "ch-cta"
+        }
+      ],
+      "images": [],
+      "formControls": [],
+      "leftovers": [
+        {
+          "text": "https://www.example.com/",
+          "parentTag": "span",
+          "parentClass": "url"
+        },
+        {
+          "text": "5 pages",
+          "parentTag": "span",
+          "parentClass": "end"
+        },
+        {
+          "text": "Brand surface",
+          "parentTag": "span",
+          "parentClass": "label"
+        },
+        {
+          "text": "Aa",
+          "parentTag": "div",
+          "parentClass": "aa"
+        },
+        {
+          "text": "serif display",
+          "parentTag": "b",
+          "parentClass": ""
+        },
+        {
+          "text": "1.25 scale",
+          "parentTag": "b",
+          "parentClass": ""
+        },
+        {
+          "text": "radius 12px",
+          "parentTag": "b",
+          "parentClass": ""
+        },
+        {
+          "text": "voice: assured",
+          "parentTag": "b",
+          "parentClass": ""
+        },
+        {
+          "text": "5 pages",
+          "parentTag": "b",
+          "parentClass": ""
+        },
+        {
+          "text": "gradient blob hero",
+          "parentTag": "b",
+          "parentClass": ""
+        }
+      ],
+      "ordered": [
+        {
+          "kind": "heading",
+          "text": "Extract",
+          "display": "block",
+          "level": "h3",
+          "sep": ""
+        },
+        {
+          "kind": "paragraph",
+          "text": "/stardust:extract <url>",
+          "display": "block",
+          "sep": " "
+        },
+        {
+          "kind": "heading",
+          "text": "Read the site you already have.",
+          "display": "block",
+          "level": "h4",
+          "children": [
+            {
+              "kind": "text",
+              "text": "Read the site",
+              "parentTag": "span",
+              "parentClass": "",
+              "sep": ""
+            },
+            {
+              "kind": "text",
+              "text": "you already have.",
+              "parentTag": "span",
+              "parentClass": "",
+              "sep": " "
+            }
+          ],
+          "sep": " "
+        },
+        {
+          "kind": "paragraph",
+          "text": "Point it at a URL. Stardust renders each page in a real browser and writes down the palette, the type scale, the motifs, the voice and every block of copy. Five pages by default, the whole site on request. It invents nothing at this stage. The capture is the evidence the next steps argue from.",
+          "display": "block",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "https://www.example.com/",
+          "parentTag": "span",
+          "parentClass": "url",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "5 pages",
+          "parentTag": "span",
+          "parentClass": "end",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "Brand surface",
+          "parentTag": "span",
+          "parentClass": "label",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "Aa",
+          "parentTag": "div",
+          "parentClass": "aa",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "serif display",
+          "parentTag": "b",
+          "parentClass": "",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "1.25 scale",
+          "parentTag": "b",
+          "parentClass": "",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "radius 12px",
+          "parentTag": "b",
+          "parentClass": "",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "voice: assured",
+          "parentTag": "b",
+          "parentClass": "",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "5 pages",
+          "parentTag": "b",
+          "parentClass": "",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "gradient blob hero",
+          "parentTag": "b",
+          "parentClass": "",
+          "sep": " "
+        },
+        {
+          "kind": "listItem",
+          "text": "Real browser render, not view-source",
+          "display": "list-item",
+          "sep": " "
+        },
+        {
+          "kind": "listItem",
+          "text": "Palette, type scale, motifs, voice",
+          "display": "list-item",
+          "sep": " "
+        },
+        {
+          "kind": "listItem",
+          "text": "Every line of copy, counted",
+          "display": "list-item",
+          "sep": " "
+        },
+        {
+          "kind": "listItem",
+          "text": "PRODUCT.md and DESIGN.md as output",
+          "display": "list-item",
+          "sep": " "
+        },
+        {
+          "kind": "cta",
+          "text": "Read extract on GitHub",
+          "display": "flex",
+          "href": "https://github.com/adobe/skills/tree/main/plugins/stardust/skills/extract",
+          "absHref": "https://github.com/adobe/skills/tree/main/plugins/stardust/skills/extract",
+          "classes": "ch-cta",
+          "sep": " "
+        }
+      ],
+      "orderedVerified": true
+    },
+    {
+      "slot": "s06",
+      "rootTag": "article",
+      "rootClass": "chapter sc-layer sc-panel in waiting",
+      "visibleText": "Direct /stardust:direct One sentence in. A direction out. Tell it what you want in plain words: warmer, more editorial, keep our type. Direct reads the capture, keeps your palette and fonts unless you ask for a rebrand, researches references when it can, and rolls the seed for whatever is still open. It writes the target spec and its reasoning, so you can argue with it. /stardust:direct seed · 2026-10-12 md5(\"example.com\" · today) a3f7c92e 8b1d488a 0c5ef691 3427bbd1 → resolves to decade 1970s a3 craft letterpress f7 register editorial c9 ground inherited — Brand-faithful by default, rebrand on request References first, seed for the rest Decade, craft, register from the roll A target spec and its reasoning trace Read direct on GitHub",
+      "headings": [
+        {
+          "level": "h3",
+          "text": "Direct"
+        },
+        {
+          "level": "h4",
+          "text": "One sentence in. A direction out."
+        }
+      ],
+      "paragraphs": [
+        "/stardust:direct",
+        "Tell it what you want in plain words: warmer, more editorial, keep our type. Direct reads the capture, keeps your palette and fonts unless you ask for a rebrand, researches references when it can, and rolls the seed for whatever is still open. It writes the target spec and its reasoning, so you can argue with it."
+      ],
+      "listItems": [
+        "Brand-faithful by default, rebrand on request",
+        "References first, seed for the rest",
+        "Decade, craft, register from the roll",
+        "A target spec and its reasoning trace"
+      ],
+      "ctas": [
+        {
+          "text": "Read direct on GitHub",
+          "href": "https://github.com/adobe/skills/tree/main/plugins/stardust/skills/direct",
+          "absHref": "https://github.com/adobe/skills/tree/main/plugins/stardust/skills/direct",
+          "classes": "ch-cta"
+        }
+      ],
+      "images": [],
+      "formControls": [],
+      "leftovers": [
+        {
+          "text": "/stardust:direct",
+          "parentTag": "span",
+          "parentClass": "url"
+        },
+        {
+          "text": "seed ·",
+          "parentTag": "span",
+          "parentClass": "end"
+        },
+        {
+          "text": "2026-10-12",
+          "parentTag": "span",
+          "parentClass": ""
+        },
+        {
+          "text": "md5(\"example.com\" · today)",
+          "parentTag": "span",
+          "parentClass": "label"
+        },
+        {
+          "text": "a3f7c92e",
+          "parentTag": "span",
+          "parentClass": ""
+        },
+        {
+          "text": "8b1d488a",
+          "parentTag": "span",
+          "parentClass": ""
+        },
+        {
+          "text": "0c5ef691",
+          "parentTag": "span",
+          "parentClass": ""
+        },
+        {
+          "text": "3427bbd1",
+          "parentTag": "span",
+          "parentClass": ""
+        },
+        {
+          "text": "→ resolves to",
+          "parentTag": "div",
+          "parentClass": "eq"
+        },
+        {
+          "text": "decade",
+          "parentTag": "span",
+          "parentClass": "k"
+        },
+        {
+          "text": "1970s",
+          "parentTag": "span",
+          "parentClass": ""
+        },
+        {
+          "text": "a3",
+          "parentTag": "span",
+          "parentClass": "p"
+        },
+        {
+          "text": "craft",
+          "parentTag": "span",
+          "parentClass": "k"
+        },
+        {
+          "text": "letterpress",
+          "parentTag": "span",
+          "parentClass": ""
+        },
+        {
+          "text": "f7",
+          "parentTag": "span",
+          "parentClass": "p"
+        },
+        {
+          "text": "register",
+          "parentTag": "span",
+          "parentClass": "k"
+        },
+        {
+          "text": "editorial",
+          "parentTag": "span",
+          "parentClass": ""
+        },
+        {
+          "text": "c9",
+          "parentTag": "span",
+          "parentClass": "p"
+        },
+        {
+          "text": "ground",
+          "parentTag": "span",
+          "parentClass": "k"
+        },
+        {
+          "text": "inherited",
+          "parentTag": "span",
+          "parentClass": ""
+        },
+        {
+          "text": "—",
+          "parentTag": "span",
+          "parentClass": "p"
+        }
+      ],
+      "ordered": [
+        {
+          "kind": "heading",
+          "text": "Direct",
+          "display": "block",
+          "level": "h3",
+          "sep": ""
+        },
+        {
+          "kind": "paragraph",
+          "text": "/stardust:direct",
+          "display": "block",
+          "sep": " "
+        },
+        {
+          "kind": "heading",
+          "text": "One sentence in. A direction out.",
+          "display": "block",
+          "level": "h4",
+          "children": [
+            {
+              "kind": "text",
+              "text": "One sentence in.",
+              "parentTag": "span",
+              "parentClass": "",
+              "sep": ""
+            },
+            {
+              "kind": "text",
+              "text": "A direction out.",
+              "parentTag": "span",
+              "parentClass": "",
+              "sep": " "
+            }
+          ],
+          "sep": " "
+        },
+        {
+          "kind": "paragraph",
+          "text": "Tell it what you want in plain words: warmer, more editorial, keep our type. Direct reads the capture, keeps your palette and fonts unless you ask for a rebrand, researches references when it can, and rolls the seed for whatever is still open. It writes the target spec and its reasoning, so you can argue with it.",
+          "display": "block",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "/stardust:direct",
+          "parentTag": "span",
+          "parentClass": "url",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "seed ·",
+          "parentTag": "span",
+          "parentClass": "end",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "2026-10-12",
+          "parentTag": "span",
+          "parentClass": "",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "md5(\"example.com\" · today)",
+          "parentTag": "span",
+          "parentClass": "label",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "a3f7c92e",
+          "parentTag": "span",
+          "parentClass": "",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "8b1d488a",
+          "parentTag": "span",
+          "parentClass": "",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "0c5ef691",
+          "parentTag": "span",
+          "parentClass": "",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "3427bbd1",
+          "parentTag": "span",
+          "parentClass": "",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "→ resolves to",
+          "parentTag": "div",
+          "parentClass": "eq",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "decade",
+          "parentTag": "span",
+          "parentClass": "k",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "1970s",
+          "parentTag": "span",
+          "parentClass": "",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "a3",
+          "parentTag": "span",
+          "parentClass": "p",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "craft",
+          "parentTag": "span",
+          "parentClass": "k",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "letterpress",
+          "parentTag": "span",
+          "parentClass": "",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "f7",
+          "parentTag": "span",
+          "parentClass": "p",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "register",
+          "parentTag": "span",
+          "parentClass": "k",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "editorial",
+          "parentTag": "span",
+          "parentClass": "",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "c9",
+          "parentTag": "span",
+          "parentClass": "p",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "ground",
+          "parentTag": "span",
+          "parentClass": "k",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "inherited",
+          "parentTag": "span",
+          "parentClass": "",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "—",
+          "parentTag": "span",
+          "parentClass": "p",
+          "sep": " "
+        },
+        {
+          "kind": "listItem",
+          "text": "Brand-faithful by default, rebrand on request",
+          "display": "list-item",
+          "sep": " "
+        },
+        {
+          "kind": "listItem",
+          "text": "References first, seed for the rest",
+          "display": "list-item",
+          "sep": " "
+        },
+        {
+          "kind": "listItem",
+          "text": "Decade, craft, register from the roll",
+          "display": "list-item",
+          "sep": " "
+        },
+        {
+          "kind": "listItem",
+          "text": "A target spec and its reasoning trace",
+          "display": "list-item",
+          "sep": " "
+        },
+        {
+          "kind": "cta",
+          "text": "Read direct on GitHub",
+          "display": "flex",
+          "href": "https://github.com/adobe/skills/tree/main/plugins/stardust/skills/direct",
+          "absHref": "https://github.com/adobe/skills/tree/main/plugins/stardust/skills/direct",
+          "classes": "ch-cta",
+          "sep": " "
+        }
+      ],
+      "orderedVerified": true
+    },
+    {
+      "slot": "s07",
+      "rootTag": "article",
+      "rootClass": "chapter sc-layer sc-panel in waiting",
+      "visibleText": "Prototype /stardust:prototype Before and after, side by side. Prototype renders one page of the redesign as a single HTML file and puts it next to the capture. Then it runs impeccable's craft loop: critique, audit, adapt to six viewports, check the motion. It rejects template-looking output. You pick, annotate, and re-run. Approve it, and migrate carries the design to every page as static HTML. Before After 6 viewports Critique, audit, adapt, motion Checked at six viewports Optional cinematic motion register Approve, then migrate to every page Read prototype on GitHub",
+      "headings": [
+        {
+          "level": "h3",
+          "text": "Prototype"
+        },
+        {
+          "level": "h4",
+          "text": "Before and after, side by side."
+        }
+      ],
+      "paragraphs": [
+        "/stardust:prototype",
+        "Prototype renders one page of the redesign as a single HTML file and puts it next to the capture. Then it runs impeccable's craft loop: critique, audit, adapt to six viewports, check the motion. It rejects template-looking output. You pick, annotate, and re-run. Approve it, and migrate carries the design to every page as static HTML."
+      ],
+      "listItems": [
+        "Critique, audit, adapt, motion",
+        "Checked at six viewports",
+        "Optional cinematic motion register",
+        "Approve, then migrate to every page"
+      ],
+      "ctas": [
+        {
+          "text": "Read prototype on GitHub",
+          "href": "https://github.com/adobe/skills/tree/main/plugins/stardust/skills/prototype",
+          "absHref": "https://github.com/adobe/skills/tree/main/plugins/stardust/skills/prototype",
+          "classes": "ch-cta"
+        }
+      ],
+      "images": [],
+      "formControls": [],
+      "leftovers": [
+        {
+          "text": "Before",
+          "parentTag": "b",
+          "parentClass": "on"
+        },
+        {
+          "text": "After",
+          "parentTag": "b",
+          "parentClass": ""
+        },
+        {
+          "text": "6 viewports",
+          "parentTag": "span",
+          "parentClass": "end"
+        }
+      ],
+      "ordered": [
+        {
+          "kind": "heading",
+          "text": "Prototype",
+          "display": "block",
+          "level": "h3",
+          "sep": ""
+        },
+        {
+          "kind": "paragraph",
+          "text": "/stardust:prototype",
+          "display": "block",
+          "sep": " "
+        },
+        {
+          "kind": "heading",
+          "text": "Before and after, side by side.",
+          "display": "block",
+          "level": "h4",
+          "children": [
+            {
+              "kind": "text",
+              "text": "Before and after,",
+              "parentTag": "span",
+              "parentClass": "",
+              "sep": ""
+            },
+            {
+              "kind": "text",
+              "text": "side by side.",
+              "parentTag": "span",
+              "parentClass": "",
+              "sep": " "
+            }
+          ],
+          "sep": " "
+        },
+        {
+          "kind": "paragraph",
+          "text": "Prototype renders one page of the redesign as a single HTML file and puts it next to the capture. Then it runs impeccable's craft loop: critique, audit, adapt to six viewports, check the motion. It rejects template-looking output. You pick, annotate, and re-run. Approve it, and migrate carries the design to every page as static HTML.",
+          "display": "block",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "Before",
+          "parentTag": "b",
+          "parentClass": "on",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "After",
+          "parentTag": "b",
+          "parentClass": "",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "6 viewports",
+          "parentTag": "span",
+          "parentClass": "end",
+          "sep": " "
+        },
+        {
+          "kind": "listItem",
+          "text": "Critique, audit, adapt, motion",
+          "display": "list-item",
+          "sep": " "
+        },
+        {
+          "kind": "listItem",
+          "text": "Checked at six viewports",
+          "display": "list-item",
+          "sep": " "
+        },
+        {
+          "kind": "listItem",
+          "text": "Optional cinematic motion register",
+          "display": "list-item",
+          "sep": " "
+        },
+        {
+          "kind": "listItem",
+          "text": "Approve, then migrate to every page",
+          "display": "list-item",
+          "sep": " "
+        },
+        {
+          "kind": "cta",
+          "text": "Read prototype on GitHub",
+          "display": "flex",
+          "href": "https://github.com/adobe/skills/tree/main/plugins/stardust/skills/prototype",
+          "absHref": "https://github.com/adobe/skills/tree/main/plugins/stardust/skills/prototype",
+          "classes": "ch-cta",
+          "sep": " "
+        }
+      ],
+      "orderedVerified": true
+    },
+    {
+      "slot": "s08",
+      "rootTag": "div",
+      "rootClass": "showcase block sc-layer sc-panel sc-show waiting",
+      "visibleText": "Frescopa, before and after. White-label demo site. Redesigned with extract, direct, prototype. How it was made Frescopa · before Frescopa · after",
+      "headings": [
+        {
+          "level": "h2",
+          "text": "Frescopa, before and after."
+        }
+      ],
+      "paragraphs": [
+        "White-label demo site. Redesigned with extract, direct, prototype.",
+        "How it was made",
+        "Frescopa · before",
+        "Frescopa · after"
+      ],
+      "listItems": [],
+      "ctas": [
+        {
+          "text": "How it was made",
+          "href": "https://github.com/adobe/skills/tree/main/plugins/stardust#readme",
+          "absHref": "https://github.com/adobe/skills/tree/main/plugins/stardust#readme",
+          "classes": "button secondary in"
+        }
+      ],
+      "images": [
+        {
+          "currentSrc": "https://stardust.style/media_16ccf19c185d79d70624ec42645560623fe262946.jpg?width=2000&format=webply&optimize=medium",
+          "alt": "Frescopa home page before the redesign",
+          "w": 1600,
+          "h": 941
+        },
+        {
+          "currentSrc": "https://stardust.style/media_1add1b189f47ce94e4c4ded5443b65869d52c149d.jpg?width=2000&format=webply&optimize=medium",
+          "alt": "Frescopa home page after the redesign",
+          "w": 1600,
+          "h": 939
+        }
+      ],
+      "formControls": [],
+      "leftovers": [],
+      "ordered": [
+        {
+          "kind": "heading",
+          "text": "Frescopa, before and after.",
+          "display": "block",
+          "level": "h2",
+          "children": [
+            {
+              "kind": "text",
+              "text": "Frescopa,",
+              "parentTag": "span",
+              "parentClass": "",
+              "sep": ""
+            },
+            {
+              "kind": "text",
+              "text": "before and after.",
+              "parentTag": "span",
+              "parentClass": "",
+              "sep": " "
+            }
+          ],
+          "sep": ""
+        },
+        {
+          "kind": "paragraph",
+          "text": "White-label demo site. Redesigned with extract, direct, prototype.",
+          "display": "block",
+          "sep": " "
+        },
+        {
+          "kind": "paragraph",
+          "text": "How it was made",
+          "display": "inline-flex",
+          "children": [
+            {
+              "kind": "cta",
+              "text": "How it was made",
+              "display": "flex",
+              "href": "https://github.com/adobe/skills/tree/main/plugins/stardust#readme",
+              "absHref": "https://github.com/adobe/skills/tree/main/plugins/stardust#readme",
+              "classes": "button secondary in",
+              "sep": ""
+            }
+          ],
+          "sep": " "
+        },
+        {
+          "kind": "paragraph",
+          "text": "Frescopa · before",
+          "display": "block",
+          "sep": " "
+        },
+        {
+          "kind": "image",
+          "currentSrc": "https://stardust.style/media_16ccf19c185d79d70624ec42645560623fe262946.jpg?width=2000&format=webply&optimize=medium",
+          "alt": "Frescopa home page before the redesign",
+          "sep": ""
+        },
+        {
+          "kind": "paragraph",
+          "text": "Frescopa · after",
+          "display": "block",
+          "sep": " "
+        },
+        {
+          "kind": "image",
+          "currentSrc": "https://stardust.style/media_1add1b189f47ce94e4c4ded5443b65869d52c149d.jpg?width=2000&format=webply&optimize=medium",
+          "alt": "Frescopa home page after the redesign",
+          "sep": ""
+        }
+      ],
+      "orderedVerified": true
+    },
+    {
+      "slot": "s09",
+      "rootTag": "div",
+      "rootClass": "container ch-intro-block sc-layer sc-intro waiting parked",
+      "visibleText": "Migrate as is Keep the design. Change the platform. Same site, new origin. Replica rebuilds it as clean HTML and proves the match. Deploy and rollout carry it to AEM Edge Delivery, one page first, then the whole site. When one site becomes many markets, with in-place authoring, drafts, translations and scheduled releases, this is the route to production. “The ROI on being able to do that... it's undeniable.” Thursday Frequency, aem-live Static HTML every page, tokens, provenance · any host stardust:deploy one page → EDS blocks + authorable content AEM Edge Delivery rollout the site · qa the live pages",
+      "headings": [
+        {
+          "level": "h2",
+          "text": "Keep the design. Change the platform."
+        }
+      ],
+      "paragraphs": [
+        "Same site, new origin. Replica rebuilds it as clean HTML and proves the match. Deploy and rollout carry it to AEM Edge Delivery, one page first, then the whole site. When one site becomes many markets, with in-place authoring, drafts, translations and scheduled releases, this is the route to production.",
+        "“The ROI on being able to do that... it's undeniable.”",
+        "Thursday Frequency, aem-live"
+      ],
+      "listItems": [],
+      "ctas": [],
+      "images": [],
+      "formControls": [],
+      "leftovers": [
+        {
+          "text": "Migrate as is",
+          "parentTag": "b",
+          "parentClass": ""
+        },
+        {
+          "text": "Static HTML",
+          "parentTag": "strong",
+          "parentClass": ""
+        },
+        {
+          "text": "every page, tokens, provenance · any host",
+          "parentTag": "span",
+          "parentClass": ""
+        },
+        {
+          "text": "stardust:deploy",
+          "parentTag": "strong",
+          "parentClass": ""
+        },
+        {
+          "text": "one page → EDS blocks + authorable content",
+          "parentTag": "span",
+          "parentClass": ""
+        },
+        {
+          "text": "AEM Edge Delivery",
+          "parentTag": "strong",
+          "parentClass": ""
+        },
+        {
+          "text": "rollout the site · qa the live pages",
+          "parentTag": "span",
+          "parentClass": ""
+        }
+      ],
+      "ordered": [
+        {
+          "kind": "text",
+          "text": "Migrate as is",
+          "parentTag": "b",
+          "parentClass": "",
+          "sep": ""
+        },
+        {
+          "kind": "heading",
+          "text": "Keep the design. Change the platform.",
+          "display": "block",
+          "level": "h2",
+          "children": [
+            {
+              "kind": "text",
+              "text": "Keep the design.",
+              "parentTag": "span",
+              "parentClass": "",
+              "sep": ""
+            },
+            {
+              "kind": "text",
+              "text": "Change the platform.",
+              "parentTag": "span",
+              "parentClass": "lane-ink",
+              "sep": " "
+            }
+          ],
+          "sep": " "
+        },
+        {
+          "kind": "paragraph",
+          "text": "Same site, new origin. Replica rebuilds it as clean HTML and proves the match. Deploy and rollout carry it to AEM Edge Delivery, one page first, then the whole site. When one site becomes many markets, with in-place authoring, drafts, translations and scheduled releases, this is the route to production.",
+          "display": "block",
+          "sep": " "
+        },
+        {
+          "kind": "paragraph",
+          "text": "“The ROI on being able to do that... it's undeniable.”",
+          "display": "block",
+          "sep": " "
+        },
+        {
+          "kind": "paragraph",
+          "text": "Thursday Frequency, aem-live",
+          "display": "block",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "Static HTML",
+          "parentTag": "strong",
+          "parentClass": "",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "every page, tokens, provenance · any host",
+          "parentTag": "span",
+          "parentClass": "",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "stardust:deploy",
+          "parentTag": "strong",
+          "parentClass": "",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "one page → EDS blocks + authorable content",
+          "parentTag": "span",
+          "parentClass": "",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "AEM Edge Delivery",
+          "parentTag": "strong",
+          "parentClass": "",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "rollout the site · qa the live pages",
+          "parentTag": "span",
+          "parentClass": "",
+          "sep": " "
+        }
+      ],
+      "orderedVerified": true
+    },
+    {
+      "slot": "s10",
+      "rootTag": "article",
+      "rootClass": "chapter sc-layer sc-panel in waiting parked",
+      "visibleText": "Replica /stardust:replica <url> The site you have, rebuilt clean. Replica reads the live site and recreates one page per template as clean HTML and CSS, never a DOM copy. It gates each one against the original at two breakpoints: structure, visuals, a stitched pixel diff. The only design changes allowed are the ones you list. Then migrate clones the rest of the pages. gate · 2 breakpoints diff < 2% ✓ live replica structure ✓ visuals ✓ pixel diff ✓ One archetype per page type Clean HTML and CSS, no DOM copy Pixel diff gate at two breakpoints migrate clones the sibling pages Read replica on GitHub",
+      "headings": [
+        {
+          "level": "h3",
+          "text": "Replica"
+        },
+        {
+          "level": "h4",
+          "text": "The site you have, rebuilt clean."
+        }
+      ],
+      "paragraphs": [
+        "/stardust:replica <url>",
+        "Replica reads the live site and recreates one page per template as clean HTML and CSS, never a DOM copy. It gates each one against the original at two breakpoints: structure, visuals, a stitched pixel diff. The only design changes allowed are the ones you list. Then migrate clones the rest of the pages."
+      ],
+      "listItems": [
+        "One archetype per page type",
+        "Clean HTML and CSS, no DOM copy",
+        "Pixel diff gate at two breakpoints",
+        "migrate clones the sibling pages"
+      ],
+      "ctas": [
+        {
+          "text": "Read replica on GitHub",
+          "href": "https://github.com/adobe/skills/tree/main/plugins/stardust/skills/replica",
+          "absHref": "https://github.com/adobe/skills/tree/main/plugins/stardust/skills/replica",
+          "classes": "ch-cta"
+        }
+      ],
+      "images": [],
+      "formControls": [],
+      "leftovers": [
+        {
+          "text": "gate · 2 breakpoints",
+          "parentTag": "span",
+          "parentClass": "url"
+        },
+        {
+          "text": "diff < 2% ✓",
+          "parentTag": "span",
+          "parentClass": "pass end"
+        },
+        {
+          "text": "live",
+          "parentTag": "span",
+          "parentClass": "label"
+        },
+        {
+          "text": "replica",
+          "parentTag": "span",
+          "parentClass": "label"
+        },
+        {
+          "text": "structure ✓",
+          "parentTag": "b",
+          "parentClass": ""
+        },
+        {
+          "text": "visuals ✓",
+          "parentTag": "b",
+          "parentClass": ""
+        },
+        {
+          "text": "pixel diff ✓",
+          "parentTag": "b",
+          "parentClass": ""
+        }
+      ],
+      "ordered": [
+        {
+          "kind": "heading",
+          "text": "Replica",
+          "display": "block",
+          "level": "h3",
+          "sep": ""
+        },
+        {
+          "kind": "paragraph",
+          "text": "/stardust:replica <url>",
+          "display": "block",
+          "sep": " "
+        },
+        {
+          "kind": "heading",
+          "text": "The site you have, rebuilt clean.",
+          "display": "block",
+          "level": "h4",
+          "children": [
+            {
+              "kind": "text",
+              "text": "The site you have,",
+              "parentTag": "span",
+              "parentClass": "",
+              "sep": ""
+            },
+            {
+              "kind": "text",
+              "text": "rebuilt clean.",
+              "parentTag": "span",
+              "parentClass": "",
+              "sep": " "
+            }
+          ],
+          "sep": " "
+        },
+        {
+          "kind": "paragraph",
+          "text": "Replica reads the live site and recreates one page per template as clean HTML and CSS, never a DOM copy. It gates each one against the original at two breakpoints: structure, visuals, a stitched pixel diff. The only design changes allowed are the ones you list. Then migrate clones the rest of the pages.",
+          "display": "block",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "gate · 2 breakpoints",
+          "parentTag": "span",
+          "parentClass": "url",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "diff < 2% ✓",
+          "parentTag": "span",
+          "parentClass": "pass end",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "live",
+          "parentTag": "span",
+          "parentClass": "label",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "replica",
+          "parentTag": "span",
+          "parentClass": "label",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "structure ✓",
+          "parentTag": "b",
+          "parentClass": "",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "visuals ✓",
+          "parentTag": "b",
+          "parentClass": "",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "pixel diff ✓",
+          "parentTag": "b",
+          "parentClass": "",
+          "sep": " "
+        },
+        {
+          "kind": "listItem",
+          "text": "One archetype per page type",
+          "display": "list-item",
+          "sep": " "
+        },
+        {
+          "kind": "listItem",
+          "text": "Clean HTML and CSS, no DOM copy",
+          "display": "list-item",
+          "sep": " "
+        },
+        {
+          "kind": "listItem",
+          "text": "Pixel diff gate at two breakpoints",
+          "display": "list-item",
+          "sep": " "
+        },
+        {
+          "kind": "listItem",
+          "text": "migrate clones the sibling pages",
+          "display": "list-item",
+          "sep": " "
+        },
+        {
+          "kind": "cta",
+          "text": "Read replica on GitHub",
+          "display": "flex",
+          "href": "https://github.com/adobe/skills/tree/main/plugins/stardust/skills/replica",
+          "absHref": "https://github.com/adobe/skills/tree/main/plugins/stardust/skills/replica",
+          "classes": "ch-cta",
+          "sep": " "
+        }
+      ],
+      "orderedVerified": true
+    },
+    {
+      "slot": "s11",
+      "rootTag": "article",
+      "rootClass": "chapter sc-layer sc-panel in waiting parked",
+      "visibleText": "Deploy /stardust:deploy One page into blocks. Deploy takes one page of static HTML and turns each section into an Edge Delivery block with its own CSS, and the copy into authorable content. It writes both through the Document Authoring API, previews, publishes, then reads the live page back and checks it. A page counts as deployed only when that check passes. index.html → blocks preview · publish · check hero cards text quote Each section becomes one block Copy stays editable in Document Authoring Internal links rewritten to the new origin Live page checked before it counts Read deploy on GitHub",
+      "headings": [
+        {
+          "level": "h3",
+          "text": "Deploy"
+        },
+        {
+          "level": "h4",
+          "text": "One page into blocks."
+        }
+      ],
+      "paragraphs": [
+        "/stardust:deploy",
+        "Deploy takes one page of static HTML and turns each section into an Edge Delivery block with its own CSS, and the copy into authorable content. It writes both through the Document Authoring API, previews, publishes, then reads the live page back and checks it. A page counts as deployed only when that check passes."
+      ],
+      "listItems": [
+        "Each section becomes one block",
+        "Copy stays editable in Document Authoring",
+        "Internal links rewritten to the new origin",
+        "Live page checked before it counts"
+      ],
+      "ctas": [
+        {
+          "text": "Read deploy on GitHub",
+          "href": "https://github.com/adobe/skills/tree/main/plugins/stardust/skills/deploy",
+          "absHref": "https://github.com/adobe/skills/tree/main/plugins/stardust/skills/deploy",
+          "classes": "ch-cta"
+        }
+      ],
+      "images": [],
+      "formControls": [],
+      "leftovers": [
+        {
+          "text": "index.html → blocks",
+          "parentTag": "span",
+          "parentClass": "url"
+        },
+        {
+          "text": "preview · publish · check",
+          "parentTag": "span",
+          "parentClass": "end"
+        },
+        {
+          "text": "hero",
+          "parentTag": "span",
+          "parentClass": "name"
+        },
+        {
+          "text": "cards",
+          "parentTag": "span",
+          "parentClass": "name"
+        },
+        {
+          "text": "text",
+          "parentTag": "span",
+          "parentClass": "name"
+        },
+        {
+          "text": "quote",
+          "parentTag": "span",
+          "parentClass": "name"
+        }
+      ],
+      "ordered": [
+        {
+          "kind": "heading",
+          "text": "Deploy",
+          "display": "block",
+          "level": "h3",
+          "sep": ""
+        },
+        {
+          "kind": "paragraph",
+          "text": "/stardust:deploy",
+          "display": "block",
+          "sep": " "
+        },
+        {
+          "kind": "heading",
+          "text": "One page into blocks.",
+          "display": "block",
+          "level": "h4",
+          "children": [
+            {
+              "kind": "text",
+              "text": "One page",
+              "parentTag": "span",
+              "parentClass": "",
+              "sep": ""
+            },
+            {
+              "kind": "text",
+              "text": "into blocks.",
+              "parentTag": "span",
+              "parentClass": "",
+              "sep": " "
+            }
+          ],
+          "sep": " "
+        },
+        {
+          "kind": "paragraph",
+          "text": "Deploy takes one page of static HTML and turns each section into an Edge Delivery block with its own CSS, and the copy into authorable content. It writes both through the Document Authoring API, previews, publishes, then reads the live page back and checks it. A page counts as deployed only when that check passes.",
+          "display": "block",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "index.html → blocks",
+          "parentTag": "span",
+          "parentClass": "url",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "preview · publish · check",
+          "parentTag": "span",
+          "parentClass": "end",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "hero",
+          "parentTag": "span",
+          "parentClass": "name",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "cards",
+          "parentTag": "span",
+          "parentClass": "name",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "text",
+          "parentTag": "span",
+          "parentClass": "name",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "quote",
+          "parentTag": "span",
+          "parentClass": "name",
+          "sep": " "
+        },
+        {
+          "kind": "listItem",
+          "text": "Each section becomes one block",
+          "display": "list-item",
+          "sep": " "
+        },
+        {
+          "kind": "listItem",
+          "text": "Copy stays editable in Document Authoring",
+          "display": "list-item",
+          "sep": " "
+        },
+        {
+          "kind": "listItem",
+          "text": "Internal links rewritten to the new origin",
+          "display": "list-item",
+          "sep": " "
+        },
+        {
+          "kind": "listItem",
+          "text": "Live page checked before it counts",
+          "display": "list-item",
+          "sep": " "
+        },
+        {
+          "kind": "cta",
+          "text": "Read deploy on GitHub",
+          "display": "flex",
+          "href": "https://github.com/adobe/skills/tree/main/plugins/stardust/skills/deploy",
+          "absHref": "https://github.com/adobe/skills/tree/main/plugins/stardust/skills/deploy",
+          "classes": "ch-cta",
+          "sep": " "
+        }
+      ],
+      "orderedVerified": true
+    },
+    {
+      "slot": "s12",
+      "rootTag": "article",
+      "rootClass": "chapter sc-layer sc-panel in waiting parked",
+      "visibleText": "Rollout /stardust:rollout The whole site, then the check. Rollout runs deploy across the migrated tree. It keeps a ledger of what shipped and what is left, shares blocks across pages instead of forking them, adds the sitemap and redirects, and audits every link. When it is done, qa sweeps the live site and reports what it finds. It never edits. stardust/rollout/ledger.json delivered 112 / 134 / delivered /about delivered /products delivered /products/beans delivered /news/2026 deploying /contact pending shared blocks ✓ · sitemap ✓ · redirects ✓ · links ✓ A ledger of shipped and pending pages Blocks shared, not forked per page Sitemap, redirects, link audit qa reports on the live site Read rollout on GitHub",
+      "headings": [
+        {
+          "level": "h3",
+          "text": "Rollout"
+        },
+        {
+          "level": "h4",
+          "text": "The whole site, then the check."
+        }
+      ],
+      "paragraphs": [
+        "/stardust:rollout",
+        "Rollout runs deploy across the migrated tree. It keeps a ledger of what shipped and what is left, shares blocks across pages instead of forking them, adds the sitemap and redirects, and audits every link. When it is done, qa sweeps the live site and reports what it finds. It never edits."
+      ],
+      "listItems": [
+        "A ledger of shipped and pending pages",
+        "Blocks shared, not forked per page",
+        "Sitemap, redirects, link audit",
+        "qa reports on the live site"
+      ],
+      "ctas": [
+        {
+          "text": "Read rollout on GitHub",
+          "href": "https://github.com/adobe/skills/tree/main/plugins/stardust/skills/rollout",
+          "absHref": "https://github.com/adobe/skills/tree/main/plugins/stardust/skills/rollout",
+          "classes": "ch-cta"
+        }
+      ],
+      "images": [],
+      "formControls": [],
+      "leftovers": [
+        {
+          "text": "stardust/rollout/ledger.json",
+          "parentTag": "span",
+          "parentClass": "url"
+        },
+        {
+          "text": "delivered 112 / 134",
+          "parentTag": "span",
+          "parentClass": "end"
+        },
+        {
+          "text": "/",
+          "parentTag": "span",
+          "parentClass": ""
+        },
+        {
+          "text": "delivered",
+          "parentTag": "span",
+          "parentClass": "st ok"
+        },
+        {
+          "text": "/about",
+          "parentTag": "span",
+          "parentClass": ""
+        },
+        {
+          "text": "delivered",
+          "parentTag": "span",
+          "parentClass": "st ok"
+        },
+        {
+          "text": "/products",
+          "parentTag": "span",
+          "parentClass": ""
+        },
+        {
+          "text": "delivered",
+          "parentTag": "span",
+          "parentClass": "st ok"
+        },
+        {
+          "text": "/products/beans",
+          "parentTag": "span",
+          "parentClass": ""
+        },
+        {
+          "text": "delivered",
+          "parentTag": "span",
+          "parentClass": "st ok"
+        },
+        {
+          "text": "/news/2026",
+          "parentTag": "span",
+          "parentClass": ""
+        },
+        {
+          "text": "deploying",
+          "parentTag": "span",
+          "parentClass": "st run"
+        },
+        {
+          "text": "/contact",
+          "parentTag": "span",
+          "parentClass": ""
+        },
+        {
+          "text": "pending",
+          "parentTag": "span",
+          "parentClass": "st wait"
+        },
+        {
+          "text": "shared blocks ✓ · sitemap ✓ · redirects ✓ · links ✓",
+          "parentTag": "div",
+          "parentClass": "foot mono-line"
+        }
+      ],
+      "ordered": [
+        {
+          "kind": "heading",
+          "text": "Rollout",
+          "display": "block",
+          "level": "h3",
+          "sep": ""
+        },
+        {
+          "kind": "paragraph",
+          "text": "/stardust:rollout",
+          "display": "block",
+          "sep": " "
+        },
+        {
+          "kind": "heading",
+          "text": "The whole site, then the check.",
+          "display": "block",
+          "level": "h4",
+          "children": [
+            {
+              "kind": "text",
+              "text": "The whole site,",
+              "parentTag": "span",
+              "parentClass": "",
+              "sep": ""
+            },
+            {
+              "kind": "text",
+              "text": "then the check.",
+              "parentTag": "span",
+              "parentClass": "",
+              "sep": " "
+            }
+          ],
+          "sep": " "
+        },
+        {
+          "kind": "paragraph",
+          "text": "Rollout runs deploy across the migrated tree. It keeps a ledger of what shipped and what is left, shares blocks across pages instead of forking them, adds the sitemap and redirects, and audits every link. When it is done, qa sweeps the live site and reports what it finds. It never edits.",
+          "display": "block",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "stardust/rollout/ledger.json",
+          "parentTag": "span",
+          "parentClass": "url",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "delivered 112 / 134",
+          "parentTag": "span",
+          "parentClass": "end",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "/",
+          "parentTag": "span",
+          "parentClass": "",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "delivered",
+          "parentTag": "span",
+          "parentClass": "st ok",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "/about",
+          "parentTag": "span",
+          "parentClass": "",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "delivered",
+          "parentTag": "span",
+          "parentClass": "st ok",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "/products",
+          "parentTag": "span",
+          "parentClass": "",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "delivered",
+          "parentTag": "span",
+          "parentClass": "st ok",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "/products/beans",
+          "parentTag": "span",
+          "parentClass": "",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "delivered",
+          "parentTag": "span",
+          "parentClass": "st ok",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "/news/2026",
+          "parentTag": "span",
+          "parentClass": "",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "deploying",
+          "parentTag": "span",
+          "parentClass": "st run",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "/contact",
+          "parentTag": "span",
+          "parentClass": "",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "pending",
+          "parentTag": "span",
+          "parentClass": "st wait",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "shared blocks ✓ · sitemap ✓ · redirects ✓ · links ✓",
+          "parentTag": "div",
+          "parentClass": "foot mono-line",
+          "sep": " "
+        },
+        {
+          "kind": "listItem",
+          "text": "A ledger of shipped and pending pages",
+          "display": "list-item",
+          "sep": " "
+        },
+        {
+          "kind": "listItem",
+          "text": "Blocks shared, not forked per page",
+          "display": "list-item",
+          "sep": " "
+        },
+        {
+          "kind": "listItem",
+          "text": "Sitemap, redirects, link audit",
+          "display": "list-item",
+          "sep": " "
+        },
+        {
+          "kind": "listItem",
+          "text": "qa reports on the live site",
+          "display": "list-item",
+          "sep": " "
+        },
+        {
+          "kind": "cta",
+          "text": "Read rollout on GitHub",
+          "display": "flex",
+          "href": "https://github.com/adobe/skills/tree/main/plugins/stardust/skills/rollout",
+          "absHref": "https://github.com/adobe/skills/tree/main/plugins/stardust/skills/rollout",
+          "classes": "ch-cta",
+          "sep": " "
+        }
+      ],
+      "orderedVerified": true
+    },
+    {
+      "slot": "s13",
+      "rootTag": "div",
+      "rootClass": "install block sc-layer sc-panel sc-install waiting parked",
+      "visibleText": "Install it. Docs included. Stardust is a set of AI skills. Install it, then say what you want in your own words. Copy install README on GitHub “One of the most incredible open source skills I've ever seen.” Thursday Frequency, aem-live ~/project ~/project › /plugin marketplace add adobe/skills /plugin install stardust@adobe-skills installed stardust 0.20.0 · 14 skills ~/project › /stardust make example.com feel like a magazine, keep our type reading example.com · 5 pages brand-faithful mode · palette and type pinned decade ✓ rolled → 1970s craft ✓ rolled → letterpress plan written to stardust/direction.md · confirm to run",
+      "headings": [
+        {
+          "level": "h2",
+          "text": "Install it. Docs included."
+        }
+      ],
+      "paragraphs": [
+        "Stardust is a set of AI skills. Install it, then say what you want in your own words.",
+        "Copy install",
+        "README on GitHub",
+        "“One of the most incredible open source skills I've ever seen.”",
+        "Thursday Frequency, aem-live"
+      ],
+      "listItems": [],
+      "ctas": [
+        {
+          "text": "Copy install",
+          "href": "#install",
+          "absHref": "https://stardust.style/#install",
+          "classes": "button primary in"
+        },
+        {
+          "text": "README on GitHub",
+          "href": "https://github.com/adobe/skills/tree/main/plugins/stardust#readme",
+          "absHref": "https://github.com/adobe/skills/tree/main/plugins/stardust#readme",
+          "classes": "button secondary in"
+        }
+      ],
+      "images": [],
+      "formControls": [],
+      "leftovers": [
+        {
+          "text": "~/project",
+          "parentTag": "span",
+          "parentClass": ""
+        },
+        {
+          "text": "~/project ›",
+          "parentTag": "span",
+          "parentClass": "p"
+        },
+        {
+          "text": "/plugin marketplace add adobe/skills",
+          "parentTag": "span",
+          "parentClass": "c"
+        },
+        {
+          "text": "/plugin install stardust@adobe-skills",
+          "parentTag": "span",
+          "parentClass": "c"
+        },
+        {
+          "text": "installed stardust 0.20.0 · 14 skills",
+          "parentTag": "span",
+          "parentClass": "d"
+        },
+        {
+          "text": "~/project ›",
+          "parentTag": "span",
+          "parentClass": "p"
+        },
+        {
+          "text": "/stardust make example.com feel like a magazine, keep our type",
+          "parentTag": "span",
+          "parentClass": "c"
+        },
+        {
+          "text": "reading example.com · 5 pages",
+          "parentTag": "span",
+          "parentClass": "d"
+        },
+        {
+          "text": "brand-faithful mode · palette and type pinned",
+          "parentTag": "span",
+          "parentClass": "d"
+        },
+        {
+          "text": "decade ✓ rolled → 1970s craft ✓ rolled → letterpress",
+          "parentTag": "span",
+          "parentClass": "d"
+        },
+        {
+          "text": "plan written to stardust/direction.md · confirm to run",
+          "parentTag": "span",
+          "parentClass": "d"
+        }
+      ],
+      "ordered": [
+        {
+          "kind": "heading",
+          "text": "Install it. Docs included.",
+          "display": "block",
+          "level": "h2",
+          "children": [
+            {
+              "kind": "text",
+              "text": "Install it.",
+              "parentTag": "span",
+              "parentClass": "",
+              "sep": ""
+            },
+            {
+              "kind": "text",
+              "text": "Docs included.",
+              "parentTag": "span",
+              "parentClass": "",
+              "sep": " "
+            }
+          ],
+          "sep": ""
+        },
+        {
+          "kind": "paragraph",
+          "text": "Stardust is a set of AI skills. Install it, then say what you want in your own words.",
+          "display": "block",
+          "sep": " "
+        },
+        {
+          "kind": "paragraph",
+          "text": "Copy install",
+          "display": "flex",
+          "children": [
+            {
+              "kind": "cta",
+              "text": "Copy install",
+              "display": "flex",
+              "href": "#install",
+              "absHref": "https://stardust.style/#install",
+              "classes": "button primary in",
+              "sep": ""
+            }
+          ],
+          "sep": " "
+        },
+        {
+          "kind": "paragraph",
+          "text": "README on GitHub",
+          "display": "flex",
+          "children": [
+            {
+              "kind": "cta",
+              "text": "README on GitHub",
+              "display": "flex",
+              "href": "https://github.com/adobe/skills/tree/main/plugins/stardust#readme",
+              "absHref": "https://github.com/adobe/skills/tree/main/plugins/stardust#readme",
+              "classes": "button secondary in",
+              "sep": ""
+            }
+          ],
+          "sep": " "
+        },
+        {
+          "kind": "paragraph",
+          "text": "“One of the most incredible open source skills I've ever seen.”",
+          "display": "block",
+          "sep": " "
+        },
+        {
+          "kind": "paragraph",
+          "text": "Thursday Frequency, aem-live",
+          "display": "block",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "~/project",
+          "parentTag": "span",
+          "parentClass": "",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "~/project ›",
+          "parentTag": "span",
+          "parentClass": "p",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "/plugin marketplace add adobe/skills",
+          "parentTag": "span",
+          "parentClass": "c",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "/plugin install stardust@adobe-skills",
+          "parentTag": "span",
+          "parentClass": "c",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "installed stardust 0.20.0 · 14 skills",
+          "parentTag": "span",
+          "parentClass": "d",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "~/project ›",
+          "parentTag": "span",
+          "parentClass": "p",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "/stardust make example.com feel like a magazine, keep our type",
+          "parentTag": "span",
+          "parentClass": "c",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "reading example.com · 5 pages",
+          "parentTag": "span",
+          "parentClass": "d",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "brand-faithful mode · palette and type pinned",
+          "parentTag": "span",
+          "parentClass": "d",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "decade ✓ rolled → 1970s craft ✓ rolled → letterpress",
+          "parentTag": "span",
+          "parentClass": "d",
+          "sep": " "
+        },
+        {
+          "kind": "text",
+          "text": "plan written to stardust/direction.md · confirm to run",
+          "parentTag": "span",
+          "parentClass": "d",
+          "sep": " "
+        }
+      ],
+      "orderedVerified": true
+    }
+  ]
+}

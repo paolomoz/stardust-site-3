@@ -1,0 +1,14 @@
+import { chromium } from 'playwright';
+import { pathToFileURL } from 'node:url';
+import { resolve } from 'node:path';
+const [url, out, w = '1440'] = process.argv.slice(2);
+const target = /^https?:/.test(url) ? url : pathToFileURL(resolve(url)).href;
+const b = await chromium.launch(); const p = await b.newPage({ viewport: { width: +w, height: 900 }, reducedMotion: 'reduce' });
+await p.goto(target, { waitUntil: 'networkidle' });
+await p.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += 600) { scrollTo(0, y); await new Promise((r) => setTimeout(r, 120)); } scrollTo(0, 0); });
+await p.waitForTimeout(1500);
+await p.addStyleTag({ content: '.hero-nebula{visibility:hidden!important} *{caret-color:transparent}' });
+await p.waitForTimeout(300);
+console.log(url, await p.evaluate(() => document.documentElement.scrollHeight));
+await p.screenshot({ path: out, fullPage: true });
+await b.close();

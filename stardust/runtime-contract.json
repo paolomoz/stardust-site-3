@@ -1,0 +1,10 @@
+{
+  "runtime": "vanilla-eds",
+  "source": "probed from this repo's scripts/scripts.js + scripts/aem.js (adobe/aem-boilerplate main, merged 2026-10-12)",
+  "blockWrapperClass": "block",
+  "buttonClasses": ".button / .button.primary / .button.secondary / .button.accent, in p.button-wrapper",
+  "buttonization": "formatted-only",
+  "fragmentScriptPolicy": "inert-innerHTML",
+  "trustedTypes": "CSP require-trusted-types-for 'script'; scripts.js installs a 'default' policy that passes innerHTML through (strips scripts only for createContextualFragment/document.write) — block templates may use innerHTML",
+  "emptySectionCollapse": true
+}

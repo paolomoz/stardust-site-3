@@ -378,6 +378,36 @@
         "#17 hero formula",
         "#18 giant footer wordmark"
       ]
+    },
+    "index-v3": {
+      "url": "https://stardust.style/",
+      "status": "gated",
+      "derivedFrom": "index-v2 (v1 and v2 kept unchanged)",
+      "normalize": "stardust/reskin/normalize/index-v3.mjs = index-v2.mjs (awaited) + V3-N18 authored casing (text-transform:none on the source)",
+      "tokens": "stardust/reskin/donor-tokens-v3.json (v2 + type.mono for genuine code)",
+      "probeSpec": "stardust/reskin/probe-spec-v3.json",
+      "request": "fix AI tells 3, 5, 7, 13, 14, 15, 16",
+      "changes": [
+        "#3 notebook quotes without the grid: the handwriting sits on ruled lines drawn by the text (underline at 12px offset), plain lifted-navy ground",
+        "#5 demo step list without 01/02/03",
+        "#7 big-stat row → three-stop pipeline (Static HTML → stardust:deploy → AEM Edge Delivery) at reading size, gold drawn arrows, one hairline rule",
+        "#13 pills removed: commands, routes, hashes, paths in system mono with no chip; statuses = dot + word; tags and gate checks = plain words; Before/After toggle = underline tabs",
+        "#14 ambient glows removed: demo-stage radial wash and the Migrate band gradient → flat grounds (the requested hero nebula stays)",
+        "#15 sentence case everywhere: V3-N18 captures the authored text ('Follow the redesign', 'Shortcut', 'Brand surface', 'Redesign'); acronyms untouched",
+        "#16 CSS-drawn [ ] brackets removed (band labels, numbers)"
+      ],
+      "gates": {
+        "domEquality": "PASS 6190/6190",
+        "slotCoverage": "PASS 42/42",
+        "donorProbe": "PASS 44/44",
+        "sanity": "PASS",
+        "impeccableDetector": "89 (v1) → 21 (v2) → 18 (v3): 17 cramped-padding false positives + 1 nested = #8 page drawings (not in scope)"
+      },
+      "remaining": [
+        "#8 placeholder page drawings",
+        "#17 centred SaaS hero formula",
+        "#18 giant footer wordmark"
+      ]
     }
   }
 }

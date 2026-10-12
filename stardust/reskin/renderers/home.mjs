@@ -22,8 +22,9 @@ const ROOT = resolve(HERE, '..');
 const slug = process.argv[2] || 'index';
 const model = JSON.parse(readFileSync(resolve(ROOT, `content-model/${slug}/content-model.json`), 'utf8'));
 // v2 = the AI-tell cleanup variant (own ledger, model, token sheet); v1 rendering is untouched.
-const V2 = slug === 'index-v2';
-const tokens = JSON.parse(readFileSync(resolve(ROOT, V2 ? 'donor-tokens-v2.json' : 'donor-tokens.json'), 'utf8'));
+const V3 = slug === 'index-v3'; // v3 = v2 + second AI-tell pass
+const V2 = slug === 'index-v2' || V3;
+const tokens = JSON.parse(readFileSync(resolve(ROOT, V3 ? 'donor-tokens-v3.json' : V2 ? 'donor-tokens-v2.json' : 'donor-tokens.json'), 'utf8'));
 
 /* ------------------------------------------------------------------ helpers */
 
@@ -115,7 +116,7 @@ function demo() {
       const st = parseStep(id);
       const num = st.digits.map((d) => d.text).join('');
       const h4 = st.title.children ? st.title.children.map((ch) => ch.text).join(' ') : st.title.text;
-      nav.push(`<li><button type="button" class="dnav${k ? '' : ' on'}" data-go="${k}" aria-pressed="${k ? 'false' : 'true'}"><span class="dnav-n">${esc(num)}</span><span class="dnav-t">${esc(st.name.text)}</span><span class="dnav-s">${esc(h4)}</span><i class="dnav-bar" aria-hidden="true"></i></button></li>`);
+      nav.push(`<li><button type="button" class="dnav${k ? '' : ' on'}" data-go="${k}" aria-pressed="${k ? 'false' : 'true'}">${V3 ? '' : `<span class="dnav-n">${esc(num)}</span>`}<span class="dnav-t">${esc(st.name.text)}</span><span class="dnav-s">${esc(h4)}</span><i class="dnav-bar" aria-hidden="true"></i></button></li>`);
       stages.push(`<div class="dstage dstage-${esc(st.name.text.toLowerCase())}${k ? '' : ' on'}" data-cmd="${esc(st.cmd.text)}">${st.mock(st.mockNodes)}</div>`);
       k += 1;
     });
@@ -307,7 +308,10 @@ function intro(id, { flow = false, motion = null } = {}) {
   if (flow) {
     const items = [];
     while (c.peek()) items.push([c.next('text', (n) => n.parentTag === 'strong'), c.next('text')]);
-    flowHtml = `<div class="stats">${items.map(([t, d]) => `<div class="stat"><strong>${esc(t.text)}</strong> <span>${esc(d.text)}</span></div>`).join('')}</div>`;
+    flowHtml = V3
+      // v3 #7: not a big-stat row — a three-stop pipeline at reading size, joined by drawn arrows
+      ? `<ol class="flow">${items.map(([t, d], k) => `<li><strong>${esc(t.text)}</strong> <span>${esc(d.text)}</span>${k < items.length - 1 ? `<i class="flow-arrow" aria-hidden="true">${I.arrow}</i>` : ''}</li>`).join('')}</ol>`
+      : `<div class="stats">${items.map(([t, d]) => `<div class="stat"><strong>${esc(t.text)}</strong> <span>${esc(d.text)}</span></div>`).join('')}</div>`;
   }
   c.done();
   return `
@@ -1168,6 +1172,49 @@ const cssV2 = V2 ? `
 }
 ` : '';
 
+const cssV3 = V3 ? `
+/* ================================================================ v3 — second AI-tell pass (2026-10-12) */
+/* #16 no decorative brackets */
+.tab::before, .tab::after, .num::before, .num::after { content: none; }
+/* #3 notebook without the grid: the hand writes on ruled lines drawn by the text itself */
+.quote { background-image: none; background-color: var(--s1); box-shadow: none; }
+.quote blockquote p { text-decoration-line: underline; text-decoration-color: rgba(244, 242, 236, .16); text-decoration-thickness: 1px; text-underline-offset: 12px; text-decoration-skip-ink: none; }
+/* #13 no pill overload: genuine code is set in mono, statuses are a dot + word, tags are words */
+code, .cmd code, .plan-flow code, .hashes span, .addr-t, .win-url, .seedline, .hero-seed .hash, .msg-user span { font-family: ${T.type.mono}; font-variant-ligatures: none; }
+.plan-flow code, .cmd code, .step-v2 .step-head .cmd code { padding: 0; background: none; box-shadow: none; border-radius: 0; font-size: 13px; letter-spacing: 0; }
+.band-light .plan-flow code, .band-light .cmd code { padding: 0; background: none; box-shadow: none; border-radius: 0; }
+.plan-flow code { color: var(--ink-muted); }
+.band-light .plan-extra .cmd code { color: var(--ink); font-size: 14px; }
+.step-v2 .step-head .cmd code { color: var(--muted); font-size: 14px; }
+.status { padding: 0; background: none !important; font-size: 12px; font-weight: 500; letter-spacing: 0; }
+.chip, .chip.on, .chip.ok { padding: 0; border-radius: 0; background: none; box-shadow: none; color: var(--muted); }
+.chips { gap: 4px 16px; }
+.chips .chip.on { color: var(--fg); }
+.chip.ok { color: var(--fg); }
+.pill { padding: 0; background: none; font-family: ${T.type.mono}; color: var(--dim); }
+.seg { padding: 0; background: none; box-shadow: none; gap: 14px; }
+.seg b { padding: 0 0 3px; border-radius: 0; background: none; }
+.seg b.on { background: none; color: var(--fg); box-shadow: inset 0 -1.5px 0 ${T.palette.accent}; }
+.hashes span { letter-spacing: 0; font-size: 14px; }
+/* #14 no ambient glows: flat grounds */
+.dstages { background: none; }
+.band { background: var(--page); }
+/* #5 the demo step list without numbers */
+.dnav { grid-template-columns: 1fr; }
+/* #7 the migrate pipeline */
+.flow { display: flex; margin: 40px 0 0; padding: 22px var(--px) 0; list-style: none; border-top: 1px solid var(--border); }
+.flow li { position: relative; flex: 1; display: grid; align-content: start; gap: 4px; padding-right: 48px; }
+.flow strong { font-size: 16px; line-height: 24px; font-weight: 500; color: var(--fg); }
+.flow span { font-size: 14px; line-height: 20px; color: var(--muted); }
+.flow-arrow { position: absolute; right: 14px; top: 4px; color: ${T.palette.accent}; }
+.flow-arrow .ico { width: 18px; height: 18px; }
+@media (max-width: 760px) {
+  .flow { flex-direction: column; gap: 18px; }
+  .flow li { padding-right: 0; }
+  .flow-arrow { position: static; transform: rotate(90deg); margin-top: 6px; width: 18px; }
+}
+` : '';
+
 const js = `
 // Daily seed (ported from stardust.style scripts/seed.js: md5 of "<name> · <YYYY-MM-DD>", local date)
 const K=Array.from({length:64},(_, i)=>Math.floor(Math.abs(Math.sin(i+1))*2**32));const S=[7,12,17,22,5,9,14,20,4,11,16,23,6,10,15,21];
@@ -1297,7 +1344,7 @@ const html = `<!DOCTYPE html>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&display=swap">
-  <style>${V2 ? css.replace(/ text-shadow: 0 2px 24px rgba\(8, 30, 61, \.55\);/, '').replace(/\n\.hero-lede, \.hero-seed \{ text-shadow: [^}]*\}/, '').replace(/ text-shadow: 0 0 48px [^;]*;/, '').replace(/, text-shadow 2\.6s cubic-bezier\(\.7, 0, \.3, 1\)/, '').replace(/ box-shadow: 0 0 16px var\(--accent\);/, '').replace(/ box-shadow: 0 0 0 3px rgba\(247, 202, 110, \.25\);/, '').replace(/ box-shadow: 0 0 8px var\(--accent\);/, '') : css}${cssV2}</style>
+  <style>${(V3 ? (x) => x.replace(/\n  background-image: linear-gradient\(rgba\(244, 242, 236, \.075\) 1px, transparent 1px\), linear-gradient\(90deg, rgba\(244, 242, 236, \.075\) 1px, transparent 1px\);\n  background-size: 24px 24px; background-position: -1px -1px;/, '') : (x) => x)(V2 ? css.replace(/ text-shadow: 0 2px 24px rgba\(8, 30, 61, \.55\);/, '').replace(/\n\.hero-lede, \.hero-seed \{ text-shadow: [^}]*\}/, '').replace(/ text-shadow: 0 0 48px [^;]*;/, '').replace(/, text-shadow 2\.6s cubic-bezier\(\.7, 0, \.3, 1\)/, '').replace(/ box-shadow: 0 0 16px var\(--accent\);/, '').replace(/ box-shadow: 0 0 0 3px rgba\(247, 202, 110, \.25\);/, '').replace(/ box-shadow: 0 0 8px var\(--accent\);/, '') : css)}${cssV2}${cssV3}</style>
 </head>
 <body>
 ${nav}

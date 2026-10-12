@@ -134,3 +134,7 @@ weight and mutedFg color so the uppercase reads as small UI labels rather than s
 ## v2 — AI-tell cleanup (2026-10-12) → pages/index-v2.html
 
 v1 (pages/index.html) untouched. v2 = own ledger (normalize/index-v2.mjs: + V2-N16 step numbers, V2-N17 'In this step' labels), own model (content-model/index-v2), own tokens (donor-tokens-v2.json), own probe spec. Fixes #1 #2 #4 #6 #9 #10 #11 #12 #19 #20 — details in ledger.json pages['index-v2'].
+
+## v3 — second AI-tell pass (2026-10-12) → pages/index-v3.html
+
+v2 + V3-N18 authored casing. Fixes #3 #5 #7 #13 #14 #15 #16 — details in ledger.json pages['index-v3']. v1/v2 unchanged.
